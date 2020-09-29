@@ -7,11 +7,12 @@ import {
     SafeAreaView,
     TouchableOpacity,
     ScrollView,
-    ImageBackground
+    ImageBackground, Button
 } from 'react-native'
 import { Image } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Images } from '../../config';
+import Modal, { ModalContent } from "react-native-modals";
 
 const lstCategory = [
     {
@@ -66,15 +67,23 @@ const lstCategory = [
 
 export default class Home extends Component {
 
+    state = {
+        dialogVisible: false
+    };
+    showDialog = () => {
+        this.setState({ dialogVisible: true });
+    };
     renderItem = ({ item }) => {
         return (
-            item.title != '' ?
-                <View style={{ flex: 1, flexDirection: 'column', height: 200, alignItems: "center", justifyContent: "center", borderRadius: 20, backgroundColor: "#ffffff3f", margin: 15 }}>
-                    <Image style={{ minWidth: "85%", height: 150, borderRadius: 5 }} resizeMode="contain" source={item.icon}
-                        PlaceholderContent={<ActivityIndicator />}></Image>
-                </View>
-                :
-                <View style={{ flex: 1, margin: 15 }}></View>
+            <TouchableOpacity style={{ flex: 1 }} onPress={this.showDialog}>
+                { item.title != '' ?
+                    <View style={{ flex: 1, flexDirection: 'column', height: 200, alignItems: "center", justifyContent: "center", borderRadius: 20, backgroundColor: "#ffffff3f", margin: 15 }}>
+                        <Image style={{ minWidth: "85%", height: 150, borderRadius: 5 }} resizeMode="contain" source={item.icon}
+                            PlaceholderContent={<ActivityIndicator />}></Image>
+                    </View>
+                    :
+                    <View style={{ flex: 1, margin: 15 }}></View>}
+            </TouchableOpacity>
         )
     }
     render() {
@@ -108,6 +117,31 @@ export default class Home extends Component {
                     </ScrollView>
                     <View style={{ height: 80 }}></View>
                 </SafeAreaView>
+                <Modal
+                    visible={this.state.dialogVisible}
+                    swipeThreshold={100}
+                    modalStyle={{ backgroundColor: "transparent" }}
+                    onSwipeOut={(event) => { this.setState({ dialogVisible: false }); }}
+                    onTouchOutside={() => { this.setState({ dialogVisible: false }); }}
+                >
+
+                    <ModalContent style={{ width: 300, height: 380, paddingVertical:25, paddingHorizontal:25, backgroundColor:"transparent" }}>
+                        <View style={{borderWidth: 5, paddingHorizontal:10, paddingVertical:20, borderRadius: 30, borderColor: "#fff", backgroundColor: "#00549a"}}>
+                            <TouchableOpacity style={{ position: "absolute", top: -23, right: -23 }}>
+                                <Icon name="times-circle" size={35} color="#fff"></Icon>
+                            </TouchableOpacity>
+                            <Text style={{ fontSize: 30, marginTop: 20, marginBottom: 30, textAlign: "center", color: "#fff" }}>Rules</Text>
+                            <Text style={{ color: "#fff", textAlign: "center", fontSize: 18, paddingHorizontal: 15 }}>Try to guess the object by describing the plot. To make it more difficult don't use any charactor names.</Text>
+                            <TouchableOpacity activeOpacity={0.8} style={{ paddingTop: 30, paddingHorizontal: 10, marginBottom:20 }}>
+                                <View style={{ backgroundColor: "#eabf28", height: 40, borderRadius: 10, justifyContent: "center", alignItems: "center" }}>
+                                    <Text style={{ textAlign: "center", color:"#fff", fontSize: 20, fontWeight: "bold" }}>Play</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+
+                    </ModalContent>
+                </Modal>
+
             </ImageBackground>
 
 
