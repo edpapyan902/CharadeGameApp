@@ -4,6 +4,7 @@ import { createStackNavigator } from "react-navigation-stack";
 /* Main Screen */
 import Home from "../screens/Home";
 import Setting from "../screens/Setting";
+import Play from "../screens/Play";
 
 // Main Stack View App
 const StackNavigator = createStackNavigator(
@@ -13,6 +14,9 @@ const StackNavigator = createStackNavigator(
     },
     Setting: {
       screen: Setting
+    },
+    Play: {
+      screen: Play
     }
   },
   {

@@ -7,12 +7,16 @@ import {
     SafeAreaView,
     TouchableOpacity,
     ScrollView,
-    ImageBackground, Button
+    ImageBackground,
+    Button,
+    BackHandler,
+    StatusBar
 } from 'react-native'
 import { Image } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Images } from '../../config';
 import Modal, { ModalContent } from "react-native-modals";
+import Orientation from 'react-native-orientation';
 
 const lstCategory = [
     {
@@ -70,9 +74,33 @@ export default class Home extends Component {
     state = {
         dialogVisible: false
     };
+
     showDialog = () => {
         this.setState({ dialogVisible: true });
-    };
+    }
+
+    hideDialog = () => {
+        this.setState({ dialogVisible: false });
+    }
+
+    playGame = () => {
+        this.setState({ dialogVisible: false });
+        this.props.navigation.navigate("Play");
+    }
+
+    backAction = () => {
+        StatusBar.setHidden(false);
+        Orientation.lockToPortrait();
+    }
+
+    componentDidMount() {
+        BackHandler.addEventListener("hardwareBackPress", this.backAction);
+    }
+
+    componentWillUnmount() {
+        BackHandler.removeEventListener("hardwareBackPress", this.backAction);
+    }
+
     renderItem = ({ item }) => {
         return (
             <TouchableOpacity style={{ flex: 1 }} onPress={this.showDialog}>
@@ -86,6 +114,7 @@ export default class Home extends Component {
             </TouchableOpacity>
         )
     }
+
     render() {
         return (
             <ImageBackground source={Images.background} style={{ width: "100%", height: "100%" }}>
@@ -125,16 +154,16 @@ export default class Home extends Component {
                     onTouchOutside={() => { this.setState({ dialogVisible: false }); }}
                 >
 
-                    <ModalContent style={{ width: 300, height: 380, paddingVertical:25, paddingHorizontal:25, backgroundColor:"transparent" }}>
-                        <View style={{borderWidth: 5, paddingHorizontal:10, paddingVertical:20, borderRadius: 30, borderColor: "#fff", backgroundColor: "#00549a"}}>
-                            <TouchableOpacity style={{ position: "absolute", top: -23, right: -23 }}>
+                    <ModalContent style={{ width: 300, height: 380, paddingVertical: 25, paddingHorizontal: 25, backgroundColor: "transparent" }}>
+                        <View style={{ borderWidth: 5, paddingHorizontal: 10, paddingVertical: 20, borderRadius: 30, borderColor: "#fff", backgroundColor: "#00549a" }}>
+                            <TouchableOpacity style={{ position: "absolute", top: -23, right: -23 }} onPress={this.hideDialog}>
                                 <Icon name="times-circle" size={35} color="#fff"></Icon>
                             </TouchableOpacity>
                             <Text style={{ fontSize: 30, marginTop: 20, marginBottom: 30, textAlign: "center", color: "#fff" }}>Rules</Text>
                             <Text style={{ color: "#fff", textAlign: "center", fontSize: 18, paddingHorizontal: 15 }}>Try to guess the object by describing the plot. To make it more difficult don't use any charactor names.</Text>
-                            <TouchableOpacity activeOpacity={0.8} style={{ paddingTop: 30, paddingHorizontal: 10, marginBottom:20 }}>
+                            <TouchableOpacity activeOpacity={0.8} style={{ paddingTop: 30, paddingHorizontal: 10, marginBottom: 20 }} onPress={this.playGame}>
                                 <View style={{ backgroundColor: "#eabf28", height: 40, borderRadius: 10, justifyContent: "center", alignItems: "center" }}>
-                                    <Text style={{ textAlign: "center", color:"#fff", fontSize: 20, fontWeight: "bold" }}>Play</Text>
+                                    <Text style={{ textAlign: "center", color: "#fff", fontSize: 20, fontWeight: "bold" }}>Play</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
