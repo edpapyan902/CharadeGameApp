@@ -12,5 +12,4 @@ export const Images = {
   song: require("../assets/images/song.png"),
   spot: require("../assets/images/spot.png"),   
   tv: require("../assets/images/tv.png"),
-  star: require("../assets/images/star.png")
 };

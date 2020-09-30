@@ -17,59 +17,80 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Images } from '../../config';
 import Modal, { ModalContent } from "react-native-modals";
 import Orientation from 'react-native-orientation';
+import { Actions, CateogryAction } from '../../actions';
 
-const lstCategory = [
-    {
-        title: 'Music Songs',
-        icon: Images.song
-    },
-    {
-        title: 'TV Shows & Actors',
-        icon: Images.tv
-    },
-    {
-        title: 'Musicians',
-        icon: Images.musician
-    },
-    {
-        title: 'Famous Zimboz',
-        icon: Images.famous
-    },
-    {
-        title: 'Zimboz Geo',
-        icon: Images.geo
-    },
-    {
-        title: 'Random Zimboz',
-        icon: Images.random
-    },
-    {
-        title: 'Food',
-        icon: Images.food
-    },
-    {
-        title: 'Town & Villages',
-        icon: Images.town
-    },
-    {
-        title: 'Africa',
-        icon: Images.africa
-    },
-    {
-        title: 'Holiday & Chill Spots',
-        icon: Images.spot
-    },
-    {
-        title: 'Brands',
-        icon: Images.brand
-    },
-    {
-        title: '',
-        icon: ''
-    }
-];
+// const lstCategory = [
+//     {
+//         title: 'Music Songs',
+//         icon: Images.song
+//     },
+//     {
+//         title: 'TV Shows & Actors',
+//         icon: Images.tv
+//     },
+//     {
+//         title: 'Musicians',
+//         icon: Images.musician
+//     },
+//     {
+//         title: 'Famous Zimboz',
+//         icon: Images.famous
+//     },
+//     {
+//         title: 'Zimboz Geo',
+//         icon: Images.geo
+//     },
+//     {
+//         title: 'Random Zimboz',
+//         icon: Images.random
+//     },
+//     {
+//         title: 'Food',
+//         icon: Images.food
+//     },
+//     {
+//         title: 'Town & Villages',
+//         icon: Images.town
+//     },
+//     {
+//         title: 'Africa',
+//         icon: Images.africa
+//     },
+//     {
+//         title: 'Holiday & Chill Spots',
+//         icon: Images.spot
+//     },
+//     {
+//         title: 'Brands',
+//         icon: Images.brand
+//     },
+//     {
+//         title: '',
+//         icon: ''
+//     }
+// ];
 
 export default class Home extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            lstCategory: null,
+        }
+    };
+
+    getCategory = () => {
+        CateogryAction.getCategory(response => {
+            if (response.success) {
+                this.setState({ lstCategory: response.data });
+            }
+        });
+    }
+
+    componentWillMount = () => {
+        this.getCategory();
+    }
 
     state = {
         dialogVisible: false
@@ -139,7 +160,7 @@ export default class Home extends Component {
                         <FlatList
                             style={{ padding: "3.5%" }}
                             keyExtractor={(item, index) => index.toString()}
-                            data={lstCategory}
+                            data={this.state.lstCategory}
                             renderItem={this.renderItem}
                             numColumns={2}
                         />
@@ -156,9 +177,6 @@ export default class Home extends Component {
 
                     <ModalContent style={{ width: 300, height: 380, paddingVertical: 25, paddingHorizontal: 25, backgroundColor: "transparent" }}>
                         <View style={{ borderWidth: 5, paddingHorizontal: 10, paddingVertical: 20, borderRadius: 30, borderColor: "#fff", backgroundColor: "#00549a" }}>
-                            <TouchableOpacity style={{ position: "absolute", top: -23, right: -23 }} onPress={this.hideDialog}>
-                                <Icon name="times-circle" size={35} color="#fff"></Icon>
-                            </TouchableOpacity>
                             <Text style={{ fontSize: 30, marginTop: 20, marginBottom: 30, textAlign: "center", color: "#fff" }}>Rules</Text>
                             <Text style={{ color: "#fff", textAlign: "center", fontSize: 18, paddingHorizontal: 15 }}>Try to guess the object by describing the plot. To make it more difficult don't use any charactor names.</Text>
                             <TouchableOpacity activeOpacity={0.8} style={{ paddingTop: 30, paddingHorizontal: 10, marginBottom: 20 }} onPress={this.playGame}>
@@ -167,7 +185,11 @@ export default class Home extends Component {
                                 </View>
                             </TouchableOpacity>
                         </View>
-
+                        <View style={{ position: "absolute", top: 5, right: 5, width: 35, height: 35 }}>
+                            <TouchableOpacity onPress={this.hideDialog}>
+                                <Icon name="times-circle" size={35} color="#fff"></Icon>
+                            </TouchableOpacity>
+                        </View>
                     </ModalContent>
                 </Modal>
 
