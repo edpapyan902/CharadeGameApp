@@ -7,15 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* CharadeGameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* CharadeGameTests.m */; };
+		00E356F31AD99517003FC87E /* CharadesGameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* CharadesGameTests.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		2DCD954D1E0B4F2C00145EB5 /* CharadeGameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* CharadeGameTests.m */; };
+		2DCD954D1E0B4F2C00145EB5 /* CharadesGameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* CharadesGameTests.m */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		F5483101DF0F466C97EB0EB4 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 010324A1C52948B2ABC27214 /* AntDesign.ttf */; };
+		46530BD4748C4C7CB51B9E63 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF1AA8BD24134E3C8FD70374 /* Entypo.ttf */; };
+		C938F6C25DAF41AAB8DD84E1 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C5C6F94B623343999B63595A /* EvilIcons.ttf */; };
+		BBAA155F6F8B48CF967730E8 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0EA8859EFB904A42B46FC42A /* Feather.ttf */; };
+		9C891D78EF664E2DA588D0FF /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36146D31E5C4427EAE7EC59D /* FontAwesome.ttf */; };
+		7BA6DF0A298F4253976E6B93 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEA1683F93FD41509FAECAC4 /* FontAwesome5_Brands.ttf */; };
+		82829680DEAD4A0F8361213B /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEA77EB0BD544649BAB99131 /* FontAwesome5_Regular.ttf */; };
+		9A7052BA08F647438432E8C7 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D107527E2B24EF385CE1FFA /* FontAwesome5_Solid.ttf */; };
+		88910AA5BDB340CE97EA5689 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 493C9691AE6B461286E70665 /* Fontisto.ttf */; };
+		824BD7F9813F415CB945D9F9 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F96B11AFC5EA485A869331BE /* Foundation.ttf */; };
+		21852F3EB9FA4192923B25E0 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB00B47B959A4FD3A6C01CF2 /* Ionicons.ttf */; };
+		642D315A23F54A42A3EAB14B /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F44A15FE597A40B798F5F363 /* MaterialCommunityIcons.ttf */; };
+		25B1AAC620E3419FB460AB41 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5CFABA9933814A769F8EF7E0 /* MaterialIcons.ttf */; };
+		C18523A6B3C34C6E9EBC5504 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B770642C741A4E81973EEA42 /* Octicons.ttf */; };
+		294EA9F5AA1A495184219910 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1121B4DCD29B4642AF757B42 /* SimpleLineIcons.ttf */; };
+		6146EF48176C42A1A1A8EB70 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB404256B1834062977F96B6 /* Zocial.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,33 +40,49 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = CharadeGame;
+			remoteInfo = CharadesGame;
 		};
 		2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
-			remoteInfo = "CharadeGame-tvOS";
+			remoteInfo = "CharadesGame-tvOS";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
-		00E356EE1AD99517003FC87E /* CharadeGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CharadeGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* CharadesGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CharadesGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* CharadeGameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CharadeGameTests.m; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* CharadeGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CharadeGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = CharadeGame/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = CharadeGame/AppDelegate.m; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = CharadeGame/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = CharadeGame/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = CharadeGame/main.m; sourceTree = "<group>"; };
-		2D02E47B1E0B4A5D006451C7 /* CharadeGame-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CharadeGame-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D02E4901E0B4A5D006451C7 /* CharadeGame-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CharadeGame-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = CharadeGame/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* CharadesGameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CharadesGameTests.m; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* CharadesGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CharadesGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = CharadesGame/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = CharadesGame/AppDelegate.m; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = CharadesGame/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = CharadesGame/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = CharadesGame/main.m; sourceTree = "<group>"; };
+		2D02E47B1E0B4A5D006451C7 /* CharadesGame-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CharadesGame-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02E4901E0B4A5D006451C7 /* CharadesGame-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CharadesGame-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = CharadesGame/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		010324A1C52948B2ABC27214 /* AntDesign.ttf */ = {isa = PBXFileReference; name = "AntDesign.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		AF1AA8BD24134E3C8FD70374 /* Entypo.ttf */ = {isa = PBXFileReference; name = "Entypo.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C5C6F94B623343999B63595A /* EvilIcons.ttf */ = {isa = PBXFileReference; name = "EvilIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0EA8859EFB904A42B46FC42A /* Feather.ttf */ = {isa = PBXFileReference; name = "Feather.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		36146D31E5C4427EAE7EC59D /* FontAwesome.ttf */ = {isa = PBXFileReference; name = "FontAwesome.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DEA1683F93FD41509FAECAC4 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; name = "FontAwesome5_Brands.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DEA77EB0BD544649BAB99131 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; name = "FontAwesome5_Regular.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6D107527E2B24EF385CE1FFA /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; name = "FontAwesome5_Solid.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		493C9691AE6B461286E70665 /* Fontisto.ttf */ = {isa = PBXFileReference; name = "Fontisto.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F96B11AFC5EA485A869331BE /* Foundation.ttf */ = {isa = PBXFileReference; name = "Foundation.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BB00B47B959A4FD3A6C01CF2 /* Ionicons.ttf */ = {isa = PBXFileReference; name = "Ionicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F44A15FE597A40B798F5F363 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; name = "MaterialCommunityIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5CFABA9933814A769F8EF7E0 /* MaterialIcons.ttf */ = {isa = PBXFileReference; name = "MaterialIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B770642C741A4E81973EEA42 /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1121B4DCD29B4642AF757B42 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		AB404256B1834062977F96B6 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,13 +117,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* CharadeGameTests */ = {
+		00E356EF1AD99517003FC87E /* CharadesGameTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* CharadeGameTests.m */,
+				00E356F21AD99517003FC87E /* CharadesGameTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = CharadeGameTests;
+			path = CharadesGameTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -102,7 +134,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* CharadeGame */ = {
+		13B07FAE1A68108700A75B9A /* CharadesGame */ = {
 			isa = PBXGroup;
 			children = (
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -113,7 +145,7 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = CharadeGame;
+			name = CharadesGame;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -135,11 +167,12 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* CharadeGame */,
+				13B07FAE1A68108700A75B9A /* CharadesGame */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* CharadeGameTests */,
+				00E356EF1AD99517003FC87E /* CharadesGameTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
+				68BAB1617F82453D8B13222D /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -149,20 +182,44 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* CharadeGame.app */,
-				00E356EE1AD99517003FC87E /* CharadeGameTests.xctest */,
-				2D02E47B1E0B4A5D006451C7 /* CharadeGame-tvOS.app */,
-				2D02E4901E0B4A5D006451C7 /* CharadeGame-tvOSTests.xctest */,
+				13B07F961A680F5B00A75B9A /* CharadesGame.app */,
+				00E356EE1AD99517003FC87E /* CharadesGameTests.xctest */,
+				2D02E47B1E0B4A5D006451C7 /* CharadesGame-tvOS.app */,
+				2D02E4901E0B4A5D006451C7 /* CharadesGame-tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
+		68BAB1617F82453D8B13222D /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				010324A1C52948B2ABC27214 /* AntDesign.ttf */,
+				AF1AA8BD24134E3C8FD70374 /* Entypo.ttf */,
+				C5C6F94B623343999B63595A /* EvilIcons.ttf */,
+				0EA8859EFB904A42B46FC42A /* Feather.ttf */,
+				36146D31E5C4427EAE7EC59D /* FontAwesome.ttf */,
+				DEA1683F93FD41509FAECAC4 /* FontAwesome5_Brands.ttf */,
+				DEA77EB0BD544649BAB99131 /* FontAwesome5_Regular.ttf */,
+				6D107527E2B24EF385CE1FFA /* FontAwesome5_Solid.ttf */,
+				493C9691AE6B461286E70665 /* Fontisto.ttf */,
+				F96B11AFC5EA485A869331BE /* Foundation.ttf */,
+				BB00B47B959A4FD3A6C01CF2 /* Ionicons.ttf */,
+				F44A15FE597A40B798F5F363 /* MaterialCommunityIcons.ttf */,
+				5CFABA9933814A769F8EF7E0 /* MaterialIcons.ttf */,
+				B770642C741A4E81973EEA42 /* Octicons.ttf */,
+				1121B4DCD29B4642AF757B42 /* SimpleLineIcons.ttf */,
+				AB404256B1834062977F96B6 /* Zocial.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* CharadeGameTests */ = {
+		00E356ED1AD99517003FC87E /* CharadesGameTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "CharadeGameTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "CharadesGameTests" */;
 			buildPhases = (
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
@@ -173,14 +230,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = CharadeGameTests;
-			productName = CharadeGameTests;
-			productReference = 00E356EE1AD99517003FC87E /* CharadeGameTests.xctest */;
+			name = CharadesGameTests;
+			productName = CharadesGameTests;
+			productReference = 00E356EE1AD99517003FC87E /* CharadesGameTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* CharadeGame */ = {
+		13B07F861A680F5B00A75B9A /* CharadesGame */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "CharadeGame" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "CharadesGame" */;
 			buildPhases = (
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
@@ -192,14 +249,14 @@
 			);
 			dependencies = (
 			);
-			name = CharadeGame;
-			productName = CharadeGame;
-			productReference = 13B07F961A680F5B00A75B9A /* CharadeGame.app */;
+			name = CharadesGame;
+			productName = CharadesGame;
+			productReference = 13B07F961A680F5B00A75B9A /* CharadesGame.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E47A1E0B4A5D006451C7 /* CharadeGame-tvOS */ = {
+		2D02E47A1E0B4A5D006451C7 /* CharadesGame-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "CharadeGame-tvOS" */;
+			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "CharadesGame-tvOS" */;
 			buildPhases = (
 				FD10A7F122414F3F0027D42C /* Start Packager */,
 				2D02E4771E0B4A5D006451C7 /* Sources */,
@@ -211,14 +268,14 @@
 			);
 			dependencies = (
 			);
-			name = "CharadeGame-tvOS";
-			productName = "CharadeGame-tvOS";
-			productReference = 2D02E47B1E0B4A5D006451C7 /* CharadeGame-tvOS.app */;
+			name = "CharadesGame-tvOS";
+			productName = "CharadesGame-tvOS";
+			productReference = 2D02E47B1E0B4A5D006451C7 /* CharadesGame-tvOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E48F1E0B4A5D006451C7 /* CharadeGame-tvOSTests */ = {
+		2D02E48F1E0B4A5D006451C7 /* CharadesGame-tvOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "CharadeGame-tvOSTests" */;
+			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "CharadesGame-tvOSTests" */;
 			buildPhases = (
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
 				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
@@ -229,9 +286,9 @@
 			dependencies = (
 				2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */,
 			);
-			name = "CharadeGame-tvOSTests";
-			productName = "CharadeGame-tvOSTests";
-			productReference = 2D02E4901E0B4A5D006451C7 /* CharadeGame-tvOSTests.xctest */;
+			name = "CharadesGame-tvOSTests";
+			productName = "CharadesGame-tvOSTests";
+			productReference = 2D02E4901E0B4A5D006451C7 /* CharadesGame-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -260,7 +317,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "CharadeGame" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "CharadesGame" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -273,10 +330,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* CharadeGame */,
-				00E356ED1AD99517003FC87E /* CharadeGameTests */,
-				2D02E47A1E0B4A5D006451C7 /* CharadeGame-tvOS */,
-				2D02E48F1E0B4A5D006451C7 /* CharadeGame-tvOSTests */,
+				13B07F861A680F5B00A75B9A /* CharadesGame */,
+				00E356ED1AD99517003FC87E /* CharadesGameTests */,
+				2D02E47A1E0B4A5D006451C7 /* CharadesGame-tvOS */,
+				2D02E48F1E0B4A5D006451C7 /* CharadesGame-tvOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -295,6 +352,22 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				F5483101DF0F466C97EB0EB4 /* AntDesign.ttf in Resources */,
+				46530BD4748C4C7CB51B9E63 /* Entypo.ttf in Resources */,
+				C938F6C25DAF41AAB8DD84E1 /* EvilIcons.ttf in Resources */,
+				BBAA155F6F8B48CF967730E8 /* Feather.ttf in Resources */,
+				9C891D78EF664E2DA588D0FF /* FontAwesome.ttf in Resources */,
+				7BA6DF0A298F4253976E6B93 /* FontAwesome5_Brands.ttf in Resources */,
+				82829680DEAD4A0F8361213B /* FontAwesome5_Regular.ttf in Resources */,
+				9A7052BA08F647438432E8C7 /* FontAwesome5_Solid.ttf in Resources */,
+				88910AA5BDB340CE97EA5689 /* Fontisto.ttf in Resources */,
+				824BD7F9813F415CB945D9F9 /* Foundation.ttf in Resources */,
+				21852F3EB9FA4192923B25E0 /* Ionicons.ttf in Resources */,
+				642D315A23F54A42A3EAB14B /* MaterialCommunityIcons.ttf in Resources */,
+				25B1AAC620E3419FB460AB41 /* MaterialIcons.ttf in Resources */,
+				C18523A6B3C34C6E9EBC5504 /* Octicons.ttf in Resources */,
+				294EA9F5AA1A495184219910 /* SimpleLineIcons.ttf in Resources */,
+				6146EF48176C42A1A1A8EB70 /* Zocial.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,7 +462,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* CharadeGameTests.m in Sources */,
+				00E356F31AD99517003FC87E /* CharadesGameTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,7 +488,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DCD954D1E0B4F2C00145EB5 /* CharadeGameTests.m in Sources */,
+				2DCD954D1E0B4F2C00145EB5 /* CharadesGameTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,12 +497,12 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* CharadeGame */;
+			target = 13B07F861A680F5B00A75B9A /* CharadesGame */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 		2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2D02E47A1E0B4A5D006451C7 /* CharadeGame-tvOS */;
+			target = 2D02E47A1E0B4A5D006451C7 /* CharadesGame-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -443,7 +516,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = CharadeGameTests/Info.plist;
+				INFOPLIST_FILE = CharadesGameTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -453,7 +526,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CharadeGame.app/CharadeGame";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CharadesGame.app/CharadesGame";
 			};
 			name = Debug;
 		};
@@ -462,7 +535,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = CharadeGameTests/Info.plist;
+				INFOPLIST_FILE = CharadesGameTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -472,7 +545,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CharadeGame.app/CharadeGame";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CharadesGame.app/CharadesGame";
 			};
 			name = Release;
 		};
@@ -483,7 +556,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = CharadeGame/Info.plist;
+				INFOPLIST_FILE = CharadesGame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -491,7 +564,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = CharadeGame;
+				PRODUCT_NAME = CharadesGame;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -504,7 +577,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				INFOPLIST_FILE = CharadeGame/Info.plist;
+				INFOPLIST_FILE = CharadesGame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -512,7 +585,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = CharadeGame;
+				PRODUCT_NAME = CharadesGame;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -530,14 +603,14 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "CharadeGame-tvOS/Info.plist";
+				INFOPLIST_FILE = "CharadesGame-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.CharadeGame-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.CharadesGame-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -557,14 +630,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "CharadeGame-tvOS/Info.plist";
+				INFOPLIST_FILE = "CharadesGame-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.CharadeGame-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.CharadesGame-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -583,17 +656,17 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "CharadeGame-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "CharadesGame-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.CharadeGame-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.CharadesGame-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CharadeGame-tvOS.app/CharadeGame-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CharadesGame-tvOS.app/CharadesGame-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Debug;
@@ -609,17 +682,17 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "CharadeGame-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "CharadesGame-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.CharadeGame-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.CharadesGame-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CharadeGame-tvOS.app/CharadeGame-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CharadesGame-tvOS.app/CharadesGame-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Release;
@@ -740,7 +813,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "CharadeGameTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "CharadesGameTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -749,7 +822,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "CharadeGame" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "CharadesGame" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -758,7 +831,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "CharadeGame-tvOS" */ = {
+		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "CharadesGame-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4971E0B4A5E006451C7 /* Debug */,
@@ -767,7 +840,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "CharadeGame-tvOSTests" */ = {
+		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "CharadesGame-tvOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4991E0B4A5E006451C7 /* Debug */,
@@ -776,7 +849,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "CharadeGame" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "CharadesGame" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

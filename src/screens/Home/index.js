@@ -17,58 +17,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Images } from '../../config';
 import Modal, { ModalContent } from "react-native-modals";
 import Orientation from 'react-native-orientation';
-import { Actions, CateogryAction } from '../../actions';
-
-// const lstCategory = [
-//     {
-//         title: 'Music Songs',
-//         icon: Images.song
-//     },
-//     {
-//         title: 'TV Shows & Actors',
-//         icon: Images.tv
-//     },
-//     {
-//         title: 'Musicians',
-//         icon: Images.musician
-//     },
-//     {
-//         title: 'Famous Zimboz',
-//         icon: Images.famous
-//     },
-//     {
-//         title: 'Zimboz Geo',
-//         icon: Images.geo
-//     },
-//     {
-//         title: 'Random Zimboz',
-//         icon: Images.random
-//     },
-//     {
-//         title: 'Food',
-//         icon: Images.food
-//     },
-//     {
-//         title: 'Town & Villages',
-//         icon: Images.town
-//     },
-//     {
-//         title: 'Africa',
-//         icon: Images.africa
-//     },
-//     {
-//         title: 'Holiday & Chill Spots',
-//         icon: Images.spot
-//     },
-//     {
-//         title: 'Brands',
-//         icon: Images.brand
-//     },
-//     {
-//         title: '',
-//         icon: ''
-//     }
-// ];
+import { CateogryAction } from '../../actions';
 
 export default class Home extends Component {
 
@@ -77,7 +26,9 @@ export default class Home extends Component {
 
         this.state = {
             lstCategory: null,
+            currentCategory: null,
         }
+        this.getCategory();
     };
 
     getCategory = () => {
@@ -88,25 +39,21 @@ export default class Home extends Component {
         });
     }
 
-    componentWillMount = () => {
-        this.getCategory();
-    }
-
     state = {
         dialogVisible: false
     };
 
-    showDialog = () => {
-        this.setState({ dialogVisible: true });
+    showDialog = (item) => {
+        this.setState({ dialogVisible: true, currentCategory: item });
     }
 
     hideDialog = () => {
-        this.setState({ dialogVisible: false });
+        this.setState({ dialogVisible: false, currentCategory: null });
     }
 
     playGame = () => {
         this.setState({ dialogVisible: false });
-        this.props.navigation.navigate("Play");
+        this.props.navigation.navigate("Play", { currentCategory: this.state.currentCategory });
     }
 
     backAction = () => {
@@ -124,10 +71,10 @@ export default class Home extends Component {
 
     renderItem = ({ item }) => {
         return (
-            <TouchableOpacity style={{ flex: 1 }} onPress={this.showDialog}>
+            <TouchableOpacity style={{ flex: 1 }} onPress={() => this.showDialog(item)}>
                 { item.title != '' ?
                     <View style={{ flex: 1, flexDirection: 'column', height: 200, alignItems: "center", justifyContent: "center", borderRadius: 20, backgroundColor: "#ffffff3f", margin: 15 }}>
-                        <Image style={{ minWidth: "85%", height: 150, borderRadius: 5 }} resizeMode="contain" source={item.icon}
+                        <Image style={{ minWidth: "85%", height: 150, borderRadius: 5 }} resizeMode="contain" source={{ uri: CateogryAction.API_URL + item.icon }}
                             PlaceholderContent={<ActivityIndicator />}></Image>
                     </View>
                     :
@@ -168,7 +115,7 @@ export default class Home extends Component {
                     <View style={{ height: 80 }}></View>
                 </SafeAreaView>
                 <Modal
-                    visible={this.state.dialogVisible}
+                    visible={!!this.state.dialogVisible}
                     swipeThreshold={100}
                     modalStyle={{ backgroundColor: "transparent" }}
                     onSwipeOut={(event) => { this.setState({ dialogVisible: false }); }}

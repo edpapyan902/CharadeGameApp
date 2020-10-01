@@ -1,6 +1,8 @@
-export const API_URL = "http://192.168.109.83:8000";
+import { call } from "react-native-reanimated";
 
-export const getCategory = (callback) => dispatch => {
+export const API_URL = "http://10.0.2.2:8000";
+
+export const getCategory = (callback) => {
     fetch(API_URL + "/api/category", {
         method: 'GET',
         headers: {
@@ -9,11 +11,30 @@ export const getCategory = (callback) => dispatch => {
     })
         .then(res => res.json())
         .then(res => {
-            if (res.err)
-                callback({ success: false, data: null });
-            else {
+            let data = res.Category;
+            if (res.Success)
                 callback({ success: true, data: data });
-            }
+            else
+                callback({ success: false, data: null });
+        })
+        .catch(err => callback({ success: false, data: err }));
+}
+
+export const getWord = (category, callback) => {
+    fetch(`${API_URL}/api/word/${category}`, {
+        method: "GET",
+        header: {
+            'Content-Type': 'application/json'
+        },
+    })
+
+        .then(res => res.json())
+        .then(res => {
+            let data = res.Word;
+            if (res.Success)
+                callback({ success: true, data: data });
+            else
+                callback({ success: false, data: null });
         })
         .catch(err => callback({ success: false, data: err }));
 }

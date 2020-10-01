@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "CharadeGame.app"
-               BlueprintName = "CharadeGame"
-               ReferencedContainer = "container:CharadeGame.xcodeproj">
+               BuildableName = "CharadesGame.app"
+               BlueprintName = "CharadesGame"
+               ReferencedContainer = "container:CharadesGame.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "CharadeGameTests.xctest"
-               BlueprintName = "CharadeGameTests"
-               ReferencedContainer = "container:CharadeGame.xcodeproj">
+               BuildableName = "CharadesGameTests.xctest"
+               BlueprintName = "CharadesGameTests"
+               ReferencedContainer = "container:CharadesGame.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "CharadeGame.app"
-            BlueprintName = "CharadeGame"
-            ReferencedContainer = "container:CharadeGame.xcodeproj">
+            BuildableName = "CharadesGame.app"
+            BlueprintName = "CharadesGame"
+            ReferencedContainer = "container:CharadesGame.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "CharadeGame.app"
-            BlueprintName = "CharadeGame"
-            ReferencedContainer = "container:CharadeGame.xcodeproj">
+            BuildableName = "CharadesGame.app"
+            BlueprintName = "CharadesGame"
+            ReferencedContainer = "container:CharadesGame.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
