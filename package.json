@@ -1,5 +1,5 @@
 {
-  "name": "CharadeGame",
+  "name": "CharadesGame",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -14,7 +14,6 @@
     "install": "^0.13.0",
     "lpf": "^1.0.0",
     "npm": "^6.14.8",
-    "popup-ui": "^1.2.0",
     "react": "16.13.1",
     "react-native": "0.63.2",
     "react-native-elements": "^2.3.2",
