@@ -10,23 +10,33 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Images } from '../../config';
 import Orientation from 'react-native-orientation';
 import { CateogryAction } from '../../actions';
+import { accelerometer, setUpdateIntervalForType, SensorTypes } from "react-native-sensors";
 
+const ReadyTime = 2;
+const StartTime = 2;
 export default class Play extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            timer: 1,
+            timer: 0,
             isReady: false,
+            isStart: false,
             isFinish: false,
+            isPause: false,
             lstWord: null,
-            currentWord: 'GET READY',
+            currentWord: '',
             currentIndex: -1,
         };
 
         Orientation.unlockAllOrientations();
-        Orientation.lockToLandscape();
+        Orientation.lockToLandscapeLeft();
         this.getWord();
+
+        setUpdateIntervalForType(SensorTypes.accelerometer, 100);
+        const subscription = accelerometer.subscribe(({ x, y, z }) =>
+            this.detectSensorEvent(x, y, z)
+        );
     }
 
     componentDidMount() {
@@ -35,6 +45,33 @@ export default class Play extends Component {
 
     componentWillUnmount() {
         clearInterval(this.clockCall);
+    }
+
+    detectSensorEvent = (x, y, z) => {
+        if (x > 3)
+            this.correctAnswer();
+        else if (x < -3)
+            this.correctAnswer();
+        else
+            this.resumeGame();
+    }
+
+    pauseGame = () => {
+        this.setState({ isPause: true })
+    }
+
+    resumeGame = () => {
+        this.setState({ isPause: false })
+    }
+
+    correctAnswer = () => {
+        this.pauseGame();
+        this.setState({ currentWord: "CORRECT" });
+    }
+
+    failedAnswer = () => {
+        this.pauseGame();
+        this.setState({ currentWord: "FAILED" });
     }
 
     goHome() {
@@ -46,13 +83,27 @@ export default class Play extends Component {
         CateogryAction.getWord(this.props.navigation.state.params.currentCategory.id, response => {
             if (response.success) {
                 this.setState({ lstWord: response.data });
-                this.startTimer();
+                this.playGame();
             }
         });
     }
+
+    playGame = () => {
+        this.setState({
+            timer: ReadyTime,
+            isReady: false,
+            isStart: false,
+            isFinish: false,
+            isPause: false,
+            currentIndex: 0,
+            currentWord: "GET READY"
+        });
+        this.startTimer();
+    }
     startTimer = () => {
         this.clockCall = setInterval(() => {
-            this.decrementClock();
+            if (!this.state.isPause)
+                this.decrementClock();
         }, 1000);
     }
 
@@ -60,30 +111,45 @@ export default class Play extends Component {
         clearInterval(this.clockCall);
         if (!this.state.isReady) {
             this.setState({
-                currentIndex: 1,
                 isReady: true,
-                timer: 10,
-                currentWord: this.state.lstWord[0].name
+                timer: StartTime,
+                currentWord: "LET'S START"
             });
             this.startTimer();
         }
-        else {
-            this.setState({ isFinish: true });
-            this.setState({ isReady: false });
-            this.setState({ currentWord: "Finished!" });
+        else if (!this.state.isStart) {
+            this.setState({
+                isStart: true,
+                timer: 10,
+                currentWord: this.state.lstWord[this.state.currentIndex].name
+            });
+            this.startTimer();
+        }
+        else if (!this.state.isFinish) {
+            this.setState({
+                isFinish: true,
+                timer: 0,
+                currentIndex: -1,
+                currentWord: "FINISHED!"
+            });
         }
     }
 
     faildGuess = () => {
-        if (this.state.isFinish)
-            return;
-
-        this.setState((prevstate) => ({ currentIndex: prevstate.currentIndex + 1 }));
-        if (this.state.lstWord.length == this.state.currentIndex) {
+        if (!this.state.isReady) {
             this.finishTimer();
             return;
         }
-        this.setState({ currentWord: this.state.lstWord[this.state.currentIndex].name });
+        if (this.state.isFinish || !this.state.isStart || this.state.isPause)
+            return;
+
+        this.setState({ currentIndex: this.state.currentIndex + 1 }, response => {
+            if (this.state.lstWord.length == this.state.currentIndex) {
+                this.finishTimer();
+                return;
+            }
+            this.setState({ currentWord: this.state.lstWord[this.state.currentIndex].name });
+        });
     }
 
     decrementClock = () => {
@@ -117,7 +183,7 @@ export default class Play extends Component {
                                 <View style={{ flex: 1 }}></View>
                             </View>
                             <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-                                <Text style={{ fontSize: 80, color: "#fff", fontWeight: "bold", marginBottom: 20 }}>{this.state.currentWord}</Text>
+                                <Text style={{ fontSize: 70, color: "#fff", fontWeight: "bold", marginBottom: 20 }}>{this.state.currentWord}</Text>
                             </View>
                         </View>
                     </ImageBackground>

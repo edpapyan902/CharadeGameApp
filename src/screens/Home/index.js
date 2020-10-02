@@ -8,7 +8,6 @@ import {
     TouchableOpacity,
     ScrollView,
     ImageBackground,
-    Button,
     BackHandler,
     StatusBar
 } from 'react-native'
@@ -27,7 +26,9 @@ export default class Home extends Component {
         this.state = {
             lstCategory: null,
             currentCategory: null,
+            load: true,
         }
+        Orientation.lockToPortrait();
         this.getCategory();
     };
 
@@ -63,6 +64,7 @@ export default class Home extends Component {
 
     componentDidMount() {
         BackHandler.addEventListener("hardwareBackPress", this.backAction);
+        this.setState({ load: false });
     }
 
     componentWillUnmount() {
@@ -139,7 +141,20 @@ export default class Home extends Component {
                         </View>
                     </ModalContent>
                 </Modal>
-
+                <ActivityIndicator
+                    animating={this.state.load}
+                    size="large"
+                    color={"white"}
+                    style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        justifyContent: "center",
+                        alignItems: "center"
+                    }}
+                />
             </ImageBackground>
 
 
