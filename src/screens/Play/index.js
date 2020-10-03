@@ -30,6 +30,7 @@ export default class Play extends Component {
             currentWord: '',
             currentIndex: -1,
             detectDirection: "0",
+            background_image: Images.background_blue
         };
 
         Orientation.unlockAllOrientations();
@@ -45,7 +46,7 @@ export default class Play extends Component {
     componentDidMount() {
         StatusBar.setHidden(true);
 
-        RNDeviceRotation.setUpdateInterval(0.1);
+        RNDeviceRotation.setUpdateInterval(100);
 
         const orientationEvent = new NativeEventEmitter(RNDeviceRotation)
         this.subscription = orientationEvent.addListener('DeviceRotation', event => {
@@ -57,6 +58,7 @@ export default class Play extends Component {
             else if (roll >= 240 && roll <= 300)
                 this.resumeGame();
         })
+        RNDeviceRotation.start()
     }
 
     componentWillUnmount() {
@@ -89,12 +91,12 @@ export default class Play extends Component {
 
     correctAnswer = () => {
         this.pauseGame();
-        this.setState({ currentWord: "CORRECT" });
+        this.setState({ currentWord: "CORRECT", background_image: Images.background_green });
     }
 
     failedAnswer = () => {
         this.pauseGame();
-        this.setState({ currentWord: "FAILED" });
+        this.setState({ currentWord: "FAILED", background_image: Images.background_red });
     }
 
     goHome() {
@@ -107,7 +109,6 @@ export default class Play extends Component {
             if (response.success) {
                 this.setState({ lstWord: response.data });
                 this.playGame();
-                RNDeviceRotation.start()
             }
         });
     }
@@ -189,7 +190,7 @@ export default class Play extends Component {
         return (
             <View style={{ flex: 1, backgroundColor: "#000" }}>
                 <TouchableOpacity style={{ flex: 1 }} activeOpacity={1} onPress={this.faildGuess}>
-                    <ImageBackground borderRadius={40} source={Images.background} style={{ flex: 1, borderRadius: 50, borderColor: "#fff", borderWidth: 10 }}>
+                    <ImageBackground borderRadius={40} source={this.state.background_image} style={{ flex: 1, borderRadius: 50, borderColor: "#fff", borderWidth: 10 }}>
                         <View style={{ width: "100%", height: "100%", padding: 40 }}>
                             <View style={{ height: 40, flexDirection: "row" }}>
                                 <View style={{ flex: 1, alignItems: "flex-start" }}>

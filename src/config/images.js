@@ -1,6 +1,8 @@
 
 export const Images = {
-  background: require("../assets/images/background.png"),
+  background_blue: require("../assets/images/background_blue.png"),
+  background_red: require("../assets/images/background_red.png"),
+  background_green: require("../assets/images/background_green.png"),
   brand: require("../assets/images/brand.png"),
   africa: require("../assets/images/africa.png"),
   town: require("../assets/images/town.png"),

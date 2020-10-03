@@ -86,7 +86,7 @@ export default class Setting extends Component {
     }
     render() {
         return (
-            <ImageBackground source={Images.background} style={{ width: "100%", height: "100%" }}>
+            <ImageBackground source={Images.background_blue} style={{ width: "100%", height: "100%" }}>
                 <SafeAreaView style={{ flex: 1 }}>
                     <View style={{ height: 70, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
                         <View style={{ flex: 1, alignItems: "flex-start" }}>
