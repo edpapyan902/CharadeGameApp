@@ -26,18 +26,20 @@ export default class Home extends Component {
         this.state = {
             lstCategory: null,
             currentCategory: null,
-            load: true,
+            load: false,
         }
         Orientation.lockToPortrait();
-        this.getCategory();
     };
 
     getCategory = () => {
-        CateogryAction.getCategory(response => {
-            if (response.success) {
-                this.setState({ lstCategory: response.data });
-            }
-        });
+        this.setState({ load: true }, () => {
+            CateogryAction.getCategory(response => {
+                if (response.success) {
+                    this.setState({ lstCategory: response.data });
+                }
+                this.setState({ load: false });
+            });
+        })
     }
 
     state = {
@@ -63,8 +65,8 @@ export default class Home extends Component {
     }
 
     componentDidMount() {
+        this.getCategory();
         BackHandler.addEventListener("hardwareBackPress", this.backAction);
-        this.setState({ load: false });
     }
 
     componentWillUnmount() {
@@ -141,20 +143,22 @@ export default class Home extends Component {
                         </View>
                     </ModalContent>
                 </Modal>
-                <ActivityIndicator
-                    animating={this.state.load}
-                    size="large"
-                    color={"white"}
-                    style={{
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        justifyContent: "center",
-                        alignItems: "center"
-                    }}
-                />
+                {this.state.load &&
+                    <ActivityIndicator
+                        size="large"
+                        style={{
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            justifyContent: "center",
+                            alignItems: "center"
+                        }}
+                        color={"white"}
+                    />
+                }
+
             </ImageBackground>
 
 

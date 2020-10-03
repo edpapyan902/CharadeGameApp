@@ -5,12 +5,14 @@ import {
     TouchableOpacity,
     ImageBackground,
     StatusBar,
+    NativeEventEmitter
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Images } from '../../config';
 import Orientation from 'react-native-orientation';
 import { CateogryAction } from '../../actions';
 import { accelerometer, setUpdateIntervalForType, SensorTypes } from "react-native-sensors";
+import RNDeviceRotation from 'react-native-device-rotation';
 
 const ReadyTime = 2;
 const StartTime = 2;
@@ -27,33 +29,54 @@ export default class Play extends Component {
             lstWord: null,
             currentWord: '',
             currentIndex: -1,
+            detectDirection: "0",
         };
 
         Orientation.unlockAllOrientations();
         Orientation.lockToLandscapeLeft();
         this.getWord();
 
-        setUpdateIntervalForType(SensorTypes.accelerometer, 100);
-        const subscription = accelerometer.subscribe(({ x, y, z }) =>
-            this.detectSensorEvent(x, y, z)
-        );
+        // setUpdateIntervalForType(SensorTypes.accelerometer, 100);
+        // const subscription = accelerometer.subscribe(({ x, y, z }) =>
+        //     this.detectSensorEvent(x, y, z)
+        // );
     }
 
     componentDidMount() {
         StatusBar.setHidden(true);
+
+        RNDeviceRotation.setUpdateInterval(0.1);
+
+        const orientationEvent = new NativeEventEmitter(RNDeviceRotation)
+        this.subscription = orientationEvent.addListener('DeviceRotation', event => {
+            const roll = Math.round(event.roll);
+            if (roll > 300)
+                this.correctAnswer();
+            else if (roll < 240)
+                this.failedAnswer();
+            else if (roll >= 240 && roll <= 300)
+                this.resumeGame();
+        })
     }
 
     componentWillUnmount() {
         clearInterval(this.clockCall);
+
+        if (this.subscription) {
+            this.subscription.remove()
+        }
+        RNDeviceRotation.stop()
     }
 
     detectSensorEvent = (x, y, z) => {
-        if (x > 3)
-            this.correctAnswer();
-        else if (x < -3)
-            this.correctAnswer();
-        else
-            this.resumeGame();
+        const zDelta = Math.round(z * Math.sin(Math.PI / 2));
+        // if (zDelta > 500)
+        //     this.correctAnswer();
+        // else if (zDelta < -500)
+        //     this.failedAnswer();
+        // else if (Math.abs(zDelta) < 500)
+        //     this.resumeGame();
+        console.log(zDelta);
     }
 
     pauseGame = () => {
@@ -84,6 +107,7 @@ export default class Play extends Component {
             if (response.success) {
                 this.setState({ lstWord: response.data });
                 this.playGame();
+                RNDeviceRotation.start()
             }
         });
     }
@@ -100,6 +124,7 @@ export default class Play extends Component {
         });
         this.startTimer();
     }
+
     startTimer = () => {
         this.clockCall = setInterval(() => {
             if (!this.state.isPause)
