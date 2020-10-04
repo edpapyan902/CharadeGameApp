@@ -30,9 +30,8 @@ export const getWord = (category, callback) => {
 
         .then(res => res.json())
         .then(res => {
-            let data = res.Word;
             if (res.Success)
-                callback({ success: true, data: data });
+                callback({ success: true, data: res });
             else
                 callback({ success: false, data: null });
         })

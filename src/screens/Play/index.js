@@ -38,6 +38,7 @@ export default class Play extends Component {
 
         this.orientationEvent = new NativeEventEmitter(RNDeviceRotation);
         this.ReadyTime = 2;
+        this.GameTime = 5;
         this.isTouchScreen = false;
 
         this.getWord();
@@ -141,8 +142,10 @@ export default class Play extends Component {
     getWord = () => {
         CateogryAction.getWord(this.props.navigation.state.params.currentCategory.id, response => {
             if (response.success) {
-                this.setState({ lstWord: response.data });
-                this.playGame();
+                this.setState({ lstWord: response.data.Word }, () => {
+                    // this.GameTime = response.data.Time;
+                    this.playGame();
+                });
             }
         });
     }
@@ -180,7 +183,7 @@ export default class Play extends Component {
         if (!this.state.isReady) {
             this.setState({
                 isReady: true,
-                timer: 1,
+                timer: this.GameTime,
                 currentWord: this.state.lstWord[this.state.currentIndex].name
             });
             this.startTimer();
@@ -243,7 +246,7 @@ export default class Play extends Component {
                                         </Text>
                                     </View>
                                     <View style={{ flex: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
-                                        <TouchableOpacity onPress={this.goHome.bind(this)} activeOpacity={0.7} style={{
+                                        <TouchableOpacity onPress={this.playGame()} activeOpacity={0.7} style={{
                                             justifyContent: "center", alignItems: "center", backgroundColor: "#ffffff3f", borderRadius: 20,
                                             paddingVertical: 10, paddingHorizontal: 20,
                                         }}>
