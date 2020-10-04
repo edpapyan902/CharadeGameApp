@@ -147,6 +147,16 @@ export default class Play extends Component {
         });
     }
 
+    filterWord = () => {
+        const lstWord = this.state.lstWord.filter(item => item.mark != null);
+        if (lstWord.length % 2 != 0) {
+            var obj = JSON.parse(lstWord);
+            obj.push({ "name": "" });
+            lstWord = JSON.stringify(obj);
+        }
+        return lstWord;
+    }
+
     playGame = () => {
         this.setState({
             timer: this.ReadyTime,
@@ -266,7 +276,7 @@ export default class Play extends Component {
                                 <View style={{ flex: 1, marginTop: 5 }}>
                                     <FlatList
                                         keyExtractor={(item, index) => index.toString()}
-                                        data={this.state.lstWord.filter(item => item.mark != null)}
+                                        data={() => { this.filterWord() }}
                                         renderItem={this.renderItem}
                                         numColumns={2}
                                         style={{ paddingTop: 20, paddingHorizontal: 10 }}
