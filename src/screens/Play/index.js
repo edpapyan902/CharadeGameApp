@@ -5,7 +5,7 @@ import {
     TouchableOpacity,
     ImageBackground,
     StatusBar,
-    NativeEventEmitter
+    NativeEventEmitter,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Images } from '../../config';
@@ -46,7 +46,7 @@ export default class Play extends Component {
     componentDidMount() {
         StatusBar.setHidden(true);
 
-        RNDeviceRotation.setUpdateInterval(100);
+        RNDeviceRotation.setUpdateInterval(1 / 60);
 
         const orientationEvent = new NativeEventEmitter(RNDeviceRotation)
         this.subscription = orientationEvent.addListener('DeviceRotation', event => {
@@ -58,7 +58,7 @@ export default class Play extends Component {
             else if (roll >= 240 && roll <= 300)
                 this.resumeGame();
         })
-        RNDeviceRotation.start()
+        RNDeviceRotation.start();
     }
 
     componentWillUnmount() {
@@ -78,7 +78,6 @@ export default class Play extends Component {
         //     this.failedAnswer();
         // else if (Math.abs(zDelta) < 500)
         //     this.resumeGame();
-        console.log(zDelta);
     }
 
     pauseGame = () => {
