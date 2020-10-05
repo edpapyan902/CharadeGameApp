@@ -18,14 +18,12 @@ import Modal, { ModalContent } from "react-native-modals";
 import Orientation from 'react-native-orientation';
 import { CateogryAction } from '../../actions';
 
-import { getIntertial } from '../../components/adMob/Intertial';
+// import { getIntertial } from '../../components/adMob/Intertial';
 import Banner from '../../components/adMob/Banner';
-import { observer } from 'mobx-react';
 import {
     AdMobInterstitial,
 } from 'react-native-admob';
 
-@observer
 export default class Home extends Component {
 
     constructor(props) {
@@ -78,7 +76,7 @@ export default class Home extends Component {
     }
 
     componentDidUpdate() {
-      getIntertial();
+        //   getIntertial();
     }
 
     componentWillUnmount() {
@@ -129,7 +127,7 @@ export default class Home extends Component {
                             numColumns={2}
                         />
                     </ScrollView>
-                    <View style={{ height: 80 }}>
+                    <View style={{ height: 50 }}>
                         <Banner />
                     </View>
                 </SafeAreaView>
