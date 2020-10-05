@@ -18,6 +18,14 @@ import Modal, { ModalContent } from "react-native-modals";
 import Orientation from 'react-native-orientation';
 import { CateogryAction } from '../../actions';
 
+import { getIntertial } from '../../components/adMob/Intertial';
+import Banner from '../../components/adMob/Banner';
+import { observer } from 'mobx-react';
+import {
+    AdMobInterstitial,
+} from 'react-native-admob';
+
+@observer
 export default class Home extends Component {
 
     constructor(props) {
@@ -69,8 +77,13 @@ export default class Home extends Component {
         BackHandler.addEventListener("hardwareBackPress", this.backAction);
     }
 
+    componentDidUpdate() {
+      getIntertial();
+    }
+
     componentWillUnmount() {
         BackHandler.removeEventListener("hardwareBackPress", this.backAction);
+        AdMobInterstitial.removeAllListeners();
     }
 
     renderItem = ({ item }) => {
@@ -116,7 +129,9 @@ export default class Home extends Component {
                             numColumns={2}
                         />
                     </ScrollView>
-                    <View style={{ height: 80 }}></View>
+                    <View style={{ height: 80 }}>
+                        <Banner />
+                    </View>
                 </SafeAreaView>
                 <Modal
                     visible={!!this.state.dialogVisible}

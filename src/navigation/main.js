@@ -36,10 +36,6 @@ const RootStack = createStackNavigator(
     mode: "modal",
     headerMode: "none",
     initialRouteName: "StackNavigator",
-    transitionConfig: screen => {
-      return handleCustomTransition(screen);
-    },
-    transparentCard: true
   }
 );
 

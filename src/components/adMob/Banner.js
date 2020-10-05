@@ -1,6 +1,7 @@
 import { AdMobBanner } from 'react-native-admob'
 import { View, Text, Platform } from 'react-native';
 import React, { Component } from 'react';
+
 class Banner extends React.Component {
 
     constructor(props) {
@@ -31,7 +32,7 @@ class Banner extends React.Component {
                             adSize="banner"
                             adUnitID={Platform.OS === 'android'
                                 ?
-                                "ca-app-pub-7315663868828228/9356232842"
+                                "ca-app-pub-3940256099942544/6300978111"
                                 :
                                 "ca-app-pub-7315663868828228/2907386321"}
                             testDevices={[AdMobBanner.simulatorId]}
