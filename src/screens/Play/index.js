@@ -143,7 +143,7 @@ export default class Play extends Component {
         CateogryAction.getWord(this.props.navigation.state.params.currentCategory.id, response => {
             if (response.success) {
                 this.setState({ lstWord: response.data.Word }, () => {
-                    // this.GameTime = response.data.Time;
+                    this.GameTime = /*response.data.PlayTime*/5;
                     this.playGame();
                 });
             }
@@ -151,11 +151,9 @@ export default class Play extends Component {
     }
 
     filterWord = () => {
-        const lstWord = this.state.lstWord.filter(item => item.mark != null);
+        let lstWord = this.state.lstWord.filter(item => item.mark != null);
         if (lstWord.length % 2 != 0) {
-            var obj = JSON.parse(lstWord);
-            obj.push({ "name": "" });
-            lstWord = JSON.stringify(obj);
+            lstWord.push({ name: "" });
         }
         return lstWord;
     }
@@ -194,7 +192,7 @@ export default class Play extends Component {
                 timer: 0,
                 background_image: Images.background_blue,
                 currentWord: "FINISHED!",
-                gotCardCount: this.state.lstWord.filter(item => item.mark).length
+                gotCardCount: (this.filterWord()).length
             });
         }
     }
@@ -246,7 +244,7 @@ export default class Play extends Component {
                                         </Text>
                                     </View>
                                     <View style={{ flex: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
-                                        <TouchableOpacity onPress={this.playGame()} activeOpacity={0.7} style={{
+                                        <TouchableOpacity onPress={() => { this.playGame() }} activeOpacity={0.7} style={{
                                             justifyContent: "center", alignItems: "center", backgroundColor: "#ffffff3f", borderRadius: 20,
                                             paddingVertical: 10, paddingHorizontal: 20,
                                         }}>
@@ -279,7 +277,7 @@ export default class Play extends Component {
                                 <View style={{ flex: 1, marginTop: 5 }}>
                                     <FlatList
                                         keyExtractor={(item, index) => index.toString()}
-                                        data={() => { this.filterWord() }}
+                                        data={this.filterWord()}
                                         renderItem={this.renderItem}
                                         numColumns={2}
                                         style={{ paddingTop: 20, paddingHorizontal: 10 }}
@@ -288,7 +286,7 @@ export default class Play extends Component {
                                     </View>
                                 </View>
                                 :
-                                <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+                                <View style={{ flex: 1, position: "absolute", top: 0, right: 0, left: 0, bottom: 0, alignItems: "center", justifyContent: "center" }}>
                                     <Text style={{ fontSize: 70, color: "#fff", fontWeight: "bold", marginBottom: 20 }}>{this.state.currentWord}</Text>
                                 </View>
                             }
