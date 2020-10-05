@@ -15,6 +15,7 @@
     "npm": "^6.14.8",
     "react": "16.13.1",
     "react-native": "0.63.2",
+    "react-native-admob": "^1.3.2",
     "react-native-device-rotation": "^1.0.1",
     "react-native-elements": "^2.3.2",
     "react-native-gesture-handler": "^1.8.0",
