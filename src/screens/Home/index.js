@@ -18,7 +18,7 @@ import Modal, { ModalContent } from "react-native-modals";
 import Orientation from 'react-native-orientation';
 import { CateogryAction } from '../../actions';
 
-// import { getIntertial } from '../../components/adMob/Intertial';
+import { getIntertial } from '../../components/adMob/Intertial';
 import Banner from '../../components/adMob/Banner';
 import {
     AdMobInterstitial,
@@ -76,7 +76,7 @@ export default class Home extends Component {
     }
 
     componentDidUpdate() {
-        //   getIntertial();
+        getIntertial();
     }
 
     componentWillUnmount() {
