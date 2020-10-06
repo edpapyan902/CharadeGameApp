@@ -15,31 +15,37 @@ import RNPaypal from 'react-native-paypal-lib';
 
 const lstSetting = [
     {
+        index: 0,
         title: 'RATE US 5 STARS',
         icon: 'star',
         content: ''
     },
     {
+        index: 1,
         title: 'FEEDBACK',
         icon: 'comment-dots',
         content: ''
     },
     {
+        index: 2,
         title: 'PRIVACY POLICY',
         icon: 'portrait',
         content: ''
     },
     {
+        index: 3,
         title: 'ROUND TIME',
         icon: 'clock',
         content: ''
     },
     {
+        index: 4,
         title: 'SUBSCRIPTION',
         icon: 'chess-queen',
         content: "Don't show Google Advertisement."
     },
     {
+        index: 5,
         title: 'RESTORE PHRCHASE',
         icon: 'history',
         content: ''
@@ -79,35 +85,44 @@ export default class Setting extends Component {
         }).then(response => {
             console.log(response);
         }).catch(err => {
-            alert(JSON.stringify(err.message))
+            console.log(err.message)
         })
+    }
+
+    itemClicked = (item) => {
+        if (item.index == 4) {
+            this.paypalRequest();
+        }
     }
 
     renderItem = ({ item }) => {
         const buttons = ['60', '90', '120']
         const { selectedIndex } = this.state
         return (
-            <View style={{ flex: 1, margin: 5, height: 80, backgroundColor: "#fff", borderRadius: 10, flexDirection: 'row', alignItems: "center", justifyContent: "flex-start" }}>
-                <View style={{ width: 100 }}>
-                    <Icon name={item.icon} style={{ paddingHorizontal: 25 }} color={("#002F7F")} size={40}></Icon>
-                </View>
-                <View style={{ flexDirection: "column" }}>
-                    <Text style={{ fontSize: 20, fontWeight: "bold" }}>{item.title}</Text>
-                    {item.content != '' ?
-                        <Text style={{ fontSize: 15 }}>{item.content}</Text>
-                        :
+            <TouchableOpacity style={{ flex: 1 }} onPress={() => { this.itemClicked(item) }} activeOpacity={0.7}>
+                <View style={{ flex: 1, margin: 5, height: 80, backgroundColor: "#fff", borderRadius: 10, flexDirection: 'row', alignItems: "center", justifyContent: "flex-start" }}>
+                    <View style={{ width: 100 }}>
+                        <Icon name={item.icon} style={{ paddingHorizontal: 25 }} color={("#004ba1")} size={40}></Icon>
+                    </View>
+                    <View style={{ flexDirection: "column" }}>
+                        <Text style={{ fontSize: 20, fontWeight: "bold" }}>{item.title}</Text>
+                        {item.content != '' ?
+                            <Text style={{ fontSize: 15 }}>{item.content}</Text>
+                            :
+                            <></>}
+                    </View>
+                    {item.title == 'ROUND TIME' ?
+                        <ButtonGroup
+                            onPress={this.updateIndex}
+                            selectedIndex={selectedIndex}
+                            buttons={buttons}
+                            selectedButtonStyle={{ backgroundColor: "#004ba1" }}
+                            containerStyle={{ borderWidth: 3, borderColor: "#004ba1", height: 40, width: 130, borderRadius: 15 }}
+                        /> :
                         <></>}
                 </View>
-                {item.title == 'ROUND TIME' ?
-                    <ButtonGroup
-                        onPress={this.updateIndex}
-                        selectedIndex={selectedIndex}
-                        buttons={buttons}
-                        selectedButtonStyle={{ backgroundColor: "#002F7F" }}
-                        containerStyle={{ borderWidth: 3, borderColor: "#002F7F", height: 40, width: 130, borderRadius: 15 }}
-                    /> :
-                    <></>}
-            </View>
+            </TouchableOpacity>
+
         )
     }
     render() {

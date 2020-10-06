@@ -192,7 +192,6 @@ export default class Play extends Component {
                 timer: 0,
                 background_image: Images.background_blue,
                 currentWord: "FINISHED!",
-                gotCardCount: (this.filterWord()).length
             });
         }
     }
