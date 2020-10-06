@@ -51,7 +51,6 @@ export default class Home extends Component {
     };
 
     showDialog = (item) => {
-        AdMobInterstitial.showAd().catch(error => console.warn(error));
         this.setState({ dialogVisible: true, currentCategory: item });
     }
 
@@ -60,6 +59,7 @@ export default class Home extends Component {
     }
 
     playGame = () => {
+        AdMobInterstitial.showAd().catch(error => console.warn(error));
         this.setState({ dialogVisible: false });
         this.props.navigation.navigate("Play", { currentCategory: this.state.currentCategory });
     }
