@@ -20,9 +20,7 @@ import { CateogryAction } from '../../actions';
 
 import { getIntertial } from '../../components/adMob/Intertial';
 import Banner from '../../components/adMob/Banner';
-import {
-    AdMobInterstitial,
-} from 'react-native-admob';
+import { AdMobInterstitial } from 'react-native-admob';
 
 export default class Home extends Component {
 
@@ -53,6 +51,7 @@ export default class Home extends Component {
     };
 
     showDialog = (item) => {
+        AdMobInterstitial.showAd().catch(error => console.warn(error));
         this.setState({ dialogVisible: true, currentCategory: item });
     }
 
@@ -73,9 +72,6 @@ export default class Home extends Component {
     componentDidMount() {
         this.getCategory();
         BackHandler.addEventListener("hardwareBackPress", this.backAction);
-    }
-
-    componentDidUpdate() {
         getIntertial();
     }
 

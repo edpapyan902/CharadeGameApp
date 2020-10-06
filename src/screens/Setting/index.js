@@ -11,6 +11,7 @@ import {
 import { ButtonGroup } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Images } from '../../config';
+import RNPaypal from 'react-native-paypal-lib';
 
 const lstSetting = [
     {
@@ -53,8 +54,33 @@ export default class Setting extends Component {
         }
         this.updateIndex = this.updateIndex.bind(this)
     }
+
     updateIndex(selectedIndex) {
         this.setState({ selectedIndex })
+    }
+
+    paypalRequest = () => {
+        var paymentClient = {};
+        paymentClient.amount = "11";
+        paymentClient.currency_code = "UAE";
+        paymentClient.short_description = "Test Payment";
+        paymentClient.intent = "sale";
+        var env;
+        env = RNPaypal.ENVIRONMENT.SANDBOX;
+
+        RNPaypal.paymentRequest({
+            clientId: "",
+            environment: env,
+            intent: RNPaypal.INTENT.SALE,
+            price: Number(100),
+            currency: "UAE",
+            description: 'Android testing',
+            acceptCreditCards: false
+        }).then(response => {
+            console.log(response);
+        }).catch(err => {
+            alert(JSON.stringify(err.message))
+        })
     }
 
     renderItem = ({ item }) => {

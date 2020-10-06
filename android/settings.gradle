@@ -1,4 +1,6 @@
 rootProject.name = 'CharadesGame'
+include ':react-native-paypal-lib'
+project(':react-native-paypal-lib').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-paypal-lib/android')
 include ':react-native-admob'
 project(':react-native-admob').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-admob/android')
 apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)

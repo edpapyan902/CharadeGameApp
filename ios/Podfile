@@ -10,6 +10,8 @@ target 'CharadesGame' do
 
   pod 'react-native-admob', :path => '../node_modules/react-native-admob'
 
+  pod 'RNPaypal', :path => '../node_modules/react-native-paypal-lib'
+
   target 'CharadesGameTests' do
     inherit! :complete
     # Pods for testing
