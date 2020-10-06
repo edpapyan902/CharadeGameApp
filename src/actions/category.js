@@ -11,7 +11,6 @@ export const getCategory = (callback) => {
     })
         .then(res => res.json())
         .then(res => {
-            let data = res.Category;
             if (res.Success)
                 callback({ success: true, data: data });
             else
@@ -22,6 +21,24 @@ export const getCategory = (callback) => {
 
 export const getWord = (category, callback) => {
     fetch(`${API_URL}/api/word/${category}`, {
+        method: "GET",
+        header: {
+            'Content-Type': 'application/json'
+        },
+    })
+
+        .then(res => res.json())
+        .then(res => {
+            if (res.Success)
+                callback({ success: true, data: res });
+            else
+                callback({ success: false, data: null });
+        })
+        .catch(err => callback({ success: false, data: err }));
+}
+
+export const getSetting = (callback) => {
+    fetch(API_URL + "/api/setting", {
         method: "GET",
         header: {
             'Content-Type': 'application/json'

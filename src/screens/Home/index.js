@@ -31,6 +31,7 @@ export default class Home extends Component {
             lstCategory: null,
             currentCategory: null,
             load: false,
+            setting: null
         }
         Orientation.lockToPortrait();
     };
@@ -38,9 +39,8 @@ export default class Home extends Component {
     getCategory = () => {
         this.setState({ load: true }, () => {
             CateogryAction.getCategory(response => {
-                if (response.success) {
-                    this.setState({ lstCategory: response.data });
-                }
+                if (response.success)
+                    this.setState({ lstCategory: response.data.Word, setting: response.data.Setting });
                 this.setState({ load: false });
             });
         })
@@ -123,9 +123,10 @@ export default class Home extends Component {
                             numColumns={2}
                         />
                     </ScrollView>
-                    <View style={{ height: 50 }}>
-                        <Banner />
-                    </View>
+                    {this.state.setting == null || !this.state.setting.subscription ??
+                        <View style={{ height: 50 }}>
+                            <Banner />
+                        </View>}
                 </SafeAreaView>
                 <Modal
                     visible={!!this.state.dialogVisible}

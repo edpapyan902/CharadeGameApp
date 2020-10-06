@@ -12,6 +12,8 @@ target 'CharadesGame' do
 
   pod 'RNPaypal', :path => '../node_modules/react-native-paypal-lib'
 
+  pod 'RNRate', :path => '../node_modules/react-native-rate'
+
   target 'CharadesGameTests' do
     inherit! :complete
     # Pods for testing

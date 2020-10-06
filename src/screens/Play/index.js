@@ -143,7 +143,7 @@ export default class Play extends Component {
         CateogryAction.getWord(this.props.navigation.state.params.currentCategory.id, response => {
             if (response.success) {
                 this.setState({ lstWord: response.data.Word }, () => {
-                    this.GameTime = /*response.data.PlayTime*/5;
+                    this.GameTime = response.data.Setting.time;
                     this.playGame();
                 });
             }

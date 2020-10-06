@@ -12,6 +12,8 @@ import { ButtonGroup } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Images } from '../../config';
 import RNPaypal from 'react-native-paypal-lib';
+import { CateogryAction } from '../../actions';
+import Rate, { AndroidMarket } from 'react-native-rate'
 
 const lstSetting = [
     {
@@ -56,9 +58,19 @@ export default class Setting extends Component {
     constructor() {
         super()
         this.state = {
-            selectedIndex: 2
+            selectedIndex: 2,
+            setting: null
         }
         this.updateIndex = this.updateIndex.bind(this)
+        this.getSetting();
+    }
+
+    getSetting = () => {
+        CateogryAction.getSetting(response => {
+            if (response.success)
+                this.setState({ setting: response.data.Setting });
+            this.setState({ load: false });
+        });
     }
 
     updateIndex(selectedIndex) {
@@ -66,22 +78,14 @@ export default class Setting extends Component {
     }
 
     paypalRequest = () => {
-        var paymentClient = {};
-        paymentClient.amount = "11";
-        paymentClient.currency_code = "UAE";
-        paymentClient.short_description = "Test Payment";
-        paymentClient.intent = "sale";
-        var env;
-        env = RNPaypal.ENVIRONMENT.SANDBOX;
-
         RNPaypal.paymentRequest({
-            clientId: "",
-            environment: env,
+            clientId: "AdmXEOuG-37njWDPAOagN1lTjkho4Sp8lkzYrB7JIZUXJz4gO1Oh0SsA6BDZhnd324Bd-Bx58WBJq28U",
+            environment: RNPaypal.ENVIRONMENT.SANDBOX,
             intent: RNPaypal.INTENT.SALE,
-            price: Number(100),
-            currency: "UAE",
+            price: 100,
+            currency: "USD",
             description: 'Android testing',
-            acceptCreditCards: false
+            acceptCreditCards: true
         }).then(response => {
             console.log(response);
         }).catch(err => {
@@ -90,9 +94,27 @@ export default class Setting extends Component {
     }
 
     itemClicked = (item) => {
-        if (item.index == 4) {
+        if (item.index == 4)
             this.paypalRequest();
-        }
+        else if (item.index == 1)
+            this.rateApp();
+    }
+
+    rateApp = () => {
+        // const options = {
+        //     AppleAppID: "2193813192",
+        //     GooglePackageName: "com.mywebsite.myapp",
+        //     AmazonPackageName: "com.mywebsite.myapp",
+        //     OtherAndroidURL: "http://www.randomappstore.com/app/47172391",
+        //     preferredAndroidMarket: AndroidMarket.Google,
+        //     preferInApp: false,
+        //     openAppStoreIfInAppFails: true,
+        //     fallbackPlatformURL: "http://www.mywebsite.com/myapp.html",
+        // }
+        // Rate.rate(options, success => {
+        //     if (success)
+        //         this.setState({ rated: true })
+        // });
     }
 
     renderItem = ({ item }) => {
@@ -127,7 +149,7 @@ export default class Setting extends Component {
     }
     render() {
         return (
-            <ImageBackground source={Images.background_blue} style={{ width: "100%", height: "100%" }}>
+            <ImageBackground source={Images.background_blue} style={{ width: "100%", height: "100%" }} >
                 <SafeAreaView style={{ flex: 1 }}>
                     <View style={{ height: 70, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
                         <View style={{ flex: 1, alignItems: "flex-start" }}>
@@ -151,7 +173,7 @@ export default class Setting extends Component {
                         />
                     </ScrollView>
                 </SafeAreaView>
-            </ImageBackground>
+            </ImageBackground >
 
 
         )

@@ -1,4 +1,6 @@
 rootProject.name = 'CharadesGame'
+include ':react-native-rate'
+project(':react-native-rate').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-rate/android')
 include ':react-native-paypal-lib'
 project(':react-native-paypal-lib').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-paypal-lib/android')
 include ':react-native-admob'
