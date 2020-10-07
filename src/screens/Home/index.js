@@ -31,7 +31,8 @@ export default class Home extends Component {
             lstCategory: null,
             currentCategory: null,
             load: false,
-            setting: null
+            setting: null,
+            dialogVisible: false
         }
         Orientation.lockToPortrait();
     };
@@ -40,15 +41,11 @@ export default class Home extends Component {
         this.setState({ load: true }, () => {
             CateogryAction.getCategory(response => {
                 if (response.success)
-                    this.setState({ lstCategory: response.data.Word, setting: response.data.Setting });
+                    this.setState({ lstCategory: response.data.Category, setting: response.data.Setting });
                 this.setState({ load: false });
             });
         })
     }
-
-    state = {
-        dialogVisible: false
-    };
 
     showDialog = (item) => {
         this.setState({ dialogVisible: true, currentCategory: item });
@@ -59,7 +56,9 @@ export default class Home extends Component {
     }
 
     playGame = () => {
-        AdMobInterstitial.showAd().catch(error => console.warn(error));
+        if (this.state.subscription == 0)
+            AdMobInterstitial.showAd().catch(error => console.warn(error));
+
         this.setState({ dialogVisible: false });
         this.props.navigation.navigate("Play", { currentCategory: this.state.currentCategory });
     }
@@ -67,6 +66,10 @@ export default class Home extends Component {
     backAction = () => {
         StatusBar.setHidden(false);
         Orientation.lockToPortrait();
+        CateogryAction.getSetting(response => {
+            if (response.success)
+                this.setState({ setting: response.data.Setting });
+        });
     }
 
     componentDidMount() {
@@ -84,7 +87,7 @@ export default class Home extends Component {
         return (
             <TouchableOpacity style={{ flex: 1 }} onPress={() => this.showDialog(item)}>
                 { item.title != '' ?
-                    <View style={{ flex: 1, flexDirection: 'column', height: 200, alignItems: "center", justifyContent: "center", borderRadius: 20, backgroundColor: "#ffffff3f", margin: 15 }}>
+                    <View style={{ flex: 1, flexDirection: 'column', height: 200, alignItems: "center", justifyContent: "center", borderRadius: 20, backgroundColor: "#ffffff3f", marginHorizontal: 15, marginBottom: 35, marginTop: 10 }}>
                         <Image style={{ minWidth: "85%", height: 150, borderRadius: 5 }} resizeMode="contain" source={{ uri: CateogryAction.API_URL + item.icon }}
                             PlaceholderContent={<ActivityIndicator />}></Image>
                     </View>
@@ -123,10 +126,9 @@ export default class Home extends Component {
                             numColumns={2}
                         />
                     </ScrollView>
-                    {this.state.setting == null || !this.state.setting.subscription ??
-                        <View style={{ height: 50 }}>
-                            <Banner />
-                        </View>}
+                    <View style={{ height: 50 }}>
+                        <Banner />
+                    </View>
                 </SafeAreaView>
                 <Modal
                     visible={!!this.state.dialogVisible}

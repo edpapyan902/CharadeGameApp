@@ -6,14 +6,17 @@ import {
     SafeAreaView,
     TouchableOpacity,
     ScrollView,
-    ImageBackground
+    ImageBackground,
+    BackHandler
 } from 'react-native'
 import { ButtonGroup } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Images } from '../../config';
+import { Image } from 'react-native-elements';
 import RNPaypal from 'react-native-paypal-lib';
 import { CateogryAction } from '../../actions';
 import Rate, { AndroidMarket } from 'react-native-rate'
+import Modal, { ModalContent } from "react-native-modals";
 
 const lstSetting = [
     {
@@ -59,10 +62,27 @@ export default class Setting extends Component {
         super()
         this.state = {
             selectedIndex: 2,
-            setting: null
+            setting: null,
+            dialogVisible: false
         }
         this.updateIndex = this.updateIndex.bind(this)
         this.getSetting();
+    }
+
+    componentDidMount() {
+        BackHandler.addEventListener("hardwareBackPress", this.backAction);
+    }
+
+    componentWillUnmount() {
+        BackHandler.removeEventListener("hardwareBackPress", this.backAction);
+    }
+
+    backAction = () => {
+        if (this.state.dialogVisible) {
+            this.setState({ dialogVisible: false })
+            return true;
+        }
+        return false;
     }
 
     getSetting = () => {
@@ -78,43 +98,35 @@ export default class Setting extends Component {
     }
 
     paypalRequest = () => {
-        RNPaypal.paymentRequest({
-            clientId: "AdmXEOuG-37njWDPAOagN1lTjkho4Sp8lkzYrB7JIZUXJz4gO1Oh0SsA6BDZhnd324Bd-Bx58WBJq28U",
-            environment: RNPaypal.ENVIRONMENT.SANDBOX,
-            intent: RNPaypal.INTENT.SALE,
-            price: 100,
-            currency: "USD",
-            description: 'Android testing',
-            acceptCreditCards: true
-        }).then(response => {
-            console.log(response);
-        }).catch(err => {
-            console.log(err.message)
-        })
+        // RNPaypal.paymentRequest({
+        //     clientId: "AdmXEOuG-37njWDPAOagN1lTjkho4Sp8lkzYrB7JIZUXJz4gO1Oh0SsA6BDZhnd324Bd-Bx58WBJq28U",
+        //     environment: RNPaypal.ENVIRONMENT.SANDBOX,
+        //     intent: RNPaypal.INTENT.SALE,
+        //     price: 100,
+        //     currency: "USD",
+        //     description: 'Android testing',
+        //     acceptCreditCards: true
+        // }).then(response => {
+        //     console.log(response);
+        // }).catch(err => {
+        //     console.log(err.message)
+        // })
     }
 
     itemClicked = (item) => {
         if (item.index == 4)
             this.paypalRequest();
-        else if (item.index == 1)
+        else if (item.index == 0)
             this.rateApp();
     }
 
     rateApp = () => {
+        this.setState({ dialogVisible: true });
         // const options = {
-        //     AppleAppID: "2193813192",
-        //     GooglePackageName: "com.mywebsite.myapp",
-        //     AmazonPackageName: "com.mywebsite.myapp",
-        //     OtherAndroidURL: "http://www.randomappstore.com/app/47172391",
+        //     GooglePackageName: "com.scnpinside",
         //     preferredAndroidMarket: AndroidMarket.Google,
-        //     preferInApp: false,
-        //     openAppStoreIfInAppFails: true,
-        //     fallbackPlatformURL: "http://www.mywebsite.com/myapp.html",
         // }
-        // Rate.rate(options, success => {
-        //     if (success)
-        //         this.setState({ rated: true })
-        // });
+        // Rate.rate(options, success => { });
     }
 
     renderItem = ({ item }) => {
@@ -173,6 +185,43 @@ export default class Setting extends Component {
                         />
                     </ScrollView>
                 </SafeAreaView>
+                <Modal
+                    visible={!!this.state.dialogVisible}
+                    swipeThreshold={50}
+                    modalStyle={{ backgroundColor: "transparent" }}
+                >
+
+                    <ModalContent style={{ width: 350, height: 350, paddingVertical: 25, paddingHorizontal: 25, backgroundColor: "transparent" }}>
+                        <View style={{ borderWidth: 5, paddingHorizontal: 10, paddingVertical: 20, borderRadius: 20, borderColor: "#fff", backgroundColor: "#ffde00", justifyContent: "center", alignItems: "center" }}>
+                            <Image source={Images.hugface} style={{ width: 80, height: 80, marginTop: 10 }}></Image>
+                            <Text style={{ color: "#00", textAlign: "center", marginVertical: 20, fontSize: 22, paddingHorizontal: 15, fontWeight: "bold" }}>WHAT DO YOU THINK ABOUT OUR APP?</Text>
+                            <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
+                                <TouchableOpacity onPress={({ }) => { this.props.navigation.navigate("Setting"); }} activeOpacity={0.8} style={{
+                                    justifyContent: "center", alignItems: "center", backgroundColor: "#fff", borderRadius: 30,
+                                    width: 60, height: 60,
+                                    marginHorizontal: 10
+                                }}>
+                                    <Image source={Images.rate_good} style={{ width: 40, height: 40 }}></Image>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={({ }) => { this.props.navigation.navigate("Setting"); }} activeOpacity={0.8} style={{
+                                    justifyContent: "center", alignItems: "center", backgroundColor: "#fff", borderRadius: 30,
+                                    width: 60, height: 60,
+                                    marginHorizontal: 10
+                                }}>
+                                    <Image source={Images.rate_cancel} style={{ width: 40, height: 40 }}></Image>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPressIn={this.style = ""} onPress={({ }) => { this.props.navigation.navigate("Setting"); }} activeOpacity={0.8} style={{
+                                    justifyContent: "center", alignItems: "center", backgroundColor: "#fff", borderRadius: 30,
+                                    width: 60, height: 60,
+                                    marginHorizontal: 10
+                                }}>
+                                    <Image source={Images.rate_bad} style={{ width: 40, height: 40 }}></Image>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+
+                    </ModalContent>
+                </Modal>
             </ImageBackground >
 
 
