@@ -16,11 +16,13 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Images } from '../../config';
 import Modal, { ModalContent } from "react-native-modals";
 import Orientation from 'react-native-orientation';
-import { CateogryAction } from '../../actions';
+import { CategoryAction } from '../../actions';
 
 import { getIntertial } from '../../components/adMob/Intertial';
 import Banner from '../../components/adMob/Banner';
 import { AdMobInterstitial } from 'react-native-admob';
+
+import Storage from "../Store";
 
 export default class Home extends Component {
 
@@ -39,9 +41,11 @@ export default class Home extends Component {
 
     getCategory = () => {
         this.setState({ load: true }, () => {
-            CateogryAction.getCategory(response => {
+            CategoryAction.getCategory(response => {
                 if (response.success)
-                    this.setState({ lstCategory: response.data.Category, setting: response.data.Setting });
+                    this.setState({ lstCategory: response.data.Category, setting: response.data.Setting }, async () => {
+                        await Storage.setItem("subscription", this.state.setting.subscription);
+                    });
                 this.setState({ load: false });
             });
         })
@@ -55,9 +59,11 @@ export default class Home extends Component {
         this.setState({ dialogVisible: false, currentCategory: null });
     }
 
-    playGame = () => {
-        if (this.state.subscription == 0)
+    playGame = async () => {
+        var hasSub = await Storage.getItem("subscription");
+        if (this.state.setting.subscription == 0 && hasSub == 0) {
             AdMobInterstitial.showAd().catch(error => console.warn(error));
+        }
 
         this.setState({ dialogVisible: false });
         this.props.navigation.navigate("Play", { currentCategory: this.state.currentCategory });
@@ -66,10 +72,11 @@ export default class Home extends Component {
     backAction = () => {
         StatusBar.setHidden(false);
         Orientation.lockToPortrait();
-        CateogryAction.getSetting(response => {
-            if (response.success)
-                this.setState({ setting: response.data.Setting });
-        });
+        if (this.state.dialogVisible) {
+            this.setState({ dialogVisible: false })
+            return true;
+        }
+        return false;
     }
 
     componentDidMount() {
@@ -88,7 +95,7 @@ export default class Home extends Component {
             <TouchableOpacity style={{ flex: 1 }} onPress={() => this.showDialog(item)}>
                 { item.title != '' ?
                     <View style={{ flex: 1, flexDirection: 'column', height: 200, alignItems: "center", justifyContent: "center", borderRadius: 20, backgroundColor: "#ffffff3f", marginHorizontal: 15, marginBottom: 35, marginTop: 10 }}>
-                        <Image style={{ minWidth: "85%", height: 150, borderRadius: 5 }} resizeMode="contain" source={{ uri: CateogryAction.API_URL + item.icon }}
+                        <Image style={{ minWidth: "85%", height: 150, borderRadius: 5 }} resizeMode="contain" source={{ uri: CategoryAction.API_URL + item.icon }}
                             PlaceholderContent={<ActivityIndicator />}></Image>
                     </View>
                     :
@@ -134,7 +141,6 @@ export default class Home extends Component {
                     visible={!!this.state.dialogVisible}
                     swipeThreshold={100}
                     modalStyle={{ backgroundColor: "transparent" }}
-                    onSwipeOut={(event) => { this.setState({ dialogVisible: false }); }}
                     onTouchOutside={() => { this.setState({ dialogVisible: false }); }}
                 >
 

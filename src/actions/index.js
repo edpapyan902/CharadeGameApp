@@ -1,6 +1,6 @@
 import { exp } from 'react-native-reanimated';
-import * as CateogryAction from './category';
+import * as CategoryAction from './category';
 
 export {
-    CateogryAction,
+    CategoryAction,
 };

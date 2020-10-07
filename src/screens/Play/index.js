@@ -11,7 +11,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Images } from '../../config';
 import Orientation from 'react-native-orientation';
-import { CateogryAction } from '../../actions';
+import { CategoryAction } from '../../actions';
 import RNDeviceRotation from 'react-native-device-rotation';
 
 export default class Play extends Component {
@@ -140,7 +140,7 @@ export default class Play extends Component {
         Orientation.lockToPortrait();
     }
     getWord = () => {
-        CateogryAction.getWord(this.props.navigation.state.params.currentCategory.id, response => {
+        CategoryAction.getWord(this.props.navigation.state.params.currentCategory.id, response => {
             if (response.success) {
                 this.setState({ lstWord: response.data.Word }, () => {
                     this.GameTime = response.data.Setting.time;

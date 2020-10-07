@@ -8,4 +8,5 @@ export const Images = {
   rate_cancel: require("../assets/images/rate_cancel.png"),
   monkey: require("../assets/images/monkey.png"),
   hugface: require("../assets/images/hugface.png"),
+  rating: require("../assets/images/rating.png"),
 };

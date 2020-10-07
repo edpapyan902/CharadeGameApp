@@ -54,3 +54,39 @@ export const getSetting = (callback) => {
         })
         .catch(err => callback({ success: false, data: err }));
 }
+
+export const subscription = (callback) => {
+    fetch(API_URL + "/api/subscription", {
+        method: "GET",
+        header: {
+            'Content-Type': 'application/json'
+        },
+    })
+
+        .then(res => res.json())
+        .then(res => {
+            if (res.Success)
+                callback({ success: true, data: res });
+            else
+                callback({ success: false, data: null });
+        })
+        .catch(err => callback({ success: false, data: err }));
+}
+
+export const setTime = (time, callback) => {
+    fetch(`${API_URL}/api/settime/${time}`, {
+        method: "GET",
+        header: {
+            'Content-Type': 'application/json'
+        },
+    })
+
+        .then(res => res.json())
+        .then(res => {
+            if (res.Success)
+                callback({ success: true, data: res });
+            else
+                callback({ success: false, data: null });
+        })
+        .catch(err => callback({ success: false, data: err }));
+}
