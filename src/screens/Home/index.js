@@ -22,7 +22,7 @@ import { getIntertial } from '../../components/adMob/Intertial';
 import Banner from '../../components/adMob/Banner';
 import { AdMobInterstitial } from 'react-native-admob';
 
-import Storage from "../Store";
+import Storage from "../../Store";
 
 export default class Home extends Component {
 

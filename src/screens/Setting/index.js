@@ -21,7 +21,7 @@ import Rate, { AndroidMarket } from 'react-native-rate'
 import Modal, { ModalContent } from "react-native-modals";
 import { openComposer } from 'react-native-email-link'
 
-import Storage from "../Store";
+import { Storage } from "../../Store";
 
 const lstSetting = [
     {
