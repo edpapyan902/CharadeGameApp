@@ -3,14 +3,15 @@ import {
     FlatList,
     View,
     Text,
-    ActivityIndicator,
     SafeAreaView,
     TouchableOpacity,
+    ActivityIndicator,
     ScrollView,
     ImageBackground,
     BackHandler,
     StatusBar
 } from 'react-native'
+import { SkypeIndicator } from 'react-native-indicators';
 import { Image } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Images } from '../../config';
@@ -162,17 +163,8 @@ export default class Home extends Component {
                     </ModalContent>
                 </Modal>
                 {this.state.load &&
-                    <ActivityIndicator
-                        size="large"
-                        style={{
-                            position: "absolute",
-                            top: 0,
-                            left: 0,
-                            right: 0,
-                            bottom: 0,
-                            justifyContent: "center",
-                            alignItems: "center"
-                        }}
+                    <SkypeIndicator
+                        size={40}
                         color={"white"}
                     />
                 }
