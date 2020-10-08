@@ -1,18 +1,24 @@
 import { AsyncStorage } from 'react-native';
 
+const TimeKey = "TIME";
+const SubscriptionKey = "SUBSCRIPTION";
+
 const Storage = {
 
-    getItem: async function (key) {
-        let item = await AsyncStorage.getItem(key);
-        //You'd want to error check for failed JSON parsing...
+    getTime: async function () {
+        let item = await AsyncStorage.getItem(TimeKey);
         return JSON.parse(item);
     },
-    setItem: async function (key, value) {
-        return await AsyncStorage.setItem(key, JSON.stringify(value));
+    setTime: async function (value) {
+        return await AsyncStorage.setItem(TimeKey, JSON.stringify(value));
     },
-    removeItem: async function (key) {
-        return await AsyncStorage.removeItem(key);
-    }
+    getSubscription: async function () {
+        let item = await AsyncStorage.getItem(SubscriptionKey);
+        return JSON.parse(item);
+    },
+    setSubscription: async function (value) {
+        return await AsyncStorage.setItem(SubscriptionKey, JSON.stringify(value));
+    },
 };
 
 export default Storage;

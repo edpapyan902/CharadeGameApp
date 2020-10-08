@@ -35,21 +35,27 @@ export default class Home extends Component {
             currentCategory: null,
             load: false,
             setting: null,
-            dialogVisible: false
+            dialogVisible: false,
         }
         Orientation.lockToPortrait();
     };
 
     getCategory = () => {
         this.setState({ load: true }, () => {
-            CategoryAction.getCategory(response => {
+            CategoryAction.getCategory(async response => {
                 if (response.success)
-                    this.setState({ lstCategory: response.data.Category, setting: response.data.Setting }, async () => {
-                        await Storage.setItem("subscription", this.state.setting.subscription);
-                    });
+                    this.setState({ lstCategory: this.filterCategory(response.data.Category) });
                 this.setState({ load: false });
             });
         })
+    }
+
+    filterCategory = (data) => {
+        let lstCategory = data;
+        if (lstCategory.length % 2 != 0) {
+            lstCategory.push({ title: "" });
+        }
+        return lstCategory;
     }
 
     showDialog = (item) => {
@@ -61,10 +67,8 @@ export default class Home extends Component {
     }
 
     playGame = async () => {
-        var hasSub = await Storage.getItem("subscription");
-        if (this.state.setting.subscription == 0 && hasSub == 0) {
+        if (await Storage.getSubscription() == 0)
             AdMobInterstitial.showAd().catch(error => console.warn(error));
-        }
 
         this.setState({ dialogVisible: false });
         this.props.navigation.navigate("Play", { currentCategory: this.state.currentCategory });
@@ -170,8 +174,6 @@ export default class Home extends Component {
                 }
 
             </ImageBackground>
-
-
         )
     }
 }

@@ -16,12 +16,11 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Images } from '../../config';
 import { Image } from 'react-native-elements';
 import RNPaypal from 'react-native-paypal-lib';
-import { CategoryAction } from '../../actions';
 import Rate, { AndroidMarket } from 'react-native-rate'
 import Modal, { ModalContent } from "react-native-modals";
 import { openComposer } from 'react-native-email-link'
 
-import { Storage } from "../../Store";
+import Storage from "../../Store";
 
 const lstSetting = [
     {
@@ -73,7 +72,6 @@ export default class Setting extends Component {
         }
         this.pricacyUrl = "https://google.com";
         this.updateIndex = this.timeChanged.bind(this)
-        this.getSetting();
     }
 
     componentDidMount() {
@@ -92,37 +90,25 @@ export default class Setting extends Component {
         return false;
     }
 
-    getSetting = () => {
-        CategoryAction.getSetting(response => {
-            if (response.success)
-                this.setState({ setting: response.data.Setting });
-            this.setState({ load: false });
-        });
+    timeChanged = async (selectedIndex) => {
+        this.setState({ selectedIndex });
+        await Storage.setItem("time", (selectedIndex + 2) * 30);
     }
 
-    timeChanged(selectedIndex) {
-        this.setState({ selectedIndex })
-        CategoryAction.setTime((selectedIndex + 2) * 30, async () => {
-            await Storage.setItem("time", (selectedIndex + 2) * 30);
-        });
-    }
-
-    paypalRequest = () => {
-        // RNPaypal.paymentRequest({
-        //     clientId: "AdmXEOuG-37njWDPAOagN1lTjkho4Sp8lkzYrB7JIZUXJz4gO1Oh0SsA6BDZhnd324Bd-Bx58WBJq28U",
-        //     environment: RNPaypal.ENVIRONMENT.SANDBOX,
-        //     intent: RNPaypal.INTENT.SALE,
-        //     price: 100,
-        //     currency: "USD",
-        //     description: 'Android testing',
-        //     acceptCreditCards: true
-        // }).then(response => {
-        //     console.log(response);
-        // }).catch(err => {
-        //     console.log(err.message)
-        // })
-        CategoryAction.subscription(async response => {
-            await Storage.setItem("subscription", 1);
+    paypalRequest = async () => {
+        RNPaypal.paymentRequest({
+            clientId: "AdmXEOuG-37njWDPAOagN1lTjkho4Sp8lkzYrB7JIZUXJz4gO1Oh0SsA6BDZhnd324Bd-Bx58WBJq28U",
+            environment: RNPaypal.ENVIRONMENT.SANDBOX,
+            intent: RNPaypal.INTENT.SALE,
+            price: 100,
+            currency: "USD",
+            description: 'Android testing',
+            acceptCreditCards: true
+        }).then(async response => {
+            console.log(response);
+            await Storage.setSubscription("1");
+        }).catch(err => {
+            console.log(err.message)
         })
     }
 
