@@ -92,15 +92,18 @@ export default class Setting extends Component {
 
     timeChanged = async (selectedIndex) => {
         this.setState({ selectedIndex });
-        await Storage.setItem("time", (selectedIndex + 2) * 30);
+        await Storage.setTime((selectedIndex + 2) * 30);
     }
 
     paypalRequest = async () => {
+        if (await Storage.getSubscription() == 1)
+            return;
+
         RNPaypal.paymentRequest({
-            clientId: "AdmXEOuG-37njWDPAOagN1lTjkho4Sp8lkzYrB7JIZUXJz4gO1Oh0SsA6BDZhnd324Bd-Bx58WBJq28U",
+            clientId: "AeqJvRiaRbrutSrbCCsDnkfy9zwF_yopkBPpamZ7oTidca_RlMuvXJzO4n8rKsSReb8z5K5nZHA4s5aC",
             environment: RNPaypal.ENVIRONMENT.SANDBOX,
             intent: RNPaypal.INTENT.SALE,
-            price: 100,
+            price: 111,
             currency: "USD",
             description: 'Android testing',
             acceptCreditCards: true
