@@ -166,6 +166,7 @@ export default class Play extends Component {
             isFinish: false,
             isPause: false,
             currentIndex: 0,
+            gotCardCount: 0,
             currentWord: "GET READY"
         });
         this.startTimer();

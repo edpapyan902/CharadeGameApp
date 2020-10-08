@@ -53,12 +53,12 @@ const lstSetting = [
         icon: 'chess-queen',
         content: "Don't show Google Advertisement."
     },
-    {
-        index: 5,
-        title: 'RESTORE PHRCHASE',
-        icon: 'history',
-        content: ''
-    }
+    // {
+    //     index: 5,
+    //     title: 'RESTORE PHRCHASE',
+    //     icon: 'history',
+    //     content: ''
+    // }
 ];
 
 export default class Setting extends Component {
@@ -69,6 +69,7 @@ export default class Setting extends Component {
             setting: null,
             dialogVisible: false,
             hugViewVisivle: false,
+            checkoutSuccessDialog: false,
         }
         this.pricacyUrl = "https://google.com";
         this.updateIndex = this.timeChanged.bind(this)
@@ -85,6 +86,10 @@ export default class Setting extends Component {
     backAction = () => {
         if (this.state.dialogVisible) {
             this.setState({ dialogVisible: false })
+            return true;
+        }
+        if (this.state.checkoutSuccessDialog) {
+            this.setState({ checkoutSuccessDialog: false })
             return true;
         }
         return false;
@@ -109,6 +114,7 @@ export default class Setting extends Component {
             acceptCreditCards: true
         }).then(async response => {
             console.log(response);
+            this.setState({checkoutSuccessDialog: true});
             await Storage.setSubscription("1");
         }).catch(err => {
             console.log(err.message)
@@ -150,7 +156,7 @@ export default class Setting extends Component {
         const { selectedIndex } = this.state
         return (
             <TouchableOpacity style={{ flex: 1 }} onPress={() => { this.itemClicked(item) }} activeOpacity={0.8}>
-                <View style={{ flex: 1, margin: 5, height: 80, backgroundColor: "#fff", borderRadius: 10, flexDirection: 'row', alignItems: "center", justifyContent: "flex-start" }}>
+                <View style={{ flex: 1, marginVertical: 10, marginHorizontal:5, height: 80, backgroundColor: "#fff", borderRadius: 10, flexDirection: 'row', alignItems: "center", justifyContent: "flex-start" }}>
                     <View style={{ width: 100 }}>
                         <Icon name={item.icon} style={{ paddingHorizontal: 25 }} color={("#004ba1")} size={40}></Icon>
                     </View>
@@ -179,14 +185,14 @@ export default class Setting extends Component {
         return (
             <ImageBackground source={Images.background_blue} style={{ width: "100%", height: "100%" }} >
                 <SafeAreaView style={{ flex: 1 }}>
-                    <View style={{ height: 70, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                    <View style={{ height: 70, flexDirection: "row", alignItems: "center", justifyContent: "center", marginBottom:30 }}>
                         <View style={{ flex: 1, alignItems: "flex-start" }}>
                             <TouchableOpacity onPress={({ }) => { this.props.navigation.navigate("Home"); }} activeOpacity={0.7} style={{
                                 justifyContent: "center", alignItems: "center",
                                 width: 40, height: 40,
                                 marginLeft: 10
                             }}>
-                                <Icon name={'arrow-left'} color={'white'} size={30} />
+                                <Icon name={'arrow-left'} color={'white'} size={25} />
                             </TouchableOpacity>
                         </View>
                         <Text style={{ flex: 2, textAlign: "center", color: "#fff", fontSize: 30 }}>SETTINGS</Text>
@@ -261,6 +267,29 @@ export default class Setting extends Component {
 
                     </ModalContent>
                 </Modal>
+
+                <Modal
+                    visible={!!this.state.checkoutSuccessDialog}
+                    swipeThreshold={50}
+                    modalStyle={{ backgroundColor: "transparent" }}
+                >
+
+                    <ModalContent style={{ width: 350, height: 350, padding: 0, paddingTop: 60 }}>
+                        <View style={{ flex: 1, backgroundColor: "#fff", borderRadius: 5, justifyContent: "center", alignItems: "center" }}>
+                            <Text style={{ color: "#71c341", fontSize: 33, marginTop: 40 }}>Success!</Text>
+                            <Text style={{ color: "#71c341", fontSize: 20 }}>Thank you.</Text>
+                            <TouchableOpacity style={{ width: "100%", marginTop: 50, justifyContent: "center", alignItems: "center" }} onPress={() => { this.setState({ checkoutSuccessDialog: false }) }}>
+                                <View style={{ backgroundColor: "#71c341", width: "80%", borderRadius: 5, height: 50, justifyContent: "center", alignItems: "center" }}>
+                                    <Text style={{ fontSize: 20, color: "#fff" }}>OK</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={{ position: "absolute", width: 350, height: 120, top: 0, alignItems: "center", justifyContent: "center" }}>
+                            <Image source={Images.checkout} style={{ width: 100, height: 100 }}></Image>
+                        </View>
+                    </ModalContent>
+                </Modal>
+
             </ImageBackground >
 
 

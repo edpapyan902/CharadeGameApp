@@ -36,6 +36,8 @@ export default class Home extends Component {
             load: false,
             setting: null,
             dialogVisible: false,
+            showSubcateogry: false,
+            lstSubCategory: null,
         }
         Orientation.lockToPortrait();
     };
@@ -63,15 +65,28 @@ export default class Home extends Component {
     }
 
     hideDialog = () => {
-        this.setState({ dialogVisible: false, currentCategory: null });
+        this.setState({ dialogVisible: false, currentCategory: null, lstSubCategory: null, showSubcateogry: false });
     }
 
     playGame = async () => {
-        if (await Storage.getSubscription() == 0)
-            AdMobInterstitial.showAd().catch(error => console.warn(error));
+        if (this.state.currentCategory.subcategory != null && !this.state.showSubcateogry) {
+            this.setState({ lstSubCategory: this.state.currentCategory.subcategory }, () => {
+                this.setState({ showSubcateogry: true });
+            });
+        }
+        else {
+            if (await Storage.getSubscription() == 0)
+                AdMobInterstitial.showAd().catch(error => console.warn(error));
 
-        this.setState({ dialogVisible: false });
-        this.props.navigation.navigate("Play", { currentCategory: this.state.currentCategory });
+            this.props.navigation.navigate("Play", { currentCategory: this.state.currentCategory });
+            this.hideDialog();
+        }
+    }
+
+    subitemClicked = (item) => {
+        this.setState({currentCategory: item}, () => {
+            this.playGame();
+        })
     }
 
     backAction = () => {
@@ -94,6 +109,16 @@ export default class Home extends Component {
         BackHandler.removeEventListener("hardwareBackPress", this.backAction);
         AdMobInterstitial.removeAllListeners();
     }
+
+    renderSubItem = ({ item }) => {
+        return (
+            <TouchableOpacity style={{ flex: 1, paddingVertical: 5 }} onPress={() => this.subitemClicked(item)} activeOpacity={0.8}>
+                <View style={{ flex: 1, backgroundColor: "#fff", borderRadius: 10, paddingVertical: 10, justifyContent: "center", alignItems: "center" }}>
+                    <Text style={{ color: "#000", fontSize: 20 }}>{item.title}</Text>
+                </View>
+            </TouchableOpacity>
+        )
+    };
 
     renderItem = ({ item }) => {
         return (
@@ -148,23 +173,43 @@ export default class Home extends Component {
                     modalStyle={{ backgroundColor: "transparent" }}
                     onTouchOutside={() => { this.setState({ dialogVisible: false }); }}
                 >
+                    {this.state.showSubcateogry ?
+                        <ModalContent style={{ width: 300, height: 380, paddingVertical: 25, paddingHorizontal: 25, backgroundColor: "transparent" }}>
+                            <View style={{ borderWidth: 5, paddingHorizontal: 5, paddingVertical: 30, borderRadius: 30, borderColor: "#fff", backgroundColor: "#71c341", justifyContent: "center", alignItems: "center" }}>
+                                <FlatList
+                                    style={{ padding: "1.5%", width: "95%" }}
+                                    keyExtractor={(item, index) => index.toString()}
+                                    data={this.state.lstSubCategory}
+                                    renderItem={this.renderSubItem}
+                                    numColumns={1}
+                                    showsVerticalScrollIndicator={false}
+                                />
+                            </View>
+                            <View style={{ position: "absolute", top: 5, right: 5, width: 35, height: 35 }}>
+                                <TouchableOpacity onPress={this.hideDialog}>
+                                    <Icon name="times-circle" size={35} color="#fff"></Icon>
+                                </TouchableOpacity>
+                            </View>
+                        </ModalContent>
+                        :
+                        <ModalContent style={{ width: 300, height: 380, paddingVertical: 25, paddingHorizontal: 25, backgroundColor: "transparent" }}>
+                            <View style={{ borderWidth: 5, paddingHorizontal: 10, paddingVertical: 20, borderRadius: 30, borderColor: "#fff", backgroundColor: "#00549a" }}>
+                                <Text style={{ fontSize: 30, marginTop: 20, marginBottom: 30, textAlign: "center", color: "#fff" }}>Rules</Text>
+                                <Text style={{ color: "#fff", textAlign: "center", fontSize: 18, paddingHorizontal: 15 }}>Try to guess the object by describing the plot. To make it more difficult don't use any charactor names.</Text>
+                                <TouchableOpacity activeOpacity={0.8} style={{ paddingTop: 30, paddingHorizontal: 10, marginBottom: 20 }} onPress={this.playGame}>
+                                    <View style={{ backgroundColor: "#eabf28", height: 40, borderRadius: 10, justifyContent: "center", alignItems: "center" }}>
+                                        <Text style={{ textAlign: "center", color: "#fff", fontSize: 20, fontWeight: "bold" }}>Play</Text>
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={{ position: "absolute", top: 5, right: 5, width: 35, height: 35 }}>
+                                <TouchableOpacity onPress={this.hideDialog}>
+                                    <Icon name="times-circle" size={35} color="#fff"></Icon>
+                                </TouchableOpacity>
+                            </View>
+                        </ModalContent>
+                    }
 
-                    <ModalContent style={{ width: 300, height: 380, paddingVertical: 25, paddingHorizontal: 25, backgroundColor: "transparent" }}>
-                        <View style={{ borderWidth: 5, paddingHorizontal: 10, paddingVertical: 20, borderRadius: 30, borderColor: "#fff", backgroundColor: "#00549a" }}>
-                            <Text style={{ fontSize: 30, marginTop: 20, marginBottom: 30, textAlign: "center", color: "#fff" }}>Rules</Text>
-                            <Text style={{ color: "#fff", textAlign: "center", fontSize: 18, paddingHorizontal: 15 }}>Try to guess the object by describing the plot. To make it more difficult don't use any charactor names.</Text>
-                            <TouchableOpacity activeOpacity={0.8} style={{ paddingTop: 30, paddingHorizontal: 10, marginBottom: 20 }} onPress={this.playGame}>
-                                <View style={{ backgroundColor: "#eabf28", height: 40, borderRadius: 10, justifyContent: "center", alignItems: "center" }}>
-                                    <Text style={{ textAlign: "center", color: "#fff", fontSize: 20, fontWeight: "bold" }}>Play</Text>
-                                </View>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={{ position: "absolute", top: 5, right: 5, width: 35, height: 35 }}>
-                            <TouchableOpacity onPress={this.hideDialog}>
-                                <Icon name="times-circle" size={35} color="#fff"></Icon>
-                            </TouchableOpacity>
-                        </View>
-                    </ModalContent>
                 </Modal>
                 {this.state.load &&
                     <SkypeIndicator

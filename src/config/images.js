@@ -9,4 +9,5 @@ export const Images = {
   monkey: require("../assets/images/monkey.png"),
   hugface: require("../assets/images/hugface.png"),
   rating: require("../assets/images/rating.png"),
+  checkout: require("../assets/images/checkout.png"),
 };
