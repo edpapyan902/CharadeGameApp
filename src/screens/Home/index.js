@@ -84,7 +84,7 @@ export default class Home extends Component {
     }
 
     subitemClicked = (item) => {
-        this.setState({currentCategory: item}, () => {
+        this.setState({ currentCategory: item }, () => {
             this.playGame();
         })
     }
@@ -214,7 +214,7 @@ export default class Home extends Component {
                 {this.state.load &&
                     <SkypeIndicator
                         size={40}
-                        color={"white"}
+                        color={"#71c341"}
                     />
                 }
 
