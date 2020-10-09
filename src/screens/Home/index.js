@@ -78,8 +78,9 @@ export default class Home extends Component {
             if (await Storage.getSubscription() == 0)
                 AdMobInterstitial.showAd().catch(error => console.warn(error));
 
+            this.setState({ dialogVisible: false });
             this.props.navigation.navigate("Play", { currentCategory: this.state.currentCategory });
-            this.hideDialog();
+            this.setState({ currentCategory: null, lstSubCategory: null, showSubcateogry: false });
         }
     }
 
