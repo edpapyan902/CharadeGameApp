@@ -11,6 +11,7 @@ export default class Loading extends Component {
   componentDidMount = async () => {
     let time = await Storage.getTime();
     let subscription = await Storage.getSubscription();
+    console.log(subscription);
 
     if (time == null)
       await Storage.setTime(90);

@@ -65,18 +65,26 @@ export default class Setting extends Component {
     constructor() {
         super()
         this.state = {
-            selectedIndex: 2,
+            selectedIndex: 1,
             setting: null,
             dialogVisible: false,
             hugViewVisivle: false,
             checkoutSuccessDialog: false,
         }
         this.pricacyUrl = "https://google.com";
-        this.updateIndex = this.timeChanged.bind(this)
+        this.updateIndex = this.timeChanged.bind(this);
+        this.initSetting();
+    }
+
+    initSetting = async() => {
+        let time = await Storage.getTime();
+        time = time/30-2;
+        this.setState({selectedIndex: time});
     }
 
     componentDidMount() {
         BackHandler.addEventListener("hardwareBackPress", this.backAction);
+        this.initSetting();
     }
 
     componentWillUnmount() {

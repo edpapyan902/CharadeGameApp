@@ -212,7 +212,7 @@ export default class Play extends Component {
     renderItem = ({ item }) => {
         return (
             <View style={{ flex: 1, marginVertical: 5, justifyContent: "center", alignItems: "center" }}>
-                <Text style={{ color: item.mark ? "#53e25b" : "#b02a2b", fontSize: 30, fontWeight: "bold" }}>{item.name}</Text>
+                <Text style={{ color: item.mark ? "#53e25b" : "#b02a2b", textAlign:"center", fontSize: 30, fontWeight: "bold" }}>{item.name}</Text>
             </View>
         )
     }
@@ -287,8 +287,8 @@ export default class Play extends Component {
                                     </View>
                                 </View>
                                 :
-                                <View style={{ flex: 1, position: "absolute", top: 0, right: 0, left: 0, bottom: 0, alignItems: "center", justifyContent: "center" }}>
-                                    <Text style={{ fontSize: 70, color: "#fff", fontWeight: "bold", marginBottom: 20 }}>{this.state.currentWord}</Text>
+                                <View style={{ flex: 1, position: "absolute", top: 0, right: 0, left: 0, bottom: 0, paddingHorizontal:10, alignItems: "center", justifyContent: "center" }}>
+                                    <Text style={{ fontSize: 70, color: "#fff", fontWeight: "bold", marginBottom: 20, textAlign:"center" }}>{this.state.currentWord}</Text>
                                 </View>
                             }
 

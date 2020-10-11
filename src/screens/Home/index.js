@@ -34,7 +34,6 @@ export default class Home extends Component {
             lstCategory: null,
             currentCategory: null,
             load: false,
-            setting: null,
             dialogVisible: false,
             showSubcateogry: false,
             lstSubCategory: null,
@@ -48,6 +47,7 @@ export default class Home extends Component {
                 if (response.success)
                     this.setState({ lstCategory: this.filterCategory(response.data.Category) });
                 this.setState({ load: false });
+                console.log(response);
             });
         })
     }
