@@ -14,6 +14,7 @@ import Orientation from 'react-native-orientation';
 import { CategoryAction } from '../../actions';
 import RNDeviceRotation from 'react-native-device-rotation';
 import Storage from '../../Store';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default class Play extends Component {
 
@@ -39,7 +40,7 @@ export default class Play extends Component {
 
         this.orientationEvent = new NativeEventEmitter(RNDeviceRotation);
         this.ReadyTime = 2;
-        this.GameTime = 30;
+        this.GameTime = 15;
         this.isTouchScreen = false;
 
         this.getWord();
@@ -198,8 +199,8 @@ export default class Play extends Component {
     }
 
     decrementClock = () => {
-        if (this.isTouchScreen)
-            return;
+        // if (this.isTouchScreen)
+        //     return;
 
         if (this.state.timer == 0) {
             this.finishTimer();
@@ -211,7 +212,7 @@ export default class Play extends Component {
     renderItem = ({ item }) => {
         return (
             <View style={{ flex: 1, marginVertical: 5, justifyContent: "center", alignItems: "center" }}>
-                <Text style={{ color: item.mark ? "#53e25b" : "#b02a2b", textAlign:"center", fontSize: 30, fontWeight: "bold" }}>{item.name}</Text>
+                <Text style={{ color: item.mark ? "#53e25b" : "#b02a2b", textAlign: "center", fontSize: 30, fontWeight: "bold" }}>{item.name}</Text>
             </View>
         )
     }
@@ -275,19 +276,22 @@ export default class Play extends Component {
                             }
                             {this.state.isFinish ?
                                 <View style={{ flex: 1, marginTop: 5 }}>
-                                    <FlatList
-                                        keyExtractor={(item, index) => index.toString()}
-                                        data={this.filterWord()}
-                                        renderItem={this.renderItem}
-                                        numColumns={2}
-                                        style={{ paddingTop: 20, paddingHorizontal: 10 }}
-                                    />
                                     <View style={{ flex: 1, position: "absolute", top: 0, right: 0, left: 0, bottom: 0, backgroundColor: "#fff", opacity: 0.1, borderBottomLeftRadius: 46, borderBottomRightRadius: 46 }}>
                                     </View>
+                                    <ScrollView style={{ flex: 1 }}>
+                                        <FlatList
+                                            keyExtractor={(item, index) => index.toString()}
+                                            data={this.filterWord()}
+                                            renderItem={this.renderItem}
+                                            numColumns={2}
+                                            style={{ flex: 1, paddingVertical: 20, paddingHorizontal: 10 }}
+                                        />
+                                    </ScrollView>
+
                                 </View>
                                 :
-                                <View style={{ flex: 1, position: "absolute", top: 0, right: 0, left: 0, bottom: 0, paddingHorizontal:10, alignItems: "center", justifyContent: "center" }}>
-                                    <Text style={{ fontSize: 70, color: "#fff", fontWeight: "bold", marginBottom: 20, textAlign:"center" }}>{this.state.currentWord}</Text>
+                                <View style={{ flex: 1, position: "absolute", top: 0, right: 0, left: 0, bottom: 0, paddingHorizontal: 10, alignItems: "center", justifyContent: "center" }}>
+                                    <Text style={{ fontSize: 70, color: "#fff", fontWeight: "bold", marginBottom: 20, textAlign: "center" }}>{this.state.currentWord}</Text>
                                 </View>
                             }
 

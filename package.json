@@ -22,6 +22,7 @@
     "react-native-elements": "^2.3.2",
     "react-native-email-link": "^1.9.2",
     "react-native-gesture-handler": "^1.8.0",
+    "react-native-image-pan-zoom": "^2.1.12",
     "react-native-indicators": "^0.17.0",
     "react-native-list-view-select": "^1.0.4",
     "react-native-modals": "^0.19.9",

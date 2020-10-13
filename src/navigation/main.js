@@ -6,6 +6,7 @@ import Home from "../screens/Home";
 import Setting from "../screens/Setting";
 import Play from "../screens/Play";
 import Adsense from "../screens/Adsense";
+import ZoomView from "../screens/ZoomView";
 
 // Main Stack View App
 const StackNavigator = createStackNavigator(
@@ -21,6 +22,9 @@ const StackNavigator = createStackNavigator(
     },
     Adsense: {
       screen: Adsense
+    },
+    ZoomView: {
+      screen: ZoomView
     }
   },
   {

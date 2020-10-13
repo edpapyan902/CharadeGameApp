@@ -53,12 +53,12 @@ const lstSetting = [
         icon: 'chess-queen',
         content: "Don't show Google Advertisement."
     },
-    // {
-    //     index: 5,
-    //     title: 'RESTORE PHRCHASE',
-    //     icon: 'history',
-    //     content: ''
-    // }
+    {
+        index: 5,
+        title: 'ADSENSE',
+        icon: 'headphones',
+        content: ''
+    }
 ];
 
 export default class Setting extends Component {
@@ -71,11 +71,11 @@ export default class Setting extends Component {
             checkoutSuccessDialog: false,
         }
         this.pricacyUrl = "https://google.com";
+        this.showAdsense = false;
     }
 
     componentDidMount() {
         BackHandler.addEventListener("hardwareBackPress", this.backAction);
-        this.initSetting();
     }
 
     componentWillUnmount() {
@@ -125,6 +125,8 @@ export default class Setting extends Component {
             this.feedbackApp();
         else if (item.index == 2)
             Linking.openURL(this.pricacyUrl);
+        else if (item.index == 5)
+            this.adsense();
     }
 
     rateApp = () => {
@@ -144,6 +146,36 @@ export default class Setting extends Component {
         })
     }
 
+    adsense = async () => {
+        if (await Storage.getAdsense() == 1)
+        {
+            this.props.navigation.navigate("Adsense");
+            return;
+        }
+
+        RNPaypal.paymentRequest({
+            clientId: "AeqJvRiaRbrutSrbCCsDnkfy9zwF_yopkBPpamZ7oTidca_RlMuvXJzO4n8rKsSReb8z5K5nZHA4s5aC",
+            environment: RNPaypal.ENVIRONMENT.SANDBOX,
+            intent: RNPaypal.INTENT.SALE,
+            price: 10,
+            currency: "USD",
+            description: 'Android testing',
+            acceptCreditCards: true
+        }).then(async response => {
+            this.showAdsense = true;
+            this.setState({ checkoutSuccessDialog: true });
+            await Storage.setAdsense("1");
+        }).catch(err => {
+            console.log(err.message)
+        })
+    }
+
+    checkoutOK = () => {
+        this.setState({ checkoutSuccessDialog: false });
+        if(this.showAdsense)
+            this.props.navigation.navigate("Adsense");
+    }
+
     renderItem = ({ item }) => {
         const buttons = ['60', '90', '120']
         const { selectedIndex } = this.state
@@ -160,15 +192,14 @@ export default class Setting extends Component {
                             :
                             <></>}
                     </View>
-                    {/* {item.title == 'ROUND TIME' ?
-                        <ButtonGroup
-                            onPress={this.timeChanged}
-                            selectedIndex={selectedIndex}
-                            buttons={buttons}
-                            selectedButtonStyle={{ backgroundColor: "#004ba1" }}
-                            containerStyle={{ borderWidth: 3, borderColor: "#004ba1", height: 40, width: 130, borderRadius: 15 }}
-                        /> :
-                        <></>} */}
+                    {item.title == 'ROUND TIME' ?
+                        <View style={{ flex: 1, alignItems: "flex-end", paddingRight: 20, justifyContent: "flex-end" }}>
+                            <View style={{ padding: 5, borderRadius: 100, width: 40, height: 40, justifyContent: "center", alignItems: "center", borderWidth: 3, borderColor: "#004ba1" }}>
+                                <Text style={{ fontSize: 20 }}>30</Text>
+                            </View>
+                        </View>
+                        :
+                        <></>}
                 </View>
             </TouchableOpacity>
 
@@ -178,7 +209,7 @@ export default class Setting extends Component {
         return (
             <ImageBackground source={Images.background_blue} style={{ width: "100%", height: "100%" }} >
                 <SafeAreaView style={{ flex: 1 }}>
-                    <View style={{ height: 70, flexDirection: "row", alignItems: "center", justifyContent: "center", marginBottom: 30 }}>
+                    <View style={{ height: 70, flexDirection: "row", alignItems: "center", justifyContent: "center", marginBottom: 10 }}>
                         <View style={{ flex: 1, alignItems: "flex-start" }}>
                             <TouchableOpacity onPress={({ }) => { this.props.navigation.navigate("Home"); }} activeOpacity={0.7} style={{
                                 justifyContent: "center", alignItems: "center",
@@ -271,7 +302,7 @@ export default class Setting extends Component {
                         <View style={{ flex: 1, backgroundColor: "#fff", borderRadius: 5, justifyContent: "center", alignItems: "center" }}>
                             <Text style={{ color: "#71c341", fontSize: 33, marginTop: 40 }}>Success!</Text>
                             <Text style={{ color: "#71c341", fontSize: 20 }}>Thank you.</Text>
-                            <TouchableOpacity style={{ width: "100%", marginTop: 50, justifyContent: "center", alignItems: "center" }} onPress={() => { this.setState({ checkoutSuccessDialog: false }) }}>
+                            <TouchableOpacity style={{ width: "100%", marginTop: 50, justifyContent: "center", alignItems: "center" }} onPress={this.checkoutOK}>
                                 <View style={{ backgroundColor: "#71c341", width: "80%", borderRadius: 5, height: 50, justifyContent: "center", alignItems: "center" }}>
                                     <Text style={{ fontSize: 20, color: "#fff" }}>OK</Text>
                                 </View>

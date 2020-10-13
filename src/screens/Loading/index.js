@@ -9,15 +9,13 @@ export default class Loading extends Component {
   }
 
   componentDidMount = async () => {
-    let time = await Storage.getTime();
     let subscription = await Storage.getSubscription();
-    console.log(subscription);
-
-    if (time == null)
-      await Storage.setTime(90);
+    let adsense = await Storage.getAdsense();
 
     if (subscription == null)
       await Storage.setSubscription(0);
+    if (adsense == null)
+      await Storage.setAdsense(0);
 
     setTimeout(() => {
       this.props.navigation.navigate("Home");

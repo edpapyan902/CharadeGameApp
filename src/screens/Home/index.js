@@ -127,7 +127,7 @@ export default class Home extends Component {
                 { item.title != '' ?
                     <View style={{ flex: 1, flexDirection: 'column', height: 200, alignItems: "center", justifyContent: "center", borderRadius: 20, backgroundColor: "#ffffff3f", marginHorizontal: 15, marginBottom: 35, marginTop: 10 }}>
                         <Image style={{ minWidth: "85%", height: 150, borderRadius: 5 }} resizeMode="contain" source={{ uri: CategoryAction.API_URL + item.icon }}
-                            PlaceholderContent={<ActivityIndicator />}></Image>
+                            PlaceholderContent={<ActivityIndicator size={"large"} color={"white"} />} placeholderStyle={{ backgroundColor: "transparent" }}></Image>
                     </View>
                     :
                     <View style={{ flex: 1, margin: 15 }}></View>}
@@ -215,7 +215,7 @@ export default class Home extends Component {
                 {this.state.load &&
                     <SkypeIndicator
                         size={40}
-                        color={"#71c341"}
+                        color={"#fff"}
                     />
                 }
 
