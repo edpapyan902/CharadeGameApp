@@ -39,7 +39,7 @@ export default class Play extends Component {
 
         this.orientationEvent = new NativeEventEmitter(RNDeviceRotation);
         this.ReadyTime = 2;
-        this.GameTime = 5;
+        this.GameTime = 30;
         this.isTouchScreen = false;
 
         this.getWord();
@@ -144,7 +144,6 @@ export default class Play extends Component {
         CategoryAction.getWord(this.props.navigation.state.params.currentCategory.id, response => {
             if (response.success) {
                 this.setState({ lstWord: response.data.Word }, async () => {
-                    this.GameTime = await Storage.getTime();
                     this.playGame();
                 });
             }

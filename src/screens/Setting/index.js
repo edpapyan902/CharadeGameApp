@@ -65,21 +65,12 @@ export default class Setting extends Component {
     constructor() {
         super()
         this.state = {
-            selectedIndex: 1,
             setting: null,
             dialogVisible: false,
             hugViewVisivle: false,
             checkoutSuccessDialog: false,
         }
         this.pricacyUrl = "https://google.com";
-        this.updateIndex = this.timeChanged.bind(this);
-        this.initSetting();
-    }
-
-    initSetting = async() => {
-        let time = await Storage.getTime();
-        time = time/30-2;
-        this.setState({selectedIndex: time});
     }
 
     componentDidMount() {
@@ -103,11 +94,6 @@ export default class Setting extends Component {
         return false;
     }
 
-    timeChanged = async (selectedIndex) => {
-        this.setState({ selectedIndex });
-        await Storage.setTime((selectedIndex + 2) * 30);
-    }
-
     paypalRequest = async () => {
         if (await Storage.getSubscription() == 1)
             return;
@@ -116,13 +102,12 @@ export default class Setting extends Component {
             clientId: "AeqJvRiaRbrutSrbCCsDnkfy9zwF_yopkBPpamZ7oTidca_RlMuvXJzO4n8rKsSReb8z5K5nZHA4s5aC",
             environment: RNPaypal.ENVIRONMENT.SANDBOX,
             intent: RNPaypal.INTENT.SALE,
-            price: 111,
+            price: 10,
             currency: "USD",
             description: 'Android testing',
             acceptCreditCards: true
         }).then(async response => {
-            console.log(response);
-            this.setState({checkoutSuccessDialog: true});
+            this.setState({ checkoutSuccessDialog: true });
             await Storage.setSubscription("1");
         }).catch(err => {
             console.log(err.message)
@@ -164,7 +149,7 @@ export default class Setting extends Component {
         const { selectedIndex } = this.state
         return (
             <TouchableOpacity style={{ flex: 1 }} onPress={() => { this.itemClicked(item) }} activeOpacity={0.8}>
-                <View style={{ flex: 1, marginVertical: 10, marginHorizontal:5, height: 80, backgroundColor: "#fff", borderRadius: 10, flexDirection: 'row', alignItems: "center", justifyContent: "flex-start" }}>
+                <View style={{ flex: 1, marginVertical: 10, marginHorizontal: 5, height: 80, backgroundColor: "#fff", borderRadius: 10, flexDirection: 'row', alignItems: "center", justifyContent: "flex-start" }}>
                     <View style={{ width: 100 }}>
                         <Icon name={item.icon} style={{ paddingHorizontal: 25 }} color={("#004ba1")} size={40}></Icon>
                     </View>
@@ -175,7 +160,7 @@ export default class Setting extends Component {
                             :
                             <></>}
                     </View>
-                    {item.title == 'ROUND TIME' ?
+                    {/* {item.title == 'ROUND TIME' ?
                         <ButtonGroup
                             onPress={this.timeChanged}
                             selectedIndex={selectedIndex}
@@ -183,7 +168,7 @@ export default class Setting extends Component {
                             selectedButtonStyle={{ backgroundColor: "#004ba1" }}
                             containerStyle={{ borderWidth: 3, borderColor: "#004ba1", height: 40, width: 130, borderRadius: 15 }}
                         /> :
-                        <></>}
+                        <></>} */}
                 </View>
             </TouchableOpacity>
 
@@ -193,7 +178,7 @@ export default class Setting extends Component {
         return (
             <ImageBackground source={Images.background_blue} style={{ width: "100%", height: "100%" }} >
                 <SafeAreaView style={{ flex: 1 }}>
-                    <View style={{ height: 70, flexDirection: "row", alignItems: "center", justifyContent: "center", marginBottom:30 }}>
+                    <View style={{ height: 70, flexDirection: "row", alignItems: "center", justifyContent: "center", marginBottom: 30 }}>
                         <View style={{ flex: 1, alignItems: "flex-start" }}>
                             <TouchableOpacity onPress={({ }) => { this.props.navigation.navigate("Home"); }} activeOpacity={0.7} style={{
                                 justifyContent: "center", alignItems: "center",
