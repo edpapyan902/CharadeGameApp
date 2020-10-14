@@ -173,7 +173,6 @@ export default class Play extends Component {
         });
 
         this.readyWord();
-        this.startTimer();
     }
 
     readyWord = () => {
