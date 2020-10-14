@@ -52,12 +52,6 @@ const lstSetting = [
         title: 'SUBSCRIPTION',
         icon: 'chess-queen',
         content: "Don't show Google Advertisement."
-    },
-    {
-        index: 5,
-        title: 'ADSENSE',
-        icon: 'headphones',
-        content: ''
     }
 ];
 
@@ -71,7 +65,6 @@ export default class Setting extends Component {
             checkoutSuccessDialog: false,
         }
         this.pricacyUrl = "https://google.com";
-        this.showAdsense = false;
     }
 
     componentDidMount() {
@@ -125,8 +118,6 @@ export default class Setting extends Component {
             this.feedbackApp();
         else if (item.index == 2)
             Linking.openURL(this.pricacyUrl);
-        else if (item.index == 5)
-            this.adsense();
     }
 
     rateApp = () => {
@@ -146,34 +137,8 @@ export default class Setting extends Component {
         })
     }
 
-    adsense = async () => {
-        if (await Storage.getAdsense() == 1)
-        {
-            this.props.navigation.navigate("Adsense");
-            return;
-        }
-
-        RNPaypal.paymentRequest({
-            clientId: "AeqJvRiaRbrutSrbCCsDnkfy9zwF_yopkBPpamZ7oTidca_RlMuvXJzO4n8rKsSReb8z5K5nZHA4s5aC",
-            environment: RNPaypal.ENVIRONMENT.SANDBOX,
-            intent: RNPaypal.INTENT.SALE,
-            price: 10,
-            currency: "USD",
-            description: 'Android testing',
-            acceptCreditCards: true
-        }).then(async response => {
-            this.showAdsense = true;
-            this.setState({ checkoutSuccessDialog: true });
-            await Storage.setAdsense("1");
-        }).catch(err => {
-            console.log(err.message)
-        })
-    }
-
     checkoutOK = () => {
         this.setState({ checkoutSuccessDialog: false });
-        if(this.showAdsense)
-            this.props.navigation.navigate("Adsense");
     }
 
     renderItem = ({ item }) => {
@@ -209,7 +174,7 @@ export default class Setting extends Component {
         return (
             <ImageBackground source={Images.background_blue} style={{ width: "100%", height: "100%" }} >
                 <SafeAreaView style={{ flex: 1 }}>
-                    <View style={{ height: 70, flexDirection: "row", alignItems: "center", justifyContent: "center", marginBottom: 10 }}>
+                    <View style={{ height: 70, flexDirection: "row", alignItems: "center", justifyContent: "center", marginBottom: 30 }}>
                         <View style={{ flex: 1, alignItems: "flex-start" }}>
                             <TouchableOpacity onPress={({ }) => { this.props.navigation.navigate("Home"); }} activeOpacity={0.7} style={{
                                 justifyContent: "center", alignItems: "center",

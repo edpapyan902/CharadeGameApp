@@ -38,13 +38,14 @@ export const getWord = (category, callback) => {
         .catch(err => callback({ success: false, data: err }));
 }
 
-export const getAdsense = (callback) => {
-    fetch(API_URL + "/api/adsense", {
-        method: 'GET',
-        headers: {
+export const getAdsense = (category, callback) => {
+    fetch(`${API_URL}/api/adsense/${category}`, {
+        method: "GET",
+        header: {
             'Content-Type': 'application/json'
         },
     })
+
         .then(res => res.json())
         .then(res => {
             if (res.Success)
@@ -52,7 +53,5 @@ export const getAdsense = (callback) => {
             else
                 callback({ success: false, data: null });
         })
-        .catch(err => {
-            callback({ success: false, data: err })
-        });
+        .catch(err => callback({ success: false, data: err }));
 }

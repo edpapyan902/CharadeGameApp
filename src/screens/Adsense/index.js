@@ -33,7 +33,7 @@ export default class Adsense extends Component {
 
     getAdsense = () => {
         this.setState({ load: true }, () => {
-            CategoryAction.getAdsense(async response => {
+            CategoryAction.getAdsense(this.props.navigation.state.params.currentCategory.id, async response => {
                 if (response.success)
                     this.setState({ lstAdsense: response.data.Adsense });
                 this.setState({ load: false });
@@ -65,7 +65,7 @@ export default class Adsense extends Component {
                 <View style={{ flex: 1, paddingBottom: 25 }}>
                     <View style={{ height: 70, marginTop: 10, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
                         <View style={{ flex: 1, alignItems: "flex-start" }}>
-                            <TouchableOpacity onPress={({ }) => { this.props.navigation.navigate("Setting"); }} activeOpacity={0.7} style={{
+                            <TouchableOpacity onPress={({ }) => { this.props.navigation.navigate("Home"); }} activeOpacity={0.7} style={{
                                 justifyContent: "center", alignItems: "center",
                                 width: 40, height: 40,
                                 marginLeft: 10

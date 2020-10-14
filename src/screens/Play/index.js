@@ -16,6 +16,8 @@ import RNDeviceRotation from 'react-native-device-rotation';
 import Storage from '../../Store';
 import { ScrollView } from 'react-native-gesture-handler';
 
+let totalWord = [];
+
 export default class Play extends Component {
 
     constructor(props) {
@@ -26,6 +28,7 @@ export default class Play extends Component {
             isFinish: false,
             isPause: false,
             lstWord: null,
+            lstResultWord: null,
             currentWord: '',
             currentIndex: -1,
             detectDirection: "0",
@@ -40,7 +43,7 @@ export default class Play extends Component {
 
         this.orientationEvent = new NativeEventEmitter(RNDeviceRotation);
         this.ReadyTime = 2;
-        this.GameTime = 15;
+        this.GameTime = 30;
         this.isTouchScreen = false;
 
         this.getWord();
@@ -75,11 +78,11 @@ export default class Play extends Component {
             background_image: Images.background_blue,
             currentIndex: (this.state.currentIndex + 1)
         }, () => {
-            if (this.state.lstWord.length == this.state.currentIndex) {
+            if (totalWord.length == this.state.currentIndex) {
                 this.finishTimer();
                 return;
             }
-            this.setState({ currentWord: this.state.lstWord[this.state.currentIndex].name });
+            this.setState({ currentWord: totalWord[this.state.currentIndex].name });
         });
     }
 
@@ -89,10 +92,8 @@ export default class Play extends Component {
             background_image: Images.background_green,
             isPause: true,
         });
-        const words = this.state.lstWord;
-        words[this.state.currentIndex].mark = true;
+        totalWord[this.state.currentIndex].mark = true;
         this.setState({
-            lstWord: words,
             gotCardCount: this.state.gotCardCount + 1
         })
     }
@@ -105,21 +106,15 @@ export default class Play extends Component {
             gotCardCount: this.state.gotCardCount + 1
         });
 
-        const words = this.state.lstWord;
-        words[this.state.currentIndex].mark = false;
-        this.setState({
-            lstWord: words
-        })
+        totalWord[this.state.currentIndex].mark = false;
     }
 
     faildGuess = () => {
         if (!this.state.isReady || this.state.isPause || this.state.isFinish || this.isTouchScreen)
             return;
 
-        const words = this.state.lstWord;
-        words[this.state.currentIndex].mark = false;
+        totalWord[this.state.currentIndex].mark = false;
         this.setState({
-            lstWord: words,
             gotCardCount: this.state.gotCardCount + 1
         })
 
@@ -141,6 +136,7 @@ export default class Play extends Component {
         StatusBar.setHidden(false);
         Orientation.lockToPortrait();
     }
+
     getWord = () => {
         CategoryAction.getWord(this.props.navigation.state.params.currentCategory.id, response => {
             if (response.success) {
@@ -152,11 +148,16 @@ export default class Play extends Component {
     }
 
     filterWord = () => {
-        let lstWord = this.state.lstWord.filter(item => item.mark != null);
-        if (lstWord.length % 2 != 0) {
-            lstWord.push({ name: "" });
+        let filterWord = [];
+        totalWord.forEach(item => {
+            if (item.mark == false || item.mark == true)
+                filterWord.push(item);
+        });
+        if (filterWord.length % 2 != 0) {
+            filterWord.push({ name: "" });
         }
-        return lstWord;
+
+        this.setState({ lstResultWord: filterWord });
     }
 
     playGame = () => {
@@ -167,8 +168,29 @@ export default class Play extends Component {
             isPause: false,
             currentIndex: 0,
             gotCardCount: 0,
+            lstResultWord: null,
             currentWord: "GET READY"
         });
+
+        this.readyWord();
+        this.startTimer();
+    }
+
+    readyWord = () => {
+
+        totalWord = this.state.lstWord;
+        console.log(totalWord.length)
+        var currentIndex = totalWord.length, temporaryValue, randomIndex;
+        while (0 !== currentIndex) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+
+            temporaryValue = totalWord[currentIndex];
+            totalWord[currentIndex] = totalWord[randomIndex];
+            totalWord[currentIndex].mark = null;
+            totalWord[randomIndex] = temporaryValue;
+            totalWord[randomIndex].mark = null;
+        }
         this.startTimer();
     }
 
@@ -184,7 +206,7 @@ export default class Play extends Component {
             this.setState({
                 isReady: true,
                 timer: this.GameTime,
-                currentWord: this.state.lstWord[this.state.currentIndex].name
+                currentWord: totalWord[this.state.currentIndex].name
             });
             this.startTimer();
         }
@@ -195,12 +217,11 @@ export default class Play extends Component {
                 background_image: Images.background_blue,
                 currentWord: "FINISHED!",
             });
+            this.filterWord();
         }
     }
 
     decrementClock = () => {
-        // if (this.isTouchScreen)
-        //     return;
 
         if (this.state.timer == 0) {
             this.finishTimer();
@@ -281,7 +302,7 @@ export default class Play extends Component {
                                     <ScrollView style={{ flex: 1 }}>
                                         <FlatList
                                             keyExtractor={(item, index) => index.toString()}
-                                            data={this.filterWord()}
+                                            data={this.state.lstResultWord}
                                             renderItem={this.renderItem}
                                             numColumns={2}
                                             style={{ flex: 1, paddingVertical: 20, paddingHorizontal: 10 }}

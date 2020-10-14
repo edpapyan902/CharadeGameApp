@@ -19,6 +19,8 @@ import Modal, { ModalContent } from "react-native-modals";
 import Orientation from 'react-native-orientation';
 import { CategoryAction } from '../../actions';
 
+import RNPaypal from 'react-native-paypal-lib';
+
 import { getIntertial } from '../../components/adMob/Intertial';
 import Banner from '../../components/adMob/Banner';
 import { AdMobInterstitial } from 'react-native-admob';
@@ -37,6 +39,7 @@ export default class Home extends Component {
             dialogVisible: false,
             showSubcateogry: false,
             lstSubCategory: null,
+            checkoutSuccessDialog: false,
         }
         Orientation.lockToPortrait();
     };
@@ -47,7 +50,6 @@ export default class Home extends Component {
                 if (response.success)
                     this.setState({ lstCategory: this.filterCategory(response.data.Category) });
                 this.setState({ load: false });
-                console.log(response);
             });
         })
     }
@@ -90,6 +92,36 @@ export default class Home extends Component {
         })
     }
 
+    showAdsense = async (item) => {
+        this.currentCategory = item;
+
+        if (await Storage.getAdsense() == 1) {
+            this.props.navigation.navigate("Adsense", { currentCategory: this.currentCategory });
+            return;
+        }
+
+        RNPaypal.paymentRequest({
+            clientId: "AeqJvRiaRbrutSrbCCsDnkfy9zwF_yopkBPpamZ7oTidca_RlMuvXJzO4n8rKsSReb8z5K5nZHA4s5aC",
+            environment: RNPaypal.ENVIRONMENT.SANDBOX,
+            intent: RNPaypal.INTENT.SALE,
+            price: 15,
+            currency: "USD",
+            description: 'Android testing',
+            acceptCreditCards: true
+        }).then(async response => {
+            this.showAdsense = true;
+            this.setState({ checkoutSuccessDialog: true });
+            await Storage.setAdsense("1");
+        }).catch(err => {
+            console.log(err.message)
+        })
+    }
+
+    checkoutOK = () => {
+        this.setState({ checkoutSuccessDialog: false });
+        this.props.navigation.navigate("Adsense", { currentCategory: this.currentCategory });
+    }
+
     backAction = () => {
         StatusBar.setHidden(false);
         Orientation.lockToPortrait();
@@ -128,6 +160,9 @@ export default class Home extends Component {
                     <View style={{ flex: 1, flexDirection: 'column', height: 200, alignItems: "center", justifyContent: "center", borderRadius: 20, backgroundColor: "#ffffff3f", marginHorizontal: 15, marginBottom: 35, marginTop: 10 }}>
                         <Image style={{ minWidth: "85%", height: 150, borderRadius: 5 }} resizeMode="contain" source={{ uri: CategoryAction.API_URL + item.icon }}
                             PlaceholderContent={<ActivityIndicator size={"large"} color={"white"} />} placeholderStyle={{ backgroundColor: "transparent" }}></Image>
+                        <TouchableOpacity style={{ position: "absolute", width: 40, height: 40, top: 5, right: 5 }} onPress={() => this.showAdsense(item)}>
+                            <Image source={Images.ic_player} style={{ width: 40, height: 40 }} resizeMode="contain"></Image>
+                        </TouchableOpacity>
                     </View>
                     :
                     <View style={{ flex: 1, margin: 15 }}></View>}
@@ -211,6 +246,28 @@ export default class Home extends Component {
                         </ModalContent>
                     }
 
+                </Modal>
+
+                <Modal
+                    visible={!!this.state.checkoutSuccessDialog}
+                    swipeThreshold={50}
+                    modalStyle={{ backgroundColor: "transparent" }}
+                >
+
+                    <ModalContent style={{ width: 350, height: 350, padding: 0, paddingTop: 60 }}>
+                        <View style={{ flex: 1, backgroundColor: "#fff", borderRadius: 5, justifyContent: "center", alignItems: "center" }}>
+                            <Text style={{ color: "#71c341", fontSize: 33, marginTop: 40 }}>Success!</Text>
+                            <Text style={{ color: "#71c341", fontSize: 20 }}>Thank you.</Text>
+                            <TouchableOpacity style={{ width: "100%", marginTop: 50, justifyContent: "center", alignItems: "center" }} onPress={this.checkoutOK}>
+                                <View style={{ backgroundColor: "#71c341", width: "80%", borderRadius: 5, height: 50, justifyContent: "center", alignItems: "center" }}>
+                                    <Text style={{ fontSize: 20, color: "#fff" }}>OK</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={{ position: "absolute", width: 350, height: 120, top: 0, alignItems: "center", justifyContent: "center" }}>
+                            <Image source={Images.checkout} style={{ width: 100, height: 100 }}></Image>
+                        </View>
+                    </ModalContent>
                 </Modal>
                 {this.state.load &&
                     <SkypeIndicator
