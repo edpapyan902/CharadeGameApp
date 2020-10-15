@@ -10,5 +10,4 @@ export const Images = {
   hugface: require("../assets/images/hugface.png"),
   rating: require("../assets/images/rating.png"),
   checkout: require("../assets/images/checkout.png"),
-  ic_player: require("../assets/images/ic_player.png"),
 };

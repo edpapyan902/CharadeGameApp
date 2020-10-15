@@ -9,7 +9,8 @@ import {
     ScrollView,
     ImageBackground,
     BackHandler,
-    StatusBar
+    StatusBar,
+    Linking
 } from 'react-native'
 import { SkypeIndicator } from 'react-native-indicators';
 import { Image } from 'react-native-elements';
@@ -96,7 +97,7 @@ export default class Home extends Component {
         this.currentCategory = item;
 
         if (await Storage.getAdsense() == 1) {
-            this.props.navigation.navigate("Adsense", { currentCategory: this.currentCategory });
+            Linking.openURL(item.title);
             return;
         }
 
@@ -119,7 +120,7 @@ export default class Home extends Component {
 
     checkoutOK = () => {
         this.setState({ checkoutSuccessDialog: false });
-        this.props.navigation.navigate("Adsense", { currentCategory: this.currentCategory });
+        Linking.openURL(this.state.currentCategory.title);
     }
 
     backAction = () => {
@@ -160,9 +161,6 @@ export default class Home extends Component {
                     <View style={{ flex: 1, flexDirection: 'column', height: 200, alignItems: "center", justifyContent: "center", borderRadius: 20, backgroundColor: "#ffffff3f", marginHorizontal: 15, marginBottom: 35, marginTop: 10 }}>
                         <Image style={{ minWidth: "85%", height: 150, borderRadius: 5 }} resizeMode="contain" source={{ uri: CategoryAction.API_URL + item.icon }}
                             PlaceholderContent={<ActivityIndicator size={"large"} color={"white"} />} placeholderStyle={{ backgroundColor: "transparent" }}></Image>
-                        <TouchableOpacity style={{ position: "absolute", width: 40, height: 40, top: 5, right: 5 }} onPress={() => this.showAdsense(item)}>
-                            <Image source={Images.ic_player} style={{ width: 40, height: 40 }} resizeMode="contain"></Image>
-                        </TouchableOpacity>
                     </View>
                     :
                     <View style={{ flex: 1, margin: 15 }}></View>}
@@ -231,7 +229,7 @@ export default class Home extends Component {
                         <ModalContent style={{ width: 300, height: 380, paddingVertical: 25, paddingHorizontal: 25, backgroundColor: "transparent" }}>
                             <View style={{ borderWidth: 5, paddingHorizontal: 10, paddingVertical: 20, borderRadius: 30, borderColor: "#fff", backgroundColor: "#00549a" }}>
                                 <Text style={{ fontSize: 30, marginTop: 20, marginBottom: 30, textAlign: "center", color: "#fff" }}>Rules</Text>
-                                <Text style={{ color: "#fff", textAlign: "center", fontSize: 18, paddingHorizontal: 15 }}>Try to guess the object by describing the plot. To make it more difficult don't use any charactor names.</Text>
+                                <Text style={{ color: "#fff", textAlign: "center", fontSize: 18, paddingHorizontal: 15 }}>Try to guess the word by describing the plot. To make it more difficult don't use any charactor names.</Text>
                                 <TouchableOpacity activeOpacity={0.8} style={{ paddingTop: 30, paddingHorizontal: 10, marginBottom: 20 }} onPress={this.playGame}>
                                     <View style={{ backgroundColor: "#eabf28", height: 40, borderRadius: 10, justifyContent: "center", alignItems: "center" }}>
                                         <Text style={{ textAlign: "center", color: "#fff", fontSize: 20, fontWeight: "bold" }}>Play</Text>
