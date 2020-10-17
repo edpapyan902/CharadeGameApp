@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {
+    Dimensions,
     FlatList,
     View,
     Text,
@@ -28,6 +29,8 @@ import { AdMobInterstitial } from 'react-native-admob';
 
 import Storage from "../../Store";
 
+let screen_width = Dimensions.get("screen").width;
+let horizon_padding = Math.floor((screen_width - 300) / 6);
 export default class Home extends Component {
 
     constructor(props) {
@@ -56,7 +59,16 @@ export default class Home extends Component {
     }
 
     filterCategory = (data) => {
-        let lstCategory = data;
+        let lstCategory = data.filter((item) => {
+            return item.type == 0;
+        })
+        let lstAdsense = data.filter((item) => {
+            return item.type == 1;
+        });
+        const position = Math.floor(data.length / (lstAdsense.length - 1));
+        for (var i = 0; i < lstAdsense.length; i++) {
+            lstCategory.splice(i * position, 0, lstAdsense[i]);
+        }
         if (lstCategory.length % 2 != 0) {
             lstCategory.push({ title: "" });
         }
@@ -64,7 +76,10 @@ export default class Home extends Component {
     }
 
     showDialog = (item) => {
-        this.setState({ dialogVisible: true, currentCategory: item });
+        if (item.type == 1)
+            this.showAdsense(item);
+        else
+            this.setState({ dialogVisible: true, currentCategory: item });
     }
 
     hideDialog = () => {
@@ -94,7 +109,7 @@ export default class Home extends Component {
     }
 
     showAdsense = async (item) => {
-        this.currentCategory = item;
+        this.setState({ currentCategory: item });
 
         if (await Storage.getAdsense() == 1) {
             Linking.openURL(item.title);
@@ -110,7 +125,6 @@ export default class Home extends Component {
             description: 'Android testing',
             acceptCreditCards: true
         }).then(async response => {
-            this.showAdsense = true;
             this.setState({ checkoutSuccessDialog: true });
             await Storage.setAdsense("1");
         }).catch(err => {
@@ -157,13 +171,23 @@ export default class Home extends Component {
     renderItem = ({ item }) => {
         return (
             <TouchableOpacity style={{ flex: 1 }} onPress={() => this.showDialog(item)}>
-                { item.title != '' ?
-                    <View style={{ flex: 1, flexDirection: 'column', height: 200, alignItems: "center", justifyContent: "center", borderRadius: 20, backgroundColor: "#ffffff3f", marginHorizontal: 15, marginBottom: 35, marginTop: 10 }}>
-                        <Image style={{ minWidth: "85%", height: 150, borderRadius: 5 }} resizeMode="contain" source={{ uri: CategoryAction.API_URL + item.icon }}
-                            PlaceholderContent={<ActivityIndicator size={"large"} color={"white"} />} placeholderStyle={{ backgroundColor: "transparent" }}></Image>
-                    </View>
+                {item.type == 0 ?
+                    item.title != '' ?
+                        <View style={{ flex: 1, flexDirection: 'column', width: 150, height: 200, alignItems: "center", justifyContent: "center", borderRadius: 20, backgroundColor: "#ffffff3f", marginHorizontal: horizon_padding, marginBottom: 25, marginTop: 10 }}>
+                            <Image style={{ minWidth: "85%", height: 150, borderRadius: 5 }} resizeMode="contain" source={{ uri: CategoryAction.API_URL + item.icon }}
+                                PlaceholderContent={<ActivityIndicator size={"large"} color={"white"} />} placeholderStyle={{ backgroundColor: "transparent" }}></Image>
+                        </View>
+                        :
+                        <View style={{ flex: 1, margin: 15 }}></View>
                     :
-                    <View style={{ flex: 1, margin: 15 }}></View>}
+                    item.title != '' ?
+                        <View style={{ flex: 1, flexDirection: 'column', width: 150, height: 200, alignItems: "center", justifyContent: "center", borderRadius: 20, backgroundColor: "#ffffff3f", marginHorizontal: horizon_padding, marginBottom: 25, marginTop: 10 }}>
+                            <Image style={{ width: 150, height: 200, borderRadius: 20 }} resizeMode="cover" source={{ uri: CategoryAction.API_URL + item.icon }}
+                                PlaceholderContent={<ActivityIndicator size={"large"} color={"white"} />} placeholderStyle={{ backgroundColor: "transparent" }}></Image>
+                        </View>
+                        :
+                        <View style={{ flex: 1, margin: 15 }}></View>
+                }
             </TouchableOpacity>
         )
     }
@@ -190,7 +214,7 @@ export default class Home extends Component {
                             </View>
                         </View>
                         <FlatList
-                            style={{ padding: "3.5%" }}
+                            style={{ paddingVertical: "3.5%", paddingHorizontal: horizon_padding }}
                             keyExtractor={(item, index) => index.toString()}
                             data={this.state.lstCategory}
                             renderItem={this.renderItem}
