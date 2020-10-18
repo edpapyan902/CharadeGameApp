@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {
+    Platform,
     Dimensions,
     FlatList,
     View,
@@ -20,8 +21,6 @@ import { Images } from '../../config';
 import Modal, { ModalContent } from "react-native-modals";
 import Orientation from 'react-native-orientation';
 import { CategoryAction } from '../../actions';
-
-import RNPaypal from 'react-native-paypal-lib';
 
 import { getIntertial } from '../../components/adMob/Intertial';
 import Banner from '../../components/adMob/Banner';
@@ -77,7 +76,7 @@ export default class Home extends Component {
 
     showDialog = (item) => {
         if (item.type == 1)
-            this.showAdsense(item);
+            Linking.openURL(item.title);
         else
             this.setState({ dialogVisible: true, currentCategory: item });
     }
@@ -105,30 +104,6 @@ export default class Home extends Component {
     subitemClicked = (item) => {
         this.setState({ currentCategory: item }, () => {
             this.playGame();
-        })
-    }
-
-    showAdsense = async (item) => {
-        this.setState({ currentCategory: item });
-
-        if (await Storage.getAdsense() == 1) {
-            Linking.openURL(item.title);
-            return;
-        }
-
-        RNPaypal.paymentRequest({
-            clientId: "AeqJvRiaRbrutSrbCCsDnkfy9zwF_yopkBPpamZ7oTidca_RlMuvXJzO4n8rKsSReb8z5K5nZHA4s5aC",
-            environment: RNPaypal.ENVIRONMENT.SANDBOX,
-            intent: RNPaypal.INTENT.SALE,
-            price: 15,
-            currency: "USD",
-            description: 'Android testing',
-            acceptCreditCards: true
-        }).then(async response => {
-            this.setState({ checkoutSuccessDialog: true });
-            await Storage.setAdsense("1");
-        }).catch(err => {
-            console.log(err.message)
         })
     }
 
@@ -194,14 +169,14 @@ export default class Home extends Component {
 
     render() {
         return (
-            <ImageBackground source={Images.background_blue} style={{ width: "100%", height: "100%" }}>
+            <ImageBackground source={Platform.OS == "android" ? Images.splash_android : Images.splash_ios} style={{ width: "100%", height: "100%" }}>
                 <SafeAreaView style={{ flex: 1 }}>
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={{ flexDirection: "row", height: 100, justifyContent: "center", alignItems: "center" }}>
                             <View style={{ flex: 1 }} />
                             <View style={{ flex: 2, marginTop: 25, alignItems: "center", justifyContent: "center" }}>
-                                <Text style={{ color: "#fff", fontSize: 30 }}>CHARADES</Text>
-                                <Text style={{ color: "#fff", fontSize: 20 }}>SERVICE</Text>
+                                <Text style={{ color: "#fff", fontSize: 30 }}>ZIMBO</Text>
+                                <Text style={{ color: "#fff", fontSize: 20 }}>CHARADES</Text>
                             </View>
                             <View style={{ flex: 1, alignItems: "flex-end" }}>
                                 <TouchableOpacity onPress={({ }) => { this.props.navigation.navigate("Setting"); }} activeOpacity={0.7} style={{
