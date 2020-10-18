@@ -1,5 +1,7 @@
 
 export const Images = {
+  splash_android: require("../assets/images/splash_android.png"),
+  splash_ios: require("../assets/images/splash_ios.png"),
   background_blue: require("../assets/images/background_blue.png"),
   background_red: require("../assets/images/background_red.png"),
   background_green: require("../assets/images/background_green.png"),

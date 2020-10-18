@@ -1,7 +1,13 @@
 import React, { Component } from "react";
-import { View, Text } from "react-native";
+import {
+  Platform,
+  View,
+  Text,
+  ImageBackground,
+} from "react-native";
 
 import Storage from "../../Store";
+import { Images } from '../../config';
 
 export default class Loading extends Component {
   constructor(props) {
@@ -24,10 +30,7 @@ export default class Loading extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: "#000", justifyContent: "center", alignItems: "center" }}>
-        <Text style={{ color: "#fff", fontSize: 25, fontWeight: "bold" }}>CharadesGame</Text>
-        <Text style={{ color: "#fff", fontSize: 25, fontWeight: "bold" }}>Service</Text>
-      </View>
+      <ImageBackground source={Platform.OS == "android" ? Images.splash_android : Images.splash_ios} style={{ width: "100%", height: "100%" }} />
     );
   }
 }
