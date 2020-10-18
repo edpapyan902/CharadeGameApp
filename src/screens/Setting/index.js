@@ -206,7 +206,7 @@ export default class Setting extends Component {
                     <ModalContent style={{ width: 350, height: 350, paddingVertical: 25, paddingHorizontal: 25, backgroundColor: "transparent" }}>
                         {!this.state.hugViewVisivle ?
                             <View style={{ borderWidth: 5, paddingHorizontal: 10, paddingVertical: 20, borderRadius: 20, borderColor: "#fff", backgroundColor: "#ffde00", justifyContent: "center", alignItems: "center" }}>
-                                <Image source={Images.monkey} style={{ width: 80, height: 80, marginTop: 10 }} placeholderStyle={{ backgroundColor: "transparent" ></Image>
+                                <Image source={Images.monkey} style={{ width: 80, height: 80, marginTop: 10 }} placeholderStyle={{ backgroundColor: "transparent" }} ></Image>
                                 <Text style={{ color: "#00", textAlign: "center", marginVertical: 20, fontSize: 22, paddingHorizontal: 15, fontWeight: "bold" }}>WHAT DO YOU THINK ABOUT OUR APP?</Text>
                                 <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                                     <TouchableOpacity onPress={({ }) => { this.setState({ hugViewVisivle: true }) }} activeOpacity={0.8} style={{
@@ -214,28 +214,28 @@ export default class Setting extends Component {
                                         width: 60, height: 60,
                                         marginHorizontal: 10
                                     }}>
-                                        <Image source={Images.rate_good} style={{ width: 40, height: 40 }} placeholderStyle={{ backgroundColor: "transparent" ></Image>
+                                        <Image source={Images.rate_good} style={{ width: 40, height: 40 }} placeholderStyle={{ backgroundColor: "transparent" }}></Image>
                                     </TouchableOpacity>
                                     <TouchableOpacity onPress={({ }) => { this.setState({ dialogVisible: false }) }} activeOpacity={0.8} style={{
                                         justifyContent: "center", alignItems: "center", backgroundColor: "#fff", borderRadius: 30,
                                         width: 60, height: 60,
                                         marginHorizontal: 10
                                     }}>
-                                        <Image source={Images.rate_cancel} style={{ width: 40, height: 40 }} placeholderStyle={{ backgroundColor: "transparent" ></Image>
+                                        <Image source={Images.rate_cancel} style={{ width: 40, height: 40 }} placeholderStyle={{ backgroundColor: "transparent" }}></Image>
                                     </TouchableOpacity>
                                     <TouchableOpacity onPress={({ }) => { this.feedbackApp() }} activeOpacity={0.8} style={{
                                         justifyContent: "center", alignItems: "center", backgroundColor: "#fff", borderRadius: 30,
                                         width: 60, height: 60,
                                         marginHorizontal: 10
                                     }}>
-                                        <Image source={Images.rate_bad} style={{ width: 40, height: 40 }} placeholderStyle={{ backgroundColor: "transparent" ></Image>
+                                        <Image source={Images.rate_bad} style={{ width: 40, height: 40 }} placeholderStyle={{ backgroundColor: "transparent" }}></Image>
                                     </TouchableOpacity>
                                 </View>
                             </View>
                             :
                             <View style={{ borderWidth: 5, paddingHorizontal: 10, paddingVertical: 20, borderRadius: 20, borderColor: "#fff", backgroundColor: "#ffde00", justifyContent: "center", alignItems: "center" }}>
-                                <Image source={Images.hugface} style={{ width: 80, height: 80, marginTop: 10 }} placeholderStyle={{ backgroundColor: "transparent" ></Image>
-                                <Image source={Images.rating} style={{ height: 80, width: 200 }} resizeMode="contain" placeholderStyle={{ backgroundColor: "transparent" ></Image>
+                                <Image source={Images.hugface} style={{ width: 80, height: 80, marginTop: 10 }} placeholderStyle={{ backgroundColor: "transparent" }}></Image>
+                                <Image source={Images.rating} style={{ height: 80, width: 200 }} resizeMode="contain" placeholderStyle={{ backgroundColor: "transparent" }}></Image>
                                 <Text style={{ color: "#00", textAlign: "center", marginBottom: 10, fontSize: 20, paddingHorizontal: 15, fontWeight: "bold" }}>GIVE US 5 STARS TO ENCOURAGE US?</Text>
                                 <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                                     <TouchableOpacity onPress={({ }) => { this.rateApp() }} activeOpacity={0.8} style={{
@@ -275,7 +275,7 @@ export default class Setting extends Component {
                             </TouchableOpacity>
                         </View>
                         <View style={{ position: "absolute", width: 350, height: 120, top: 0, alignItems: "center", justifyContent: "center" }}>
-                            <Image source={Images.checkout} style={{ width: 100, height: 100 }} placeholderStyle={{ backgroundColor: "transparent" ></Image>
+                            <Image source={Images.checkout} style={{ width: 100, height: 100 }} placeholderStyle={{ backgroundColor: "transparent" }}></Image>
                         </View>
                     </ModalContent>
                 </Modal>
