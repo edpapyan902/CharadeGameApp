@@ -1,8 +1,8 @@
 import { AdMobBanner } from 'react-native-admob'
-import { View, Text, Platform } from 'react-native';
+import { View, Platform } from 'react-native';
 import React, { Component } from 'react';
 
-class Banner extends React.Component {
+class Banner extends Component {
 
     constructor(props) {
         super(props);
@@ -15,15 +15,7 @@ class Banner extends React.Component {
     render() {
         return (
 
-            <View
-                style={
-                    {
-                        backgroundColor: 'white',
-                        alignItems: 'center',
-                        width: '100%',
-                    }}
-            >
-
+            <View style={{ backgroundColor: 'white', alignItems: 'center', width: '100%', }}>
                 {
                     this.state.isError ?
                         <View />
@@ -33,8 +25,11 @@ class Banner extends React.Component {
                             adUnitID={Platform.OS === 'android'
                                 ?
                                 "ca-app-pub-7315663868828228/9356232842"
+                                // "ca-app-pub-8844670004607379/5200718612"
                                 :
-                                "ca-app-pub-7315663868828228/2907386321"}
+                                "ca-app-pub-7315663868828228/2907386321"
+                                // "ca-app-pub-8844670004607379/9638000539"
+                            }
                             testDevices={[AdMobBanner.simulatorId]}
                             onAdFailedToLoad={error => {
                                 // console.warn(error);                    
@@ -43,7 +38,8 @@ class Banner extends React.Component {
                                 setTimeout(() => {
                                     this.setState({ isError: false });
                                 }, 10000);
-                            }} />}
+                            }} />
+                }
 
             </View>
         );
