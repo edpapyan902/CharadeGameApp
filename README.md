@@ -1,1 +1,1 @@
-# CharadesGameApp-react-native
+# ZimboCharades-RN
