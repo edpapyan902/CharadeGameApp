@@ -8,6 +8,16 @@ target 'ZimboCharades' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+  pod 'RNDeviceRotation', :path => '../node_modules/react-native-device-rotation'
+
+  pod 'react-native-orientation', :path => '../node_modules/react-native-orientation'
+
+  pod 'RNRate', :path => '../node_modules/react-native-rate'
+
+  pod 'RNPaypal', :path => '../node_modules/react-native-paypal-lib'
+
+  pod 'react-native-admob', :path => '../node_modules/react-native-admob'
+
   target 'ZimboCharadesTests' do
     inherit! :complete
     # Pods for testing
