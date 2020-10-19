@@ -3,12 +3,12 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '10.0'
 
-target 'CharadesGame' do
+target 'ZimboCharades' do
   config = use_native_modules!
 
   use_react_native!(:path => config["reactNativePath"])
 
-  target 'CharadesGameTests' do
+  target 'ZimboCharadesTests' do
     inherit! :complete
     # Pods for testing
   end
@@ -23,10 +23,10 @@ target 'CharadesGame' do
   end
 end
 
-target 'CharadesGame-tvOS' do
-  # Pods for CharadesGame-tvOS
+target 'ZimboCharades-tvOS' do
+  # Pods for ZimboCharades-tvOS
 
-  target 'CharadesGame-tvOSTests' do
+  target 'ZimboCharades-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

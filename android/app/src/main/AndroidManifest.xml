@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.charadesgame">
+  package="com.zimbocharades">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
