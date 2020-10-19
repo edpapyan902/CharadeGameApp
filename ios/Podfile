@@ -14,9 +14,10 @@ target 'ZimboCharades' do
 
   pod 'RNRate', :path => '../node_modules/react-native-rate'
 
-  pod 'RNPaypal', :path => '../node_modules/react-native-paypal-lib'
+  pod 'RNPaypal', :path => '../node_modules/react-native-paypal-lib/ios'
 
   pod 'react-native-admob', :path => '../node_modules/react-native-admob'
+  pod 'Google-Mobile-Ads-SDK'
 
   target 'ZimboCharadesTests' do
     inherit! :complete
