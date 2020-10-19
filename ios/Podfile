@@ -8,12 +8,6 @@ target 'CharadesGame' do
 
   use_react_native!(:path => config["reactNativePath"])
 
-  pod 'react-native-admob', :path => '../node_modules/react-native-admob'
-
-  pod 'RNPaypal', :path => '../node_modules/react-native-paypal-lib'
-
-  pod 'RNRate', :path => '../node_modules/react-native-rate'
-
   target 'CharadesGameTests' do
     inherit! :complete
     # Pods for testing
