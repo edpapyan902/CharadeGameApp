@@ -10,16 +10,14 @@ import {
     ImageBackground,
     BackHandler,
     Linking,
-    Alert
 } from 'react-native'
-import { ButtonGroup } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Images } from '../../config';
 import { Image } from 'react-native-elements';
 import RNPaypal from 'react-native-paypal-lib';
 import Rate, { AndroidMarket } from 'react-native-rate'
 import Modal, { ModalContent } from "react-native-modals";
-import { openComposer } from 'react-native-email-link'
+import { openComposer, openInbox } from 'react-native-email-link'
 
 import Storage from "../../Store";
 
@@ -65,7 +63,7 @@ export default class Setting extends Component {
             hugViewVisivle: false,
             checkoutSuccessDialog: false,
         }
-        this.pricacyUrl = "https://google.com";
+        this.privacyUrl = "https://google.com";
     }
 
     componentDidMount() {
@@ -98,7 +96,7 @@ export default class Setting extends Component {
             intent: RNPaypal.INTENT.SALE,
             price: 10,
             currency: "USD",
-            description: 'Android testing',
+            description: 'ZimboCharades Subscription',
             acceptCreditCards: true
         }).then(async response => {
             this.setState({ checkoutSuccessDialog: true });
@@ -118,7 +116,7 @@ export default class Setting extends Component {
         else if (item.index == 1)
             this.feedbackApp();
         else if (item.index == 2)
-            Linking.openURL(this.pricacyUrl);
+            Linking.openURL(this.privacyUrl);
     }
 
     rateApp = () => {
@@ -131,11 +129,17 @@ export default class Setting extends Component {
     }
 
     feedbackApp = () => {
-        openComposer({
-            to: 'zimbo.charades@gmail.com',
-            subject: 'CharadesGameApp Feedback Test',
-            body: ''
-        })
+        if (Platform.OS == "android") {
+            openComposer({
+                to: 'zimbo.charades@gmail.com',
+                subject: 'ZimboCharadesGameApp Feedback',
+                body: ''
+            })
+        }
+        else if (Platform.OS == "ios") {
+            if (Linking.canOpenURL("mailto:zimbo.charades@gmail.com"))
+                Linking.openURL("mailto:zimbo.charades@gmail.com?subject=ZimboCharadesGameApp Feedback");
+        }
     }
 
     checkoutOK = () => {
@@ -143,8 +147,6 @@ export default class Setting extends Component {
     }
 
     renderItem = ({ item }) => {
-        const buttons = ['60', '90', '120']
-        const { selectedIndex } = this.state
         return (
             <TouchableOpacity style={{ flex: 1 }} onPress={() => { this.itemClicked(item) }} activeOpacity={0.8}>
                 <View style={{ flex: 1, marginVertical: 10, marginHorizontal: 5, height: 80, backgroundColor: "#fff", borderRadius: 10, flexDirection: 'row', alignItems: "center", justifyContent: "flex-start" }}>
@@ -207,7 +209,7 @@ export default class Setting extends Component {
                         {!this.state.hugViewVisivle ?
                             <View style={{ borderWidth: 5, paddingHorizontal: 10, paddingVertical: 20, borderRadius: 20, borderColor: "#fff", backgroundColor: "#ffde00", justifyContent: "center", alignItems: "center" }}>
                                 <Image source={Images.monkey} style={{ width: 80, height: 80, marginTop: 10 }} placeholderStyle={{ backgroundColor: "transparent" }} ></Image>
-                                <Text style={{ color: "#00", textAlign: "center", marginVertical: 20, fontSize: 22, paddingHorizontal: 15, fontWeight: "bold" }}>WHAT DO YOU THINK ABOUT OUR APP?</Text>
+                                <Text style={{ color: "#000", textAlign: "center", marginVertical: 20, fontSize: 22, paddingHorizontal: 15, fontWeight: "bold" }}>WHAT DO YOU THINK ABOUT OUR APP?</Text>
                                 <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                                     <TouchableOpacity onPress={({ }) => { this.setState({ hugViewVisivle: true }) }} activeOpacity={0.8} style={{
                                         justifyContent: "center", alignItems: "center", backgroundColor: "#fff", borderRadius: 30,
