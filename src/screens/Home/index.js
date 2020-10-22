@@ -150,12 +150,6 @@ export default class Home extends Component {
                         <View style={{ flex: 1, flexDirection: 'column', width: category_image_width, height: category_image_height, alignItems: "center", justifyContent: "center", borderRadius: 15, backgroundColor: "#ffffff3f", marginHorizontal: category_image_padding, marginTop: 10 }}>
                             <Image style={{ minWidth: category_image_width, height: category_image_height, borderRadius: 15 }} resizeMode="contain" source={{ uri: CategoryAction.API_URL + item.icon }}
                                 PlaceholderContent={<ActivityIndicator size={"large"} color={"white"} />} placeholderStyle={{ backgroundColor: "transparent" }}></Image>
-                            <View style={{ position: "absolute", top: 0, right: 0, height: 40, backgroundColor: "#0000006b", borderTopRightRadius: 15, borderBottomLeftRadius: 15, paddingHorizontal: 10, alignItems: "center", justifyContent: "center" }}>
-                                <Text style={{ color: "#fff", fontSize: 14, fontFamily: CustomFonts.DefaultFont }}>{item.title}</Text>
-                            </View>
-                            <View style={{ position: "absolute", bottom: 0, left: 0, height: 40, backgroundColor: "#0000006b", borderTopRightRadius: 15, borderBottomLeftRadius: 15, paddingHorizontal: 10, alignItems: "center", justifyContent: "center" }}>
-                                <Text style={{ color: "#fff", fontSize: 12, fontFamily: CustomFonts.DefaultFont }}>{item.wordcount} WORDS</Text>
-                            </View>
                         </View>
                         :
                         <View style={{ flex: 1, margin: 15 }}></View>
