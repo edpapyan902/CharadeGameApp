@@ -13,6 +13,7 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Images } from '../../config';
+import { CustomFonts } from '../../config';
 import { Image } from 'react-native-elements';
 import RNPaypal from 'react-native-paypal-lib';
 import Rate, { AndroidMarket } from 'react-native-rate'
@@ -150,20 +151,20 @@ export default class Setting extends Component {
         return (
             <TouchableOpacity style={{ flex: 1 }} onPress={() => { this.itemClicked(item) }} activeOpacity={0.8}>
                 <View style={{ flex: 1, marginVertical: 10, marginHorizontal: 5, height: 80, backgroundColor: "#fff", borderRadius: 10, flexDirection: 'row', alignItems: "center", justifyContent: "flex-start" }}>
-                    <View style={{ width: 100 }}>
-                        <Icon name={item.icon} style={{ paddingHorizontal: 25 }} color={("#004ba1")} size={40}></Icon>
+                    <View style={{ width: 80 }}>
+                        <Icon name={item.icon} style={{ paddingLeft: 20 }} color={("#004ba1")} size={40}></Icon>
                     </View>
                     <View style={{ flexDirection: "column" }}>
-                        <Text style={{ fontSize: 20, fontWeight: "bold" }}>{item.title}</Text>
+                        <Text style={{ fontSize: 20, fontFamily: CustomFonts.DefaultFont }}>{item.title}</Text>
                         {item.content != '' ?
-                            <Text style={{ fontSize: 15 }}>{item.content}</Text>
+                            <Text style={{ fontSize: 15, fontFamily: CustomFonts.DefaultFont }}>{item.content}</Text>
                             :
                             <></>}
                     </View>
                     {item.title == 'ROUND TIME' ?
                         <View style={{ flex: 1, alignItems: "flex-end", paddingRight: 20, justifyContent: "flex-end" }}>
                             <View style={{ padding: 5, borderRadius: 100, width: 40, height: 40, justifyContent: "center", alignItems: "center", borderWidth: 3, borderColor: "#004ba1" }}>
-                                <Text style={{ fontSize: 20 }}>30</Text>
+                                <Text style={{ fontSize: 15, fontFamily: CustomFonts.DefaultFont }}>30</Text>
                             </View>
                         </View>
                         :
@@ -177,7 +178,7 @@ export default class Setting extends Component {
         return (
             <ImageBackground source={Platform.OS == "android" ? Images.splash_android : Images.splash_ios} style={{ width: "100%", height: "100%" }} >
                 <SafeAreaView style={{ flex: 1 }}>
-                    <View style={{ height: 70, flexDirection: "row", alignItems: "center", justifyContent: "center", marginBottom: 30 }}>
+                    <View style={{ height: 70, flexDirection: "row", alignItems: "center", justifyContent: "center", marginBottom: 10 }}>
                         <View style={{ flex: 1, alignItems: "flex-start" }}>
                             <TouchableOpacity onPress={({ }) => { this.props.navigation.navigate("Home"); }} activeOpacity={0.7} style={{
                                 justifyContent: "center", alignItems: "center",
@@ -187,7 +188,7 @@ export default class Setting extends Component {
                                 <Icon name={'arrow-left'} color={'white'} size={25} />
                             </TouchableOpacity>
                         </View>
-                        <Text style={{ flex: 2, textAlign: "center", color: "#fff", fontSize: 30 }}>SETTINGS</Text>
+                        <Text style={{ flex: 2, textAlign: "center", color: "#fff", fontSize: 30, fontFamily: CustomFonts.DefaultFont }}>SETTINGS</Text>
                         <View style={{ flex: 1 }} />
                     </View>
                     <ScrollView showsVerticalScrollIndicator={false} style={{ paddingHorizontal: 10 }}>
@@ -209,7 +210,7 @@ export default class Setting extends Component {
                         {!this.state.hugViewVisivle ?
                             <View style={{ borderWidth: 5, paddingHorizontal: 10, paddingVertical: 20, borderRadius: 20, borderColor: "#fff", backgroundColor: "#ffde00", justifyContent: "center", alignItems: "center" }}>
                                 <Image source={Images.monkey} style={{ width: 80, height: 80, marginTop: 10 }} placeholderStyle={{ backgroundColor: "transparent" }} ></Image>
-                                <Text style={{ color: "#000", textAlign: "center", marginVertical: 20, fontSize: 22, paddingHorizontal: 15, fontWeight: "bold" }}>WHAT DO YOU THINK ABOUT OUR APP?</Text>
+                                <Text style={{ color: "#000", textAlign: "center", fontFamily: CustomFonts.DefaultFont, marginVertical: 20, fontSize: 22, paddingHorizontal: 15, fontWeight: "bold" }}>WHAT DO YOU THINK ABOUT OUR APP?</Text>
                                 <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                                     <TouchableOpacity onPress={({ }) => { this.setState({ hugViewVisivle: true }) }} activeOpacity={0.8} style={{
                                         justifyContent: "center", alignItems: "center", backgroundColor: "#fff", borderRadius: 30,
@@ -238,7 +239,7 @@ export default class Setting extends Component {
                             <View style={{ borderWidth: 5, paddingHorizontal: 10, paddingVertical: 20, borderRadius: 20, borderColor: "#fff", backgroundColor: "#ffde00", justifyContent: "center", alignItems: "center" }}>
                                 <Image source={Images.hugface} style={{ width: 80, height: 80, marginTop: 10 }} placeholderStyle={{ backgroundColor: "transparent" }}></Image>
                                 <Image source={Images.rating} style={{ height: 80, width: 200 }} resizeMode="contain" placeholderStyle={{ backgroundColor: "transparent" }}></Image>
-                                <Text style={{ color: "#00", textAlign: "center", marginBottom: 10, fontSize: 20, paddingHorizontal: 15, fontWeight: "bold" }}>GIVE US 5 STARS TO ENCOURAGE US?</Text>
+                                <Text style={{ color: "#000", fontFamily: CustomFonts.DefaultFont, textAlign: "center", marginBottom: 10, fontSize: 20, paddingHorizontal: 15, fontWeight: "bold" }}>GIVE US 5 STARS TO ENCOURAGE US?</Text>
                                 <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                                     <TouchableOpacity onPress={({ }) => { this.rateApp() }} activeOpacity={0.8} style={{
                                         justifyContent: "center", alignItems: "center", backgroundColor: "#ff6600", borderRadius: 20,
@@ -268,11 +269,11 @@ export default class Setting extends Component {
 
                     <ModalContent style={{ width: 350, height: 350, padding: 0, paddingTop: 60 }}>
                         <View style={{ flex: 1, backgroundColor: "#fff", borderRadius: 5, justifyContent: "center", alignItems: "center" }}>
-                            <Text style={{ color: "#71c341", fontSize: 33, marginTop: 40 }}>Success!</Text>
-                            <Text style={{ color: "#71c341", fontSize: 20 }}>Thank you.</Text>
+                            <Text style={{ color: "#71c341", fontSize: 33, fontFamily: CustomFonts.DefaultFont, marginTop: 40 }}>Success!</Text>
+                            <Text style={{ color: "#71c341", fontSize: 20, fontFamily: CustomFonts.DefaultFont }}>Thank you.</Text>
                             <TouchableOpacity style={{ width: "100%", marginTop: 50, justifyContent: "center", alignItems: "center" }} onPress={this.checkoutOK}>
                                 <View style={{ backgroundColor: "#71c341", width: "80%", borderRadius: 5, height: 50, justifyContent: "center", alignItems: "center" }}>
-                                    <Text style={{ fontSize: 20, color: "#fff" }}>OK</Text>
+                                    <Text style={{ fontSize: 20, fontFamily: CustomFonts.DefaultFont, color: "#fff" }}>OK</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>

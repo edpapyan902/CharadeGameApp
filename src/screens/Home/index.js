@@ -17,7 +17,10 @@ import {
 import { SkypeIndicator } from 'react-native-indicators';
 import { Image } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+
 import { Images } from '../../config';
+import { CustomFonts } from '../../config';
+
 import Modal, { ModalContent } from "react-native-modals";
 import Orientation from 'react-native-orientation';
 import { CategoryAction } from '../../actions';
@@ -29,7 +32,9 @@ import { AdMobInterstitial } from 'react-native-admob';
 import Storage from "../../Store";
 
 let screen_width = Dimensions.get("screen").width;
-let horizon_padding = Math.floor((screen_width - 300) / 6);
+const category_image_padding = 5;
+const category_image_width = Math.floor((screen_width - category_image_padding * 6) / 2);
+const category_image_height = category_image_width;
 export default class Home extends Component {
 
     constructor(props) {
@@ -42,7 +47,6 @@ export default class Home extends Component {
             dialogVisible: false,
             showSubcateogry: false,
             lstSubCategory: null,
-            checkoutSuccessDialog: false,
         }
         Orientation.lockToPortrait();
     };
@@ -77,7 +81,7 @@ export default class Home extends Component {
     showDialog = (item) => {
         if (item.type == 1)
             Linking.openURL(item.title);
-        else
+        else if (item.wordcount > 0)
             this.setState({ dialogVisible: true, currentCategory: item });
     }
 
@@ -105,11 +109,6 @@ export default class Home extends Component {
         this.setState({ currentCategory: item }, () => {
             this.playGame();
         })
-    }
-
-    checkoutOK = () => {
-        this.setState({ checkoutSuccessDialog: false });
-        Linking.openURL(this.state.currentCategory.title);
     }
 
     backAction = () => {
@@ -148,16 +147,22 @@ export default class Home extends Component {
             <TouchableOpacity style={{ flex: 1 }} onPress={() => this.showDialog(item)}>
                 {item.type == 0 ?
                     item.title != '' ?
-                        <View style={{ flex: 1, flexDirection: 'column', width: 150, height: 200, alignItems: "center", justifyContent: "center", borderRadius: 20, backgroundColor: "#ffffff3f", marginHorizontal: horizon_padding, marginBottom: 25, marginTop: 10 }}>
-                            <Image style={{ minWidth: "85%", height: 150, borderRadius: 5 }} resizeMode="contain" source={{ uri: CategoryAction.API_URL + item.icon }}
+                        <View style={{ flex: 1, flexDirection: 'column', width: category_image_width, height: category_image_height, alignItems: "center", justifyContent: "center", borderRadius: 15, backgroundColor: "#ffffff3f", marginHorizontal: category_image_padding, marginTop: 10 }}>
+                            <Image style={{ minWidth: category_image_width, height: category_image_height, borderRadius: 15 }} resizeMode="contain" source={{ uri: CategoryAction.API_URL + item.icon }}
                                 PlaceholderContent={<ActivityIndicator size={"large"} color={"white"} />} placeholderStyle={{ backgroundColor: "transparent" }}></Image>
+                            <View style={{ position: "absolute", top: 0, right: 0, height: 40, backgroundColor: "#0000006b", borderTopRightRadius: 15, borderBottomLeftRadius: 15, paddingHorizontal: 10, alignItems: "center", justifyContent: "center" }}>
+                                <Text style={{ color: "#fff", fontSize: 14, fontFamily: CustomFonts.DefaultFont }}>{item.title}</Text>
+                            </View>
+                            <View style={{ position: "absolute", bottom: 0, left: 0, height: 40, backgroundColor: "#0000006b", borderTopRightRadius: 15, borderBottomLeftRadius: 15, paddingHorizontal: 10, alignItems: "center", justifyContent: "center" }}>
+                                <Text style={{ color: "#fff", fontSize: 12, fontFamily: CustomFonts.DefaultFont }}>{item.wordcount} WORDS</Text>
+                            </View>
                         </View>
                         :
                         <View style={{ flex: 1, margin: 15 }}></View>
                     :
                     item.title != '' ?
-                        <View style={{ flex: 1, flexDirection: 'column', width: 150, height: 200, alignItems: "center", justifyContent: "center", borderRadius: 20, backgroundColor: "#ffffff3f", marginHorizontal: horizon_padding, marginBottom: 25, marginTop: 10 }}>
-                            <Image style={{ width: 150, height: 200, borderRadius: 20 }} resizeMode="cover" source={{ uri: CategoryAction.API_URL + item.icon }}
+                        <View style={{ flex: 1, flexDirection: 'column', width: category_image_width, height: category_image_height, alignItems: "center", justifyContent: "center", borderRadius: 15, backgroundColor: "#ffffff3f", marginHorizontal: category_image_padding, marginTop: 10 }}>
+                            <Image style={{ width: category_image_width, height: category_image_height, borderRadius: 15 }} resizeMode="cover" source={{ uri: CategoryAction.API_URL + item.icon }}
                                 PlaceholderContent={<ActivityIndicator size={"large"} color={"white"} />} placeholderStyle={{ backgroundColor: "transparent" }}></Image>
                         </View>
                         :
@@ -175,8 +180,8 @@ export default class Home extends Component {
                         <View style={{ flexDirection: "row", height: 100, justifyContent: "center", alignItems: "center" }}>
                             <View style={{ flex: 1 }} />
                             <View style={{ flex: 2, marginTop: 25, alignItems: "center", justifyContent: "center" }}>
-                                <Text style={{ color: "#fff", fontSize: 30 }}>ZIMBO</Text>
-                                <Text style={{ color: "#fff", fontSize: 20 }}>CHARADES</Text>
+                                <Text style={{ color: "#fff", fontSize: 30, fontFamily: CustomFonts.DefaultFont, letterSpacing: 5 }}>ZIMBO</Text>
+                                <Text style={{ color: "#fff", fontSize: 18, fontFamily: CustomFonts.DefaultFont }}>CHARADES</Text>
                             </View>
                             <View style={{ flex: 1, alignItems: "flex-end" }}>
                                 <TouchableOpacity onPress={({ }) => { this.props.navigation.navigate("Setting"); }} activeOpacity={0.7} style={{
@@ -189,7 +194,7 @@ export default class Home extends Component {
                             </View>
                         </View>
                         <FlatList
-                            style={{ paddingVertical: "3.5%", paddingHorizontal: horizon_padding }}
+                            style={{ paddingVertical: "3.5%", paddingHorizontal: category_image_padding }}
                             keyExtractor={(item, index) => index.toString()}
                             data={this.state.lstCategory}
                             renderItem={this.renderItem}
@@ -227,11 +232,11 @@ export default class Home extends Component {
                         :
                         <ModalContent style={{ width: 300, height: 380, paddingVertical: 25, paddingHorizontal: 25, backgroundColor: "transparent" }}>
                             <View style={{ borderWidth: 5, paddingHorizontal: 10, paddingVertical: 20, borderRadius: 30, borderColor: "#fff", backgroundColor: "#00549a" }}>
-                                <Text style={{ fontSize: 30, marginTop: 20, marginBottom: 30, textAlign: "center", color: "#fff" }}>Rules</Text>
-                                <Text style={{ color: "#fff", textAlign: "center", fontSize: 18, paddingHorizontal: 15 }}>Try to guess the word by describing the plot. To make it more difficult don't use any charactor names.</Text>
+                                <Text style={{ fontSize: 30, fontFamily: CustomFonts.DefaultFont, marginTop: 20, marginBottom: 30, textAlign: "center", color: "#fff" }}>Rules</Text>
+                                <Text style={{ color: "#fff", fontFamily: CustomFonts.DefaultFont, textAlign: "center", fontSize: 18, paddingHorizontal: 15 }}>Try to guess the word by describing the plot. To make it more difficult don't use any charactor names.</Text>
                                 <TouchableOpacity activeOpacity={0.8} style={{ paddingTop: 30, paddingHorizontal: 10, marginBottom: 20 }} onPress={this.playGame}>
                                     <View style={{ backgroundColor: "#eabf28", height: 40, borderRadius: 10, justifyContent: "center", alignItems: "center" }}>
-                                        <Text style={{ textAlign: "center", color: "#fff", fontSize: 20, fontWeight: "bold" }}>Play</Text>
+                                        <Text style={{ textAlign: "center", color: "#fff", fontSize: 20, fontFamily: CustomFonts.DefaultFont }}>Play</Text>
                                     </View>
                                 </TouchableOpacity>
                             </View>
@@ -245,27 +250,6 @@ export default class Home extends Component {
 
                 </Modal>
 
-                <Modal
-                    visible={!!this.state.checkoutSuccessDialog}
-                    swipeThreshold={50}
-                    modalStyle={{ backgroundColor: "transparent" }}
-                >
-
-                    <ModalContent style={{ width: 350, height: 350, padding: 0, paddingTop: 60 }}>
-                        <View style={{ flex: 1, backgroundColor: "#fff", borderRadius: 5, justifyContent: "center", alignItems: "center" }}>
-                            <Text style={{ color: "#71c341", fontSize: 33, marginTop: 40 }}>Success!</Text>
-                            <Text style={{ color: "#71c341", fontSize: 20 }}>Thank you.</Text>
-                            <TouchableOpacity style={{ width: "100%", marginTop: 50, justifyContent: "center", alignItems: "center" }} onPress={this.checkoutOK}>
-                                <View style={{ backgroundColor: "#71c341", width: "80%", borderRadius: 5, height: 50, justifyContent: "center", alignItems: "center" }}>
-                                    <Text style={{ fontSize: 20, color: "#fff" }}>OK</Text>
-                                </View>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={{ position: "absolute", width: 350, height: 120, top: 0, alignItems: "center", justifyContent: "center" }}>
-                            <Image source={Images.checkout} style={{ width: 100, height: 100 }}></Image>
-                        </View>
-                    </ModalContent>
-                </Modal>
                 {this.state.load &&
                     <SkypeIndicator
                         size={40}
