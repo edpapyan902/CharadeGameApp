@@ -30,7 +30,7 @@ class Banner extends Component {
                                 :
                                 // "ca-app-pub-7315663868828228/2907386321"
                                 // "ca-app-pub-8844670004607379/9638000539"
-                                "sss"
+                                "ca-app-pub-7315663868828228/2907386321"
                             }
                             testDevices={[AdMobBanner.simulatorId]}
                             onAdFailedToLoad={error => {
