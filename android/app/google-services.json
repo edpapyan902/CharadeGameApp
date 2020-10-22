@@ -1,0 +1,41 @@
+{
+  "project_info": {
+    "project_number": "176969074938",
+    "firebase_url": "https://zimbocharades-android.firebaseio.com",
+    "project_id": "zimbocharades-android",
+    "storage_bucket": "zimbocharades-android.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:176969074938:android:f8060a1ffee164c76aa143",
+        "android_client_info": {
+          "package_name": "com.zimbocharades"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "176969074938-jlel37g659uj0mtr2p1jmmj8bvppjpmr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMtcHi4weF6XGM6DPh997MJkHfyoxeXtY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "176969074938-jlel37g659uj0mtr2p1jmmj8bvppjpmr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-7315663868828228~3567035337"
+    }
+  ],
+  "configuration_version": "1"
+}

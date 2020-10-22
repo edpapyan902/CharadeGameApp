@@ -4,8 +4,8 @@ import { Platform } from 'react-native';
 export const getIntertial = () => {
 
     AdMobInterstitial.setTestDevices([AdMobInterstitial.simulatorId]);
-    AdMobInterstitial.setAdUnitID('ca-app-pub-3940256099942544/1033173712');
-    // AdMobInterstitial.setAdUnitID(Platform.OS == "android" ? "ca-app-pub-8844670004607379/1951082201" : "ca-app-pub-8844670004607379/5462951805");
+    // AdMobInterstitial.setAdUnitID('ca-app-pub-3940256099942544/1033173712');
+    AdMobInterstitial.setAdUnitID(Platform.OS == "android" ? "ca-app-pub-7315663868828228/8345553444" : "ca-app-pub-8844670004607379/5462951805");
 
     AdMobInterstitial.addEventListener('adLoaded', () =>
         console.log('AdMobInterstitial adLoaded'),
