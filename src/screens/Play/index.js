@@ -41,11 +41,11 @@ export default class Play extends Component {
         Orientation.unlockAllOrientations();
         Orientation.lockToLandscapeLeft();
 
-        RNDeviceRotation.setUpdateInterval(100);
+        // RNDeviceRotation.setUpdateInterval(100);
 
-        this.orientationEvent = new NativeEventEmitter(RNDeviceRotation);
+        // this.orientationEvent = new NativeEventEmitter(RNDeviceRotation);
         this.ReadyTime = 2;
-        this.GameTime = 30;
+        this.GameTime = 10;
         this.isTouchScreen = false;
 
         this.getWord();
@@ -53,25 +53,25 @@ export default class Play extends Component {
 
     componentDidMount() {
         StatusBar.setHidden(true);
-        this.orientationEvent.addListener('DeviceRotation', event => {
-            if (!this.state.isReady || this.state.isFinish)
-                return;
+        // this.orientationEvent.addListener('DeviceRotation', event => {
+        //     if (!this.state.isReady || this.state.isFinish)
+        //         return;
 
-            const roll = Math.round(event.roll);
-            if (roll > 290 && !this.state.isPause)
-                this.correctAnswer();
-            else if (roll < 250 && !this.state.isPause)
-                this.failedAnswer();
-            else if (roll >= 250 && roll <= 290 && this.state.isPause)
-                this.resumeGame();
-        })
-        RNDeviceRotation.start();
+        //     const roll = Math.round(event.roll);
+        //     if (roll > 290 && !this.state.isPause)
+        //         this.correctAnswer();
+        //     else if (roll < 250 && !this.state.isPause)
+        //         this.failedAnswer();
+        //     else if (roll >= 250 && roll <= 290 && this.state.isPause)
+        //         this.resumeGame();
+        // })
+        // RNDeviceRotation.start();
     }
 
     componentWillUnmount() {
         clearInterval(this.clockCall);
 
-        RNDeviceRotation.stop()
+        // RNDeviceRotation.stop()
     }
 
     resumeGame = () => {
@@ -245,7 +245,7 @@ export default class Play extends Component {
                     <ImageBackground borderRadius={40} source={this.state.background_image} style={{ flex: 1, borderRadius: 50, borderColor: "#fff", borderWidth: 10 }}>
                         <View style={{ width: "100%", height: "100%" }}>
                             {this.state.isFinish ?
-                                <View style={{ height: 40, flexDirection: "row", margin: 25 }}>
+                                <View style={{ height: 70, flexDirection: "row", margin: 15, alignItems:"center", justifyContent:"center" }}>
                                     <View style={{ flex: 1, alignItems: "flex-start" }}>
                                         <TouchableOpacity onPress={this.goHome.bind(this)} activeOpacity={0.7} style={{
                                             justifyContent: "center", alignItems: "center", backgroundColor: "#ffffff3f", borderRadius: 100,
@@ -258,7 +258,7 @@ export default class Play extends Component {
                                         <Text style={{ fontSize: 20, fontFamily: Platform.OS == "android" ? Font.AndroidFont : Font.IOSFont, color: '#fff' }}>
                                             YOU GOT
                                         </Text>
-                                        <Text style={{ fontSize: 80, fontFamily: Platform.OS == "android" ? Font.AndroidFont : Font.IOSFont, paddingHorizontal: 10, color: '#fff' }}>
+                                        <Text style={{ fontSize: 70, fontFamily: Platform.OS == "android" ? Font.AndroidFont : Font.IOSFont, paddingHorizontal: 10, color: '#fff' }}>
                                             {this.state.gotCardCount}
                                         </Text>
                                         <Text style={{ fontSize: 20, fontFamily: Platform.OS == "android" ? Font.AndroidFont : Font.IOSFont, color: '#fff' }}>
@@ -275,7 +275,7 @@ export default class Play extends Component {
                                     </View>
                                 </View>
                                 :
-                                <View style={{ height: 40, flexDirection: "row", padding: 25 }}>
+                                <View style={{ height: 70, flexDirection: "row", padding: 15 }}>
                                     <View style={{ flex: 1, alignItems: "flex-start" }}>
                                         <TouchableOpacity onPress={this.goHome.bind(this)} activeOpacity={0.7} style={{
                                             justifyContent: "center", alignItems: "center", backgroundColor: "#ffffff3f", borderRadius: 100,
