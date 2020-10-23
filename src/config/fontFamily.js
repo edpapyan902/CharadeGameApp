@@ -1,4 +1,4 @@
 
 export const CustomFonts = {
-    DefaultFont: "GothamBold"
+    DefaultFont: "Gotham"
 }
