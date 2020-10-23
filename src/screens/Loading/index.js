@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import {
   Platform,
-  View,
-  Text,
   ImageBackground,
 } from "react-native";
 

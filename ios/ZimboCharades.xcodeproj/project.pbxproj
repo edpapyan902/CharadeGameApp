@@ -36,6 +36,7 @@
 		CFA4707030ABB5CC664A241E /* libPods-ZimboCharades-ZimboCharadesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9440E1D33EE695AF45288089 /* libPods-ZimboCharades-ZimboCharadesTests.a */; };
 		DAF30218117F4ED0A57BD213 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 26814233CFFE4C8F892E6654 /* FontAwesome.ttf */; };
 		FFFC4BB3FD6A417AAEB2D9A1 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FC374A0D9C4E2C82C8C66F /* Feather.ttf */; };
+		8E17C2A011C14F63B6B6BA0B /* Gotham Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5F4D1508C93347BC8A028132 /* Gotham Bold.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +100,7 @@
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F1353D055A7143708D0A133E /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		F39AF93E251F49E8B5CDA2F1 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		5F4D1508C93347BC8A028132 /* Gotham Bold.otf */ = {isa = PBXFileReference; name = "Gotham Bold.otf"; path = "../src/assets/fonts/Gotham Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,6 +251,7 @@
 				9ED11379B5894A7A8D2E8560 /* Octicons.ttf */,
 				4BB498F897904FC38E734A4A /* SimpleLineIcons.ttf */,
 				97B4792D69AD4617ACA8F630 /* Zocial.ttf */,
+				5F4D1508C93347BC8A028132 /* Gotham Bold.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -413,6 +416,7 @@
 				8DE19CCDADB44B3399A4ED7B /* Octicons.ttf in Resources */,
 				9850C7D1F36D4C38B7C2F2C9 /* SimpleLineIcons.ttf in Resources */,
 				623D8B5A6E324616A3B94549 /* Zocial.ttf in Resources */,
+				8E17C2A011C14F63B6B6BA0B /* Gotham Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

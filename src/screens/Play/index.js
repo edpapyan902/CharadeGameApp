@@ -11,12 +11,11 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import { Images } from '../../config';
-import { CustomFonts } from '../../config';
+import { Font } from '../../config';
 
 import Orientation from 'react-native-orientation';
 import { CategoryAction } from '../../actions';
 import RNDeviceRotation from 'react-native-device-rotation';
-import Storage from '../../Store';
 import { ScrollView } from 'react-native-gesture-handler';
 
 let totalWord = [];
@@ -181,7 +180,6 @@ export default class Play extends Component {
     readyWord = () => {
 
         totalWord = this.state.lstWord;
-        console.log(totalWord.length)
         var currentIndex = totalWord.length, temporaryValue, randomIndex;
         while (0 !== currentIndex) {
             randomIndex = Math.floor(Math.random() * currentIndex);
@@ -235,7 +233,7 @@ export default class Play extends Component {
     renderItem = ({ item }) => {
         return (
             <View style={{ flex: 1, marginVertical: 5, justifyContent: "center", alignItems: "center" }}>
-                <Text style={{ color: item.mark ? "#53e25b" : "#b02a2b", textAlign: "center", fontSize: 30, fontFamily: CustomFonts.DefaultFont }}>{item.name}</Text>
+                <Text style={{ color: item.mark ? "#53e25b" : "#b02a2b", textAlign: "center", fontSize: 30, fontFamily: Platform.OS == "android" ? Font.AndroidFont : Font.IOSFont }}>{item.name}</Text>
             </View>
         )
     }
@@ -257,13 +255,13 @@ export default class Play extends Component {
                                         </TouchableOpacity>
                                     </View>
                                     <View style={{ flex: 1, alignItems: "center", justifyContent: "center", flexDirection: "row" }}>
-                                        <Text style={{ fontSize: 20, fontFamily: CustomFonts.DefaultFont, color: '#fff' }}>
+                                        <Text style={{ fontSize: 20, fontFamily: Platform.OS == "android" ? Font.AndroidFont : Font.IOSFont, color: '#fff' }}>
                                             YOU GOT
                                         </Text>
-                                        <Text style={{ fontSize: 80, fontFamily: CustomFonts.DefaultFont, paddingHorizontal: 10, color: '#fff' }}>
+                                        <Text style={{ fontSize: 80, fontFamily: Platform.OS == "android" ? Font.AndroidFont : Font.IOSFont, paddingHorizontal: 10, color: '#fff' }}>
                                             {this.state.gotCardCount}
                                         </Text>
-                                        <Text style={{ fontSize: 20, fontFamily: CustomFonts.DefaultFont, color: '#fff' }}>
+                                        <Text style={{ fontSize: 20, fontFamily: Platform.OS == "android" ? Font.AndroidFont : Font.IOSFont, color: '#fff' }}>
                                             CARDS
                                         </Text>
                                     </View>
@@ -272,7 +270,7 @@ export default class Play extends Component {
                                             justifyContent: "center", alignItems: "center", backgroundColor: "#ffffff3f", borderRadius: 20,
                                             paddingVertical: 10, paddingHorizontal: 20,
                                         }}>
-                                            <Text style={{ color: "#fff", fontSize: 18, fontFamily: CustomFonts.DefaultFont }}>PLAY</Text>
+                                            <Text style={{ color: "#fff", fontSize: 18, fontFamily: Platform.OS == "android" ? Font.AndroidFont : Font.IOSFont }}>PLAY</Text>
                                         </TouchableOpacity>
                                     </View>
                                 </View>
@@ -287,7 +285,7 @@ export default class Play extends Component {
                                         </TouchableOpacity>
                                     </View>
                                     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-                                        <Text style={{ fontSize: 30, fontFamily: CustomFonts.DefaultFont, color: '#fff' }}>
+                                        <Text style={{ fontSize: 30, fontFamily: Platform.OS == "android" ? Font.AndroidFont : Font.IOSFont, color: '#fff' }}>
                                             {this.state.timer}
                                         </Text>
                                     </View>
@@ -314,7 +312,7 @@ export default class Play extends Component {
                                 </View>
                                 :
                                 <View style={{ flex: 1, position: "absolute", top: 0, right: 0, left: 0, bottom: 0, paddingHorizontal: 10, alignItems: "center", justifyContent: "center" }}>
-                                    <Text style={{ fontSize: 70, color: "#fff", fontFamily: CustomFonts.DefaultFont, marginBottom: 20, textAlign: "center" }}>{this.state.currentWord}</Text>
+                                    <Text style={{ fontSize: 70, color: "#fff", fontFamily: Platform.OS == "android" ? Font.AndroidFont : Font.IOSFont, marginBottom: 20, textAlign: "center" }}>{this.state.currentWord}</Text>
                                 </View>
                             }
 

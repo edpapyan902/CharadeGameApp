@@ -1,7 +1,7 @@
 import { Images } from "./images";
-import { CustomFonts } from "./fontFamily";
+import { Font } from "./fontFamily";
 
 export {
   Images,
-  CustomFonts
+  Font
 };
