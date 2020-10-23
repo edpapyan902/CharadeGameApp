@@ -40,8 +40,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<key>NSMotionUsageDescription</key>
+	<string>Can I use the this device motion please?</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-8844670004607379~3887636945</string>
 	<key>UIAppFonts</key>
