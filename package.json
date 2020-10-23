@@ -19,7 +19,7 @@
     "react": "16.13.1",
     "react-native": "0.63.2",
     "react-native-admob": "^2.0.0-beta.6",
-    "react-native-device-rotation": "^1.0.0",
+    "react-native-device-rotation": "^1.0.1",
     "react-native-elements": "^2.3.2",
     "react-native-email-link": "^1.9.2",
     "react-native-gesture-handler": "^1.8.0",
