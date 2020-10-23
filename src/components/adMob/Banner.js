@@ -24,17 +24,12 @@ class Banner extends Component {
                             adSize="banner"
                             adUnitID={Platform.OS === 'android'
                                 ?
-                                // "ca-app-pub-7315663868828228/9356232842"
-                                // "ca-app-pub-8844670004607379/5200718612"
-                                "ca-app-pub-7315663868828228/9356232842"
+                                "ca-app-pub-8844670004607379/5200718612"
                                 :
-                                // "ca-app-pub-7315663868828228/2907386321"
-                                // "ca-app-pub-8844670004607379/9638000539"
-                                "ca-app-pub-7315663868828228/2907386321"
+                                "ca-app-pub-8844670004607379/9638000539"
                             }
                             testDevices={[AdMobBanner.simulatorId]}
                             onAdFailedToLoad={error => {
-                                // console.warn(error);                    
                                 this.setState({ isError: true, errorText: error + "" });
 
                                 setTimeout(() => {

@@ -1,40 +1,47 @@
 {
   "project_info": {
-    "project_number": "176969074938",
-    "firebase_url": "https://zimbocharades-android.firebaseio.com",
-    "project_id": "zimbocharades-android",
-    "storage_bucket": "zimbocharades-android.appspot.com"
+    "project_number": "1016196679267",
+    "firebase_url": "https://zimbo-charades.firebaseio.com",
+    "project_id": "zimbo-charades",
+    "storage_bucket": "zimbo-charades.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:176969074938:android:f8060a1ffee164c76aa143",
+        "mobilesdk_app_id": "1:1016196679267:android:2733af56c7191164c4da56",
         "android_client_info": {
           "package_name": "com.zimbocharades"
         }
       },
       "oauth_client": [
         {
-          "client_id": "176969074938-jlel37g659uj0mtr2p1jmmj8bvppjpmr.apps.googleusercontent.com",
+          "client_id": "1016196679267-uqob1bujc66hjrh4ipvc63jv1865appk.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCMtcHi4weF6XGM6DPh997MJkHfyoxeXtY"
+          "current_key": "AIzaSyChIR3iQxh0DabHVOgJtkgqZrCcgBDKooM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "176969074938-jlel37g659uj0mtr2p1jmmj8bvppjpmr.apps.googleusercontent.com",
+              "client_id": "1016196679267-uqob1bujc66hjrh4ipvc63jv1865appk.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1016196679267-fntns8t07otc74p4mjrh5h2pk8lnvjfu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.zimbocharades"
+              }
             }
           ]
         }
       },
-      "admob_app_id": "ca-app-pub-7315663868828228~3567035337"
+      "admob_app_id": "ca-app-pub-8844670004607379~3671357985"
     }
   ],
   "configuration_version": "1"

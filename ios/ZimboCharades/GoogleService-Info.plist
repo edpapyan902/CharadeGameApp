@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>221549687400-ir8hk7cr7mm8tpgbh09j5t2ftf70j0f2.apps.googleusercontent.com</string>
+	<string>1016196679267-fntns8t07otc74p4mjrh5h2pk8lnvjfu.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.221549687400-ir8hk7cr7mm8tpgbh09j5t2ftf70j0f2</string>
+	<string>com.googleusercontent.apps.1016196679267-fntns8t07otc74p4mjrh5h2pk8lnvjfu</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCqdWThCwZdd1f3lfe28eSsy-1TGhmwQ8w</string>
+	<string>AIzaSyCp6dYBhUWOLDGPD3DheRoLZwlOumAGyOQ</string>
 	<key>GCM_SENDER_ID</key>
-	<string>221549687400</string>
+	<string>1016196679267</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.zimbocharades</string>
 	<key>PROJECT_ID</key>
-	<string>zimbocharades-ios</string>
+	<string>zimbo-charades</string>
 	<key>STORAGE_BUCKET</key>
-	<string>zimbocharades-ios.appspot.com</string>
+	<string>zimbo-charades.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,10 +29,10 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:221549687400:ios:b533213cdf7fc28bafc1dd</string>
+	<string>1:1016196679267:ios:0d25314fc8c1a7e8c4da56</string>
 	<key>DATABASE_URL</key>
-	<string>https://zimbocharades-ios.firebaseio.com</string>
+	<string>https://zimbo-charades.firebaseio.com</string>
 	<key>ADMOB_APP_ID</key>
-	<string>ca-app-pub-7315663868828228~3062287234</string>
+	<string>ca-app-pub-8844670004607379~3887636945</string>
 </dict>
 </plist>
