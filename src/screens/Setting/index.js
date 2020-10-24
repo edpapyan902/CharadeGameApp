@@ -21,6 +21,7 @@ import Modal, { ModalContent } from "react-native-modals";
 import { openComposer } from 'react-native-email-link'
 
 import Storage from "../../Store";
+import { CategoryAction } from '../../actions';
 
 const lstSetting = [
     {
@@ -64,7 +65,7 @@ export default class Setting extends Component {
             hugViewVisivle: false,
             checkoutSuccessDialog: false,
         }
-        this.privacyUrl = "https://google.com";
+        this.privacyUrl = CategoryAction.API_URL + "privacy.php";
     }
 
     componentDidMount() {
@@ -132,14 +133,14 @@ export default class Setting extends Component {
     feedbackApp = () => {
         if (Platform.OS == "android") {
             openComposer({
-                to: 'zimbo.charades@gmail.com',
+                to: 'taurai03@icloud.com',
                 subject: 'ZimboCharadesGameApp Feedback',
                 body: ''
             })
         }
         else if (Platform.OS == "ios") {
-            if (Linking.canOpenURL("mailto:zimbo.charades@gmail.com"))
-                Linking.openURL("mailto:zimbo.charades@gmail.com?subject=ZimboCharadesGameApp Feedback");
+            if (Linking.canOpenURL("mailto:taurai03@icloud.com"))
+                Linking.openURL("mailto:taurai03@icloud.com?subject=ZimboCharadesGameApp Feedback");
         }
     }
 
@@ -171,7 +172,6 @@ export default class Setting extends Component {
                         <></>}
                 </View>
             </TouchableOpacity>
-
         )
     }
     render() {
@@ -284,8 +284,6 @@ export default class Setting extends Component {
                 </Modal>
 
             </ImageBackground >
-
-
         )
     }
 }

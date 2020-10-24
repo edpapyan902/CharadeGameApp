@@ -195,7 +195,7 @@ export default class Home extends Component {
                             numColumns={2}
                         />
                     </ScrollView>
-                    <View style={{ height: 50 }}>
+                    <View style={{ height: 50, position:"absolute", bottom:0 }}>
                         <Banner />
                     </View>
                 </SafeAreaView>
