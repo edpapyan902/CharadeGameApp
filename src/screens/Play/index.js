@@ -41,9 +41,11 @@ export default class Play extends Component {
         Orientation.unlockAllOrientations();
         Orientation.lockToLandscapeLeft();
 
-        // RNDeviceRotation.setUpdateInterval(100);
+        if (Platform.OS == "android") {
+            RNDeviceRotation.setUpdateInterval(100);
+            this.orientationEvent = new NativeEventEmitter(RNDeviceRotation);
+        }
 
-        // this.orientationEvent = new NativeEventEmitter(RNDeviceRotation);
         this.ReadyTime = 2;
         this.GameTime = 10;
         this.isTouchScreen = false;
@@ -53,25 +55,27 @@ export default class Play extends Component {
 
     componentDidMount() {
         StatusBar.setHidden(true);
-        // this.orientationEvent.addListener('DeviceRotation', event => {
-        //     if (!this.state.isReady || this.state.isFinish)
-        //         return;
+        if (Platform.OS == "android") {
+            this.orientationEvent.addListener('DeviceRotation', event => {
+                if (!this.state.isReady || this.state.isFinish)
+                    return;
 
-        //     const roll = Math.round(event.roll);
-        //     if (roll > 290 && !this.state.isPause)
-        //         this.correctAnswer();
-        //     else if (roll < 250 && !this.state.isPause)
-        //         this.failedAnswer();
-        //     else if (roll >= 250 && roll <= 290 && this.state.isPause)
-        //         this.resumeGame();
-        // })
-        // RNDeviceRotation.start();
+                const roll = Math.round(event.roll);
+                if (roll > 290 && !this.state.isPause)
+                    this.correctAnswer();
+                else if (roll < 250 && !this.state.isPause)
+                    this.failedAnswer();
+                else if (roll >= 250 && roll <= 290 && this.state.isPause)
+                    this.resumeGame();
+            })
+            RNDeviceRotation.start();
+        }
     }
 
     componentWillUnmount() {
         clearInterval(this.clockCall);
-
-        // RNDeviceRotation.stop()
+        if (Platform.OS == "android")
+            RNDeviceRotation.stop();
     }
 
     resumeGame = () => {
@@ -245,7 +249,7 @@ export default class Play extends Component {
                     <ImageBackground borderRadius={40} source={this.state.background_image} style={{ flex: 1, borderRadius: 50, borderColor: "#fff", borderWidth: 10 }}>
                         <View style={{ width: "100%", height: "100%" }}>
                             {this.state.isFinish ?
-                                <View style={{ height: 70, flexDirection: "row", margin: 15, alignItems:"center", justifyContent:"center" }}>
+                                <View style={{ height: 70, flexDirection: "row", margin: 15, alignItems: "center", justifyContent: "center" }}>
                                     <View style={{ flex: 1, alignItems: "flex-start" }}>
                                         <TouchableOpacity onPress={this.goHome.bind(this)} activeOpacity={0.7} style={{
                                             justifyContent: "center", alignItems: "center", backgroundColor: "#ffffff3f", borderRadius: 100,
