@@ -46,8 +46,8 @@ export default class Play extends Component {
             this.orientationEvent = new NativeEventEmitter(RNDeviceRotation);
         }
 
-        this.ReadyTime = 2;
-        this.GameTime = 10;
+        this.ReadyTime = 5;
+        this.GameTime = 30;
         this.isTouchScreen = false;
 
         this.getWord();
@@ -249,7 +249,7 @@ export default class Play extends Component {
                     <ImageBackground borderRadius={40} source={this.state.background_image} style={{ flex: 1, borderRadius: 50, borderColor: "#fff", borderWidth: 10 }}>
                         <View style={{ width: "100%", height: "100%" }}>
                             {this.state.isFinish ?
-                                <View style={{ height: 70, flexDirection: "row", margin: 15, alignItems: "center", justifyContent: "center" }}>
+                                <View style={{ height: 60, flexDirection: "row", margin: 15, alignItems: "center", justifyContent: "center" }}>
                                     <View style={{ flex: 1, alignItems: "flex-start" }}>
                                         <TouchableOpacity onPress={this.goHome.bind(this)} activeOpacity={0.7} style={{
                                             justifyContent: "center", alignItems: "center", backgroundColor: "#ffffff3f", borderRadius: 100,
