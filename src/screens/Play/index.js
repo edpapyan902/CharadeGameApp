@@ -41,10 +41,10 @@ export default class Play extends Component {
         Orientation.unlockAllOrientations();
         Orientation.lockToLandscapeLeft();
 
-        if (Platform.OS == "android") {
-            RNDeviceRotation.setUpdateInterval(100);
-            this.orientationEvent = new NativeEventEmitter(RNDeviceRotation);
-        }
+        // if (Platform.OS == "android") {
+        RNDeviceRotation.setUpdateInterval(100);
+        this.orientationEvent = new NativeEventEmitter(RNDeviceRotation);
+        // }
 
         this.ReadyTime = 5;
         this.GameTime = 30;
@@ -55,27 +55,27 @@ export default class Play extends Component {
 
     componentDidMount() {
         StatusBar.setHidden(true);
-        if (Platform.OS == "android") {
-            this.orientationEvent.addListener('DeviceRotation', event => {
-                if (!this.state.isReady || this.state.isFinish)
-                    return;
+        // if (Platform.OS == "android") {
+        this.orientationEvent.addListener('DeviceRotation', event => {
+            if (!this.state.isReady || this.state.isFinish)
+                return;
 
-                const roll = Math.round(event.roll);
-                if (roll > 290 && !this.state.isPause)
-                    this.correctAnswer();
-                else if (roll < 250 && !this.state.isPause)
-                    this.failedAnswer();
-                else if (roll >= 250 && roll <= 290 && this.state.isPause)
-                    this.resumeGame();
-            })
-            RNDeviceRotation.start();
-        }
+            const roll = Math.round(event.roll);
+            if (roll > 290 && !this.state.isPause)
+                this.correctAnswer();
+            else if (roll < 250 && !this.state.isPause)
+                this.failedAnswer();
+            else if (roll >= 250 && roll <= 290 && this.state.isPause)
+                this.resumeGame();
+        })
+        RNDeviceRotation.start();
+        // }
     }
 
     componentWillUnmount() {
         clearInterval(this.clockCall);
-        if (Platform.OS == "android")
-            RNDeviceRotation.stop();
+        // if (Platform.OS == "android")
+        RNDeviceRotation.stop();
     }
 
     resumeGame = () => {
