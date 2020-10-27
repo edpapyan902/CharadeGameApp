@@ -41,10 +41,8 @@ export default class Play extends Component {
         Orientation.unlockAllOrientations();
         Orientation.lockToLandscapeLeft();
 
-        // if (Platform.OS == "android") {
         RNDeviceRotation.setUpdateInterval(100);
         this.orientationEvent = new NativeEventEmitter(RNDeviceRotation);
-        // }
 
         this.ReadyTime = 5;
         this.GameTime = 30;
@@ -55,7 +53,6 @@ export default class Play extends Component {
 
     componentDidMount() {
         StatusBar.setHidden(true);
-        // if (Platform.OS == "android") {
         this.orientationEvent.addListener('DeviceRotation', event => {
             if (!this.state.isReady || this.state.isFinish)
                 return;
@@ -69,12 +66,10 @@ export default class Play extends Component {
                 this.resumeGame();
         })
         RNDeviceRotation.start();
-        // }
     }
 
     componentWillUnmount() {
         clearInterval(this.clockCall);
-        // if (Platform.OS == "android")
         RNDeviceRotation.stop();
     }
 
