@@ -36,6 +36,7 @@ export default class Play extends Component {
             detectDirection: "0",
             background_image: Images.background_blue,
             gotCardCount: 0,
+            backAvailable: true,
         };
 
         Orientation.unlockAllOrientations();
@@ -70,6 +71,7 @@ export default class Play extends Component {
 
     componentWillUnmount() {
         clearInterval(this.clockCall);
+        clearInterval(this.singleShot);
         RNDeviceRotation.stop();
     }
 
@@ -133,6 +135,12 @@ export default class Play extends Component {
     }
 
     goHome() {
+        if (!this.state.backAvailable)
+            return true;
+
+        clearInterval(this.clockCall);
+        RNDeviceRotation.stop();
+
         this.props.navigation.navigate("Home");
         StatusBar.setHidden(false);
         Orientation.lockToPortrait();
@@ -204,6 +212,7 @@ export default class Play extends Component {
         if (!this.state.isReady) {
             this.setState({
                 isReady: true,
+                backAvailable: false,
                 timer: this.GameTime,
                 currentWord: totalWord[this.state.currentIndex].name
             });
@@ -276,12 +285,14 @@ export default class Play extends Component {
                                 :
                                 <View style={{ height: 70, flexDirection: "row", padding: 15 }}>
                                     <View style={{ flex: 1, alignItems: "flex-start" }}>
-                                        <TouchableOpacity onPress={this.goHome.bind(this)} activeOpacity={0.7} style={{
-                                            justifyContent: "center", alignItems: "center", backgroundColor: "#ffffff3f", borderRadius: 100,
-                                            width: 40, height: 40,
-                                        }}>
-                                            <Icon name={'angle-left'} color={'#fff'} size={30} />
-                                        </TouchableOpacity>
+                                        {this.state.backAvailable ?
+                                            <TouchableOpacity onPress={this.goHome.bind(this)} activeOpacity={0.7} style={{
+                                                justifyContent: "center", alignItems: "center", backgroundColor: "#ffffff3f", borderRadius: 100,
+                                                width: 40, height: 40,
+                                            }}>
+                                                <Icon name={'angle-left'} color={'#fff'} size={30} />
+                                            </TouchableOpacity>
+                                            : <></>}
                                     </View>
                                     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
                                         <Text style={{ fontSize: 30, fontFamily: Platform.OS == "android" ? Font.AndroidFont : Font.IOSFont, color: '#fff' }}>

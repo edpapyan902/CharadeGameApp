@@ -195,7 +195,7 @@ export default class Home extends Component {
                             numColumns={2}
                         />
                     </ScrollView>
-                    <View style={{ height: 50, position:"absolute", bottom:0 }}>
+                    <View style={{ height: 50, position: "absolute", bottom: 0, left: 0, right: 0 }}>
                         <Banner />
                     </View>
                 </SafeAreaView>
@@ -224,21 +224,19 @@ export default class Home extends Component {
                             </View>
                         </ModalContent>
                         :
-                        <ModalContent style={{ width: 300, height: 380, paddingVertical: 25, paddingHorizontal: 25, backgroundColor: "transparent" }}>
+                        <ModalContent style={{ width: 300, height: 380, paddingTop: 25, paddingHorizontal: 25, backgroundColor: "transparent" }}>
                             <View style={{ borderWidth: 5, paddingHorizontal: 10, paddingVertical: 20, borderRadius: 30, borderColor: "#fff", backgroundColor: "#00549a" }}>
                                 <Text style={{ fontSize: 30, fontFamily: Platform.OS == "android" ? Font.AndroidFont : Font.IOSFont, marginTop: 20, marginBottom: 30, textAlign: "center", color: "#fff" }}>Rules</Text>
                                 <Text style={{ color: "#fff", fontFamily: Platform.OS == "android" ? Font.AndroidFont : Font.IOSFont, textAlign: "center", fontSize: 18, paddingHorizontal: 15 }}>Try to guess the word by describing the plot. To make it more difficult don't use any charactor names.</Text>
-                                <TouchableOpacity activeOpacity={0.8} style={{ paddingTop: 30, paddingHorizontal: 10, marginBottom: 20 }} onPress={this.playGame}>
+                                <TouchableOpacity activeOpacity={0.8} style={{ paddingTop: 30, paddingHorizontal: 10, paddingBottom: 30 }} onPress={this.playGame}>
                                     <View style={{ backgroundColor: "#eabf28", height: 40, borderRadius: 10, justifyContent: "center", alignItems: "center" }}>
                                         <Text style={{ textAlign: "center", color: "#fff", fontSize: 20, fontFamily: Platform.OS == "android" ? Font.AndroidFont : Font.IOSFont }}>Play</Text>
                                     </View>
                                 </TouchableOpacity>
                             </View>
-                            <View style={{ position: "absolute", top: 5, right: 5, width: 35, height: 35 }}>
-                                <TouchableOpacity onPress={this.hideDialog}>
-                                    <Icon name="times-circle" size={35} color="#fff"></Icon>
-                                </TouchableOpacity>
-                            </View>
+                            <TouchableOpacity style={{ position: "absolute", top: 5, right: 5, width: 35, height: 35 }} onPress={this.hideDialog}>
+                                <Icon name="times-circle" size={35} color="#fff"></Icon>
+                            </TouchableOpacity>
                         </ModalContent>
                     }
 
