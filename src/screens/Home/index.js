@@ -7,7 +7,6 @@ import {
     Text,
     SafeAreaView,
     TouchableOpacity,
-    ActivityIndicator,
     ScrollView,
     ImageBackground,
     BackHandler,

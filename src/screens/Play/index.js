@@ -1,13 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
     View,
     Text,
     TouchableOpacity,
     ImageBackground,
     StatusBar,
-    NativeEventEmitter,
     FlatList
-} from 'react-native'
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import { Images } from '../../config';
@@ -15,8 +14,8 @@ import { Font } from '../../config';
 
 import Orientation from 'react-native-orientation';
 import { CategoryAction } from '../../actions';
-import RNDeviceRotation from 'react-native-device-rotation';
 import { ScrollView } from 'react-native-gesture-handler';
+import * as Sensors from "react-native-sensors";
 
 let totalWord = [];
 
@@ -42,9 +41,6 @@ export default class Play extends Component {
         Orientation.unlockAllOrientations();
         Orientation.lockToLandscapeLeft();
 
-        RNDeviceRotation.setUpdateInterval(100);
-        this.orientationEvent = new NativeEventEmitter(RNDeviceRotation);
-
         this.ReadyTime = 5;
         this.GameTime = 30;
         this.isTouchScreen = false;
@@ -54,25 +50,28 @@ export default class Play extends Component {
 
     componentDidMount() {
         StatusBar.setHidden(true);
-        this.orientationEvent.addListener('DeviceRotation', event => {
+
+        Sensors.setUpdateIntervalForType("accelerometer", 100);
+        const subscription = Sensors.accelerometer.subscribe(values => {
+
             if (!this.state.isReady || this.state.isFinish)
                 return;
 
-            const roll = Math.round(event.roll);
-            if (roll > 290 && !this.state.isPause)
+            let angle = Math.atan(values.z / Math.sqrt(Math.pow(values.x, 2) + Math.pow(values.y, 2))) * 180 / Math.PI;
+            if (angle > 60 && !this.state.isPause)
                 this.correctAnswer();
-            else if (roll < 250 && !this.state.isPause)
+            else if (angle < -60 && !this.state.isPause)
                 this.failedAnswer();
-            else if (roll >= 250 && roll <= 290 && this.state.isPause)
+            else if (angle >= -60 && angle <= 60 && this.state.isPause)
                 this.resumeGame();
-        })
-        RNDeviceRotation.start();
+        });
+        this.setState({ subscription });
     }
 
     componentWillUnmount() {
         clearInterval(this.clockCall);
         clearInterval(this.singleShot);
-        RNDeviceRotation.stop();
+        this.state.subscription.unsubscribe();
     }
 
     resumeGame = () => {
@@ -139,7 +138,7 @@ export default class Play extends Component {
             return true;
 
         clearInterval(this.clockCall);
-        RNDeviceRotation.stop();
+        this.state.subscription.unsubscribe();
 
         this.props.navigation.navigate("Home");
         StatusBar.setHidden(false);
