@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
     Platform,
     FlatList,
@@ -10,15 +10,15 @@ import {
     ImageBackground,
     BackHandler,
     Linking,
-} from 'react-native'
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Images } from '../../config';
 import { Font } from '../../config';
 import { Image } from 'react-native-elements';
 import RNPaypal from 'react-native-paypal-lib';
-import Rate, { AndroidMarket } from 'react-native-rate'
+import Rate, { AndroidMarket } from 'react-native-rate';
 import Modal, { ModalContent } from "react-native-modals";
-import { openComposer } from 'react-native-email-link'
+import { openComposer } from 'react-native-email-link';
 
 import Storage from "../../Store";
 import { CategoryAction } from '../../actions';
@@ -133,14 +133,14 @@ export default class Setting extends Component {
     feedbackApp = () => {
         if (Platform.OS == "android") {
             openComposer({
-                to: 'taurai03@icloud.com',
+                to: 'zimbo.charades@gmail.com',
                 subject: 'ZimboCharadesGameApp Feedback',
                 body: ''
             })
         }
         else if (Platform.OS == "ios") {
-            if (Linking.canOpenURL("mailto:taurai03@icloud.com"))
-                Linking.openURL("mailto:taurai03@icloud.com?subject=ZimboCharadesGameApp Feedback");
+            if (Linking.canOpenURL("mailto:zimbo.charades@gmail.com"))
+                Linking.openURL("mailto:zimbo.charades@gmail.com?subject=ZimboCharadesGameApp Feedback");
         }
     }
 
