@@ -65,7 +65,7 @@ export default class Setting extends Component {
             hugViewVisivle: false,
             checkoutSuccessDialog: false,
         }
-        this.privacyUrl = CategoryAction.API_URL + "privacy.php";
+        this.privacyUrl = CategoryAction.API_URL + "/privacy.php";
     }
 
     componentDidMount() {
