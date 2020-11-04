@@ -47,12 +47,6 @@ const lstSetting = [
         title: 'ROUND TIME',
         icon: 'clock',
         content: ''
-    },
-    {
-        index: 4,
-        title: 'SUBSCRIPTION',
-        icon: 'chess-queen',
-        content: "Don't show Google Advertisement."
     }
 ];
 
@@ -88,30 +82,8 @@ export default class Setting extends Component {
         return false;
     }
 
-    paypalRequest = async () => {
-        if (await Storage.getSubscription() == 1)
-            return;
-
-        RNPaypal.paymentRequest({
-            clientId: "AUSnKLb9wBOtso10oYLky958QjhgowzlwuMM4k-F3MRMmMRWuUDgbpMtz6RwXbNdrLtLu8QfN_XCm7mS",
-            environment: RNPaypal.ENVIRONMENT.PRODUCTION,
-            intent: RNPaypal.INTENT.SALE,
-            price: 10,
-            currency: "USD",
-            description: 'ZimboCharades Subscription',
-            acceptCreditCards: true
-        }).then(async response => {
-            this.setState({ checkoutSuccessDialog: true });
-            await Storage.setSubscription("1");
-        }).catch(err => {
-            console.log(err.message)
-        })
-    }
-
     itemClicked = (item) => {
-        if (item.index == 4)
-            this.paypalRequest();
-        else if (item.index == 0)
+	if (item.index == 0)
             this.setState({ hugViewVisivle: false }, () => {
                 this.setState({ dialogVisible: true });
             });
