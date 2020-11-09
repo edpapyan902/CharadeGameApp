@@ -30,10 +30,11 @@ import { AdMobInterstitial } from 'react-native-admob';
 
 import Storage from "../../Store";
 
-let screen_width = Dimensions.get("screen").width;
+const screen_width = Dimensions.get("screen").width;
 const category_image_padding = 5;
 const category_image_width = Math.floor((screen_width - category_image_padding * 6) / 2);
 const category_image_height = category_image_width;
+const modalWidth = screen_width * 0.8;
 export default class Home extends Component {
 
     constructor(props) {
@@ -205,7 +206,7 @@ export default class Home extends Component {
                     onTouchOutside={() => { this.setState({ dialogVisible: false }); }}
                 >
                     {this.state.showSubcateogry ?
-                        <ModalContent style={{ width: 300, height: 380, paddingVertical: 25, paddingHorizontal: 25, backgroundColor: "transparent" }}>
+                        <ModalContent style={{ width: modalWidth, paddingVertical: 25, paddingHorizontal: 25, backgroundColor: "transparent" }}>
                             <View style={{ borderWidth: 5, paddingHorizontal: 5, paddingVertical: 30, borderRadius: 30, borderColor: "#fff", backgroundColor: "#71c341", justifyContent: "center", alignItems: "center" }}>
                                 <FlatList
                                     style={{ padding: "1.5%", width: "95%" }}
@@ -223,7 +224,7 @@ export default class Home extends Component {
                             </View>
                         </ModalContent>
                         :
-                        <ModalContent style={{ width: 300, height: 380, paddingTop: 25, paddingHorizontal: 25, backgroundColor: "transparent" }}>
+                        <ModalContent style={{ width: modalWidth, paddingTop: 25, paddingHorizontal: 25, backgroundColor: "transparent" }}>
                             <View style={{ borderWidth: 5, paddingHorizontal: 10, paddingVertical: 20, borderRadius: 30, borderColor: "#fff", backgroundColor: "#00549a" }}>
                                 <Text style={{ fontSize: 30, fontFamily: Platform.OS == "android" ? Font.AndroidFont : Font.IOSFont, marginTop: 20, marginBottom: 30, textAlign: "center", color: "#fff" }}>Rules</Text>
                                 <Text style={{ color: "#fff", fontFamily: Platform.OS == "android" ? Font.AndroidFont : Font.IOSFont, textAlign: "center", fontSize: 18, paddingHorizontal: 15 }}>Try to guess the word by describing the plot. To make it more difficult don't use any charactor names.</Text>
