@@ -25,8 +25,8 @@ import Orientation from 'react-native-orientation';
 import { CategoryAction } from '../../actions';
 
 import { getIntertial } from '../../components/adMob/Intertial';
-import Banner from '../../components/adMob/Banner';
-import { AdMobInterstitial } from 'react-native-admob';
+// import Banner from '../../components/adMob/Banner';
+// import { AdMobInterstitial } from 'react-native-admob';
 
 import Storage from "../../Store";
 
@@ -96,8 +96,8 @@ export default class Home extends Component {
             });
         }
         else {
-            if (await Storage.getSubscription() == 0)
-                AdMobInterstitial.showAd().catch(error => console.warn(error));
+            // if (await Storage.getSubscription() == 0)
+            //     AdMobInterstitial.showAd().catch(error => console.warn(error));
 
             this.setState({ dialogVisible: false });
             this.props.navigation.navigate("Play", { currentCategory: this.state.currentCategory });
@@ -129,7 +129,7 @@ export default class Home extends Component {
 
     componentWillUnmount() {
         BackHandler.removeEventListener("hardwareBackPress", this.backAction);
-        AdMobInterstitial.removeAllListeners();
+        // AdMobInterstitial.removeAllListeners();
     }
 
     renderSubItem = ({ item }) => {
@@ -195,9 +195,9 @@ export default class Home extends Component {
                             numColumns={2}
                         />
                     </ScrollView>
-                    <View style={{ height: 50, position: "absolute", bottom: 0, left: 0, right: 0 }}>
+                    {/* <View style={{ height: 50, position: "absolute", bottom: 0, left: 0, right: 0 }}>
                         <Banner />
-                    </View>
+                    </View> */}
                 </SafeAreaView>
                 <Modal
                     visible={!!this.state.dialogVisible}

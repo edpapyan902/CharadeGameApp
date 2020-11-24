@@ -83,7 +83,7 @@ export default class Setting extends Component {
     }
 
     itemClicked = (item) => {
-	if (item.index == 0)
+        if (item.index == 0)
             this.setState({ hugViewVisivle: false }, () => {
                 this.setState({ dialogVisible: true });
             });

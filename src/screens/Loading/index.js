@@ -13,10 +13,10 @@ export default class Loading extends Component {
   }
 
   componentDidMount = async () => {
-    let subscription = await Storage.getSubscription();
+    // let subscription = await Storage.getSubscription();
 
-    if (subscription == null)
-      await Storage.setSubscription(0);
+    // if (subscription == null)
+    //   await Storage.setSubscription(0);
 
     setTimeout(() => {
       this.props.navigation.navigate("Home");
